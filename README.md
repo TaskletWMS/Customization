@@ -3,12 +3,12 @@
 ### Welcome
 While [Tasklet Docs](https://docs.taskletfactory.com/display/TFSK/Customization) is the main learning resource for extending Mobile WMS, this space will act as an extended respository to both [Tasklet Docs](https://docs.taskletfactory.com/display/TFSK/Customization) and [Tasklet University](https://university.taskletfactory.com/) 
 
-#### Folders
+### Folders
 • **Samples** - Working sample project you can modify and develop further
 
 • **Tasklet University** - Source code used in training videos
 
-#### Support
+### Support
 As a Tasklet Partner you have access to [Support](https://taskletfactory.com/about/support/) when needed
 
 #### *Disclaimer*
