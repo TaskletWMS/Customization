@@ -1,6 +1,6 @@
 {
   "id": "ba3fcbd9-536e-4f7f-9c16-8c3545e87fdb",
-  "name": "Customization",
+  "name": "My Tasklet Mobile WMS Customization",
   "publisher": "Default publisher",
   "version": "1.0.0.0",
   "brief": "",
@@ -10,7 +10,13 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+    { 
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c", 
+      "name": "Mobile WMS", 
+      "publisher": "Tasklet Factory", 
+      "version": "5.32.170.0"}
+  ],
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "17.0.0.0",
@@ -21,8 +27,5 @@
     }
   ],
   "showMyCode": true,
-  "runtime": "6.0",
-  "features": [
-    "NoImplicitWith"
-  ]
+  "runtime": "6.0"
 }
