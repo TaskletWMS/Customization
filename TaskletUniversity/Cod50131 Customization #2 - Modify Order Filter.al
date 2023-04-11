@@ -1,4 +1,4 @@
-codeunit 50131 "Customization #2 - Modify Order Filter"
+codeunit 50131 "Custom #2 Modify Order Filter"
 {
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Receive", 'OnGetReceiveOrders_OnSetFilterWarehouseReceipt', '', true, true)]
     procedure Example02_Overrule_ExptRecptDate_Filter(_HeaderFilter: Record "MOB NS Request Element"; var _WhseReceiptHeader: Record "Warehouse Receipt Header"; var _WhseReceiptLine: Record "Warehouse Receipt Line"; var _IsHandled: Boolean)
