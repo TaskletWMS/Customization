@@ -45,9 +45,9 @@ This hardcoded solution is not recommended in a real extension and you should ad
 ### Processing the bin
 The "X02 PickToBin Process Bin" codeunit receives the bin but doesn't actual do any processing in the sample extension. This is where you will need to add code to process the contents of the bin. You can find inspiration in the "X02 PickToBin Remove Item" codeunit to find detailed bin contents including item tracking.
 
-## Pages
-### PickToBinList
-[![](./Screendumps/ListSmall.png)](./Screendumps/List.png)
+### Pages
+<table><tbody><tr><td>
+<strong>PickToBinList</strong>
 
 This is the main page of Pick2Bin and is available directly on the main menu.
 
@@ -56,9 +56,12 @@ It shows a list of bins for the destination location. For each bin it shows the 
 Clicking a bin opens the PickToBinContents page, but you can also add a barcode to a physical basket with the bin code and thereby quickly open the bin.
 
 This page is handled by the "X02 Lookup PickToBin List" codeunit.
+</td><td>
 
-### PickToBinContents
-[![](./Screendumps/ContentsSmall.png)](./Screendumps/Contents.png)
+[![](./Screendumps/ListSmall.png)](./Screendumps/List.png)
+
+</td></tr><tr><td>
+<strong>PickToBinContents</strong>
 
 This page show the contents of the bin grouped per item no. It also adds a footer line with totals for the bin. The footer can i.e. be customized to show total weight or sales amount or inventory value.
 
@@ -70,36 +73,58 @@ From here you can also open these pages:
 * PickToBinProcessBin to process the bin
 
 This page is handled by the "X02 Lookup PickToBin Contents" codeunit.
+    
+</td><td>
 
-### PickToBinAddItems
-[![](./Screendumps/AddItemsSmall.png)](./Screendumps/AddItems.png)
+[![](./Screendumps/ContentsSmall.png)](./Screendumps/Contents.png)
+
+</td></tr><tr><td>
+<strong>PickToBinAddItems</strong>
 
 This page lets the user enter or scan any item to be added to the bin. Any additional information (bin code and item tracking and quantity) will be collected as steps. The user can select another location if the items isn't picked from the default location.
 
 The user stays in the page ready for adding additional items after each item is added to the bin. Once completed the Back buttons brings the user back to the PickToBinContents
 
 This page is handled by the "X02 PickToBin Add Items" codeunit.
+    
+</td><td>
 
-### PickToBinAddInfo
-[![](./Screendumps/AddInfoSmall.png)](./Screendumps/AddInfo.png)
+[![](./Screendumps/AddItemsSmall.png)](./Screendumps/AddItems.png)
+
+</td></tr><tr><td>
+<strong>PickToBinAddInfo</strong>
 
 This page enables the user to change the description of the bin.
 
 This page is handled by the "X02 PickToBin Add Info" codeunit.
 
-### PickToBinProcessBin
-[![](./Screendumps/ProcessBinSmall.png)](./Screendumps/ProcessBin.png)
+</td><td>
+
+[![](./Screendumps/AddInfoSmall.png)](./Screendumps/AddInfo.png)
+
+</td></tr><tr><td>
+<strong>PickToBinProcessBin</strong>
 
 This page enables the user to get Business Central to process the bin. This is where you will need to add code to process the contents of the bin. You can find inspiration in the "X02 PickToBin Remove Item" codeunit to find detailed bin contents including item tracking.
 
 This page is handled by the "X02 PickToBin Process Bin" codeunit.
 
-### PickToBinRemoveItem
-[![](./Screendumps/RemoveItemSmall.png)](./Screendumps/RemoveItem.png)
+</td><td>
+
+[![](./Screendumps/ProcessBinSmall.png)](./Screendumps/ProcessBin.png)
+
+</td></tr><tr><td>
+<strong>PickToBinRemoveItem</strong>
 
 This page allows the user to remove an item from the bin. The user will need to specify where the item is relocated as the original bin is not saved and the item could have been picked from several bins.
 
 This page is handled by the "X02 PickToBin Remove Item" codeunit.
+
+</td><td>
+
+[![](./Screendumps/RemoveItemSmall.png)](./Screendumps/RemoveItem.png)
+
+</td></tr></tbody></table>
 
 ## Disclaimer
 The sample extension is provided as-is so please carefully validate and test the code and any solution made with the code. The code is not supported to the same degree as Mobile WMS but it is expected periodically to be kept up to date if future changes in Business Central or Mobile WMS requires it.
