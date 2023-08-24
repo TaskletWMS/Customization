@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="ISV Shipping Solution">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 97170762 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ISV Package Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Package Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 97170762 - Field 3004954119 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Package Type - Field Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 97170762 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Package Type - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 97170762 - Field 3581037481 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Height</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Package Type - Field Height - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 97170762 - Field 2854289444 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Weight</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Package Type - Field Weight - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ISV Transport Header</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Field 3521048902 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delivery Address</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Field Delivery Address - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Field 4049626917 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delivery City</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Field Delivery City - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Field 4043147234 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delivery Country/Region Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Field Delivery Country/Region Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Field 516947637 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delivery Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Field Delivery Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Field 3166187171 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delivery Post Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Field Delivery Post Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Field 3573877485 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transport Booked</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Field Transport Booked - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 855216804 - Field 898580358 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warehouse Shipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Header - Field Warehouse Shipment No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3698979083 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ISV Transport Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3698979083 - Field 3581037481 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Height</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Line - Field Height - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3698979083 - Field 2701918132 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>License Plate No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Line - Field License Plate No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3698979083 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Line - Field Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3698979083 - Field 116357982 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Package Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Line - Field Package Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3698979083 - Field 1578081192 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transport No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Line - Field Transport No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3698979083 - Field 2854289444 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Weight</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table ISV Transport Line - Field Weight - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3035694071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ISV Package Types</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Package Types - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3035694071 - Control 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Code field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Package Types - Control Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3035694071 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Description field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Package Types - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3035694071 - Control 3581037481 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Height field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Package Types - Control Height - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3035694071 - Control 2854289444 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Weight field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Package Types - Control Weight - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ISV Transport Document</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 3521048902 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Delivery Address field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control Delivery Address - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 4049626917 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Delivery City field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control Delivery City - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 4043147234 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Delivery Country/Region Code field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control Delivery Country/Region Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 516947637 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Delivery Name field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control Delivery Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 3166187171 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Delivery Post Code field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control Delivery Post Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 3573877485 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Transport Booked field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control Transport Booked - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3825442164 - Control 898580358 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Warehouse Shipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Document - Control Warehouse Shipment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1549550453 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ISV Transport Documents</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Documents - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1549550453 - Control 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Documents - Control No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1549550453 - Control 898580358 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Warehouse Shipment No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport Documents - Control Warehouse Shipment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1005202812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lines</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport SubPage - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1005202812 - Control 3581037481 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Height field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport SubPage - Control Height - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1005202812 - Control 2701918132 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the License Plate No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport SubPage - Control License Plate No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1005202812 - Control 3320823955 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Line No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport SubPage - Control Line No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1005202812 - Control 116357982 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Package Type field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport SubPage - Control Package Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1005202812 - Control 2854289444 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Weight field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page ISV Transport SubPage - Control Weight - Property ToolTip</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

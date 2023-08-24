@@ -1,0 +1,38 @@
+{
+  "id": "525c6432-aa4a-410a-96fe-c63f0254db02",
+  "name": "ISV Shipping Solution",
+  "publisher": "Example - Tasklet Factory",
+  "brief": "",
+  "description": "Example Extension: ISV Shipping Solution",
+  "version": "1.0.0.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "./gfx/applogo.png",
+  "dependencies": [
+    { 
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c", 
+      "name": "Mobile WMS", 
+      "publisher": "Tasklet Factory", 
+      "version": "5.42.200.0"
+    }
+  ],
+  "application": "19.0.0.0",
+  "platform": "19.0.0.0",
+  "screenshots": [],
+  "resourceExposurePolicy": {
+    "allowDebugging": true, 
+    "allowDownloadingSource": true, 
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "8.0",
+  "features": ["TranslationFile"],    
+  "target": "Cloud",
+  "idRanges": [
+    {
+      "from": 62200,
+      "to": 62299
+    }
+  ]
+}
