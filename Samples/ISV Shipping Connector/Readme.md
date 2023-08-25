@@ -2,10 +2,10 @@
 <img src="./gfx/applogo.png" width="256"/>
 
 ## Introduction
-This extension provides a simple example of a ISV Shipping Connector<p>
+This extension provides a simple example of an ISV Shipping Connector<p>
 
 It uses the Pack & Ship API to transfer data from Pack & Ship into a simple Transport Document based on License Plates.<br>
-Intended to be used as base for building your own connector for any shipping provider solution.
+Intended to be used as a base for building your own connector for any shipping provider solution.
 
 This 'ISV Shipping Connector' must be used together with the sample 'ISV Shipping Solution' extension, also available on github.<br>
 Please see the [Pack & Ship userguide](https://docs.taskletfactory.com/x/xQKiCQ) for more details.
