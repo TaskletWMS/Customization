@@ -1,0 +1,33 @@
+{
+  "id": "93cc0c44-9665-41a8-885f-30a0a338e13c",
+  "name": "Mobile WMS Set Whse. Class Code Demo",
+  "publisher": "Tasklet University",
+  "brief": "Testing Mobile WMS Barcode scanning solution.",
+  "description": "Warehouse user can view and modify 'Warehouse Class Codes' on item.",
+  "version": "1.0.0.0",
+  "privacyStatement": "https://taskletfactory.com/en/cookie-and-privacy-policy/",
+  "EULA": "https://taskletfactory.com/wp-content/uploads/2018/01/End-User-License-Agreement-Version-3.1.pdf",
+  "help": "http://docs.taskletfactory.com",
+  "url": "https://taskletfactory.com",
+  "logo": "./gfx/applogo.jpg",
+  "dependencies": [
+    { 
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c", 
+      "name": "Mobile WMS", 
+      "publisher": "Tasklet Factory", 
+      "version": "5.0.144.175" 
+    }
+],
+  "screenshots": [],
+  "platform": "17.0.0.0",
+  "application": "17.0.0.0",
+  "showMyCode": true,
+  "runtime": "6.0",
+  "features": ["TranslationFile"],  
+  "idRanges": [
+    {
+    "from": 50100,
+    "to": 50999
+    }
+  ]
+}
