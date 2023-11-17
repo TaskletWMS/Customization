@@ -14,7 +14,6 @@ codeunit 50169 "MOB WMS Adhoc Reg Ext"
         // Set properties on the field
         _HeaderFields.Set_label(MobWmsLanguage.GetMessage('ITEM') + ':');
         _HeaderFields.Set_clearOnClear(true);
-        _HeaderFields.Set_acceptBarcode(true);
         _HeaderFields.Set_length(50);   // 50=length of Item Reference when accepting barcode
         _HeaderFields.Set_acceptBarcode(true);
         _HeaderFields.Set_eanAi('01,02,91'); // GS1 barcode AIs this field automatically reads
@@ -45,7 +44,7 @@ codeunit 50169 "MOB WMS Adhoc Reg Ext"
         ItemNo := MobWMSToolbox.GetItemNumber(_HeaderFieldValues.Get_ItemNumber());
         Item.Get(ItemNo);
 
-_HeaderFieldValues.get
+        _HeaderFieldValues.get
 
 
         // Return step to collect Whse. Class Code for this exact Item
