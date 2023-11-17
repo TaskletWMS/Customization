@@ -44,9 +44,6 @@ codeunit 50169 "MOB WMS Adhoc Reg Ext"
         ItemNo := MobWMSToolbox.GetItemNumber(_HeaderFieldValues.Get_ItemNumber());
         Item.Get(ItemNo);
 
-        _HeaderFieldValues.get
-
-
         // Return step to collect Whse. Class Code for this exact Item
         _Steps.Create_ListStep(1, 'WhseClassCode');
         _Steps.Set_helpLabel('Enter Warehouse Class Code');
