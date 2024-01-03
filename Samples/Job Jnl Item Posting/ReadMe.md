@@ -1,33 +1,38 @@
 
 <h1>Job Journal Item Posting</h1>
 
-![Alt text](gfx/applogo.png)
+<img src="gfx/applogo.png" width="25%">
 
+This example show how to build a custom lookup and add-hoc functions to support select a Job and register positive and negative Item Consumptions.
 
-This example show how to build a custom lookup and add-hoc functions to support select a Job and register Item Consumptions.
 <p>
-Includes custom al code and custom application.cfg
+Includes custom AL code and custom application.cfg file.
 <p>
 
 <h2>Setup:</h2>
-You must setup the Job Journal Template and Batch Name along with the Job Line Type to use.
+When the App is installed, new Menu Items and Mobile Messages are created automatically.<p>
 
-![Alt text](gfx/image.png)
+You must manually setup the Job Journal Template and Batch Name along with the Job Line Type to use.
+
+<img src="gfx/image.png" width="75%">
 
 <h2>Screenshots:</h2>
 
+New Menu Items on Main Screen
+
+<img src="gfx/image5.png" width="50%"><p>
+
 Lookup with Jobs
 
-![Alt text](gfx/image2.png)
+<img src="gfx/image2.png" width="50%"><p>
 
 Job Journal Item Consumption
 
-![Alt text](gfx/image3.png)
+<img src="gfx/image3.png" width="50%"><p>
 
 Result after posting
 
-![Alt text](gfx/image4.png)
-
+<img src="gfx/image4.png" width="75%"><p>
 
 <h2>Example barcode GS1-128:</h2>
 
@@ -35,4 +40,4 @@ We use these custom AI´s
 AI 92 = JOB
 AI 93 = JOBTASK
 
-![Alt text](gfx/barcode.png)
+<img src="gfx/barcode.png" width="25%">
