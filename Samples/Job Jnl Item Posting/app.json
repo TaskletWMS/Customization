@@ -1,0 +1,37 @@
+{
+  "id": "21898de7-186a-4278-b7ef-8bbabb8f73a4",
+  "name": "Mobile WMS Example : JobJnl Item Posting",
+  "publisher": "Tasklet Factory Example",
+  "version": "1.0.0.0",
+  "brief": "Job Journal Item Consumption",
+  "description": "Adhoc Post Item Consumption and Item Returns in Job Journal Line",
+  "privacyStatement": "",
+  "EULA": "https://taskletfactory.com/wp-content/uploads/2018/01/End-User-License-Agreement-Version-3.1.pdf",
+  "help": "https://university.taskletfactory.com",
+  "url": "",
+  "logo": "./gfx/applogo.png",
+  "dependencies": [
+    {
+      "publisher": "Tasklet Factory",
+      "name": "Mobile WMS",
+      "version": "5.40.0.0",
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c"
+    }
+  ],
+  "screenshots": [],
+  "platform": "23.0.0.0",
+  "application": "23.0.0.0",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "idRanges": [
+    {
+      "from": 60000,
+      "to": 60099
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://docs.taskletfactory.com/display/TFSK/Business%20Central",
+  "runtime": "12.0"
+}
