@@ -54,34 +54,6 @@ codeunit 60003 "MOBEX1 Install"
         MobMenu: Record "MOB Menu Option";
     begin
 
-        if not MobMenu.Get('JobJnlNegAdjustQty') then begin
-            MobMenu.Init();
-            MobMenu."Menu Option" := 'JobJnlNegAdjustQty';
-            MobMenu.Insert();
-        end;
-
-        if not MobMenuGrp.Get('WMS', 'JobJnlNegAdjustQty') then begin
-            MobMenuGrp.Init();
-            MobMenuGrp.Validate("Mobile Group", 'WMS');
-            MobMenuGrp.Validate("Mobile Menu Option", 'JobJnlNegAdjustQty');
-            MobMenuGrp.Validate(Sorting, 10);
-            MobMenuGrp.Insert(true);
-        end;
-
-        if not MobMenu.Get('JobJnlPosAdjustQty') then begin
-            MobMenu.Init();
-            MobMenu."Menu Option" := 'JobJnlPosAdjustQty';
-            MobMenu.Insert();
-        end;
-
-        if not MobMenuGrp.Get('WMS', 'JobJnlPosAdjustQty') then begin
-            MobMenuGrp.Init();
-            MobMenuGrp.Validate("Mobile Group", 'WMS');
-            MobMenuGrp.Validate("Mobile Menu Option", 'JobJnlPosAdjustQty');
-            MobMenuGrp.Validate(Sorting, 20);
-            MobMenuGrp.Insert(true);
-        end;
-
         if not MobMenu.Get('Item2JobJnl') then begin
             MobMenu.Init();
             MobMenu."Menu Option" := 'Item2JobJnl';

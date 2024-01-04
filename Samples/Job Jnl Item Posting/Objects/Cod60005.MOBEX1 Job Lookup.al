@@ -9,6 +9,7 @@ codeunit 60005 "MOBEX1 Job Lookup"
         // Add headerConfiguration elements here                
         _HeaderFields.Create_TextField(10, 'JobSearchTxt');
         _HeaderFields.Set_Label('Job Search Text:');
+        _HeaderFields.Set_optional(true);
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Lookup", 'OnLookupOnCustomLookupType', '', true, true)]
@@ -37,10 +38,15 @@ codeunit 60005 "MOBEX1 Job Lookup"
         // Initialize the response xml
         MobToolbox.InitializeResponseDocWithNS(_XmlResultDoc, XmlResponseData, CopyStr(MobXmlMgt.NS_WHSEMODEL(), 1, 1024));
 
-        Job.FilterGroup(-1); // cross-column search
-        Job.SetFilter("No.", '@*' + SearchTxt + '*');
-        Job.SetFilter("Description", '@*' + SearchTxt + '*');
-        Job.FilterGroup(0);
+        if SearchTxt <> '' then begin
+            Job.FilterGroup(-1); // cross-column search
+            Job.SetFilter("No.", '@*' + SearchTxt + '*');
+            Job.SetFilter("Description", '@*' + SearchTxt + '*');
+            Job.FilterGroup(0);
+        end;
+
+        Job.SetRange(Blocked, Job.Blocked::" ");
+        Job.SetFilter(Status, '<>%1', Job.Status::Completed);
         if Job.FindSet() then
             repeat
                 // Create new Response Element
