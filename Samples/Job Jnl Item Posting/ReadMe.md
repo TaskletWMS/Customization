@@ -17,7 +17,7 @@ This documentation assumes you are experienced making customizations to Mobile W
 <h2>Configuration file</h2>
 The extension contains several new pages for the mobile device and they need to be configured in the Configuration\application.cfg file on the device. Everything related to this example can be found by searching for 'JOB'.<p>
 
-Please visit https://docs.taskletfactory.com/display/TFSK/Mobile+Configuration+Files for more information.
+Please visit https://taskletfactory.atlassian.net/wiki/x/rZC0B for more information.
 
 <h2>Object numbers and prefix</h2>
 Please renumber and rename the objects before using the sample code at a production environment.

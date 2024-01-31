@@ -21,7 +21,7 @@ This documentation assumes you are experienced making customizations to Mobile W
 ### Configuration file
 The extension contains several new pages for the mobile device and they need to be configured in the **Configuration\application.cfg** file on the device. Everything related to Pick2Bin can be found by searching for X02.
 
-Please visit https://docs.taskletfactory.com/display/TFSK/Mobile+Configuration+Files for more information.
+Please visit https://taskletfactory.atlassian.net/wiki/x/rZC0B for more information.
 
 ### Object numbers and prefix
 Please renumber and rename the objects before using the sample code at a production environment.
