@@ -137,6 +137,7 @@ codeunit 50100 "MyMobile Adhoc Ext"
         TempTrackingSpec: Record "Tracking Specification" temporary;
         MobSetup: Record "MOB Setup";
         MobTrackingSetup: Record "MOB Tracking Setup";
+        MobItemTrackingManagement: Codeunit "MOB Item Tracking Management";
         MobToolbox: Codeunit "MOB Toolbox";
         MobWmsAdhocRegistr: Codeunit "MOB WMS Adhoc Registr.";
         MobItemReferenceMgt: Codeunit "MOB Item Reference Mgt.";
@@ -183,14 +184,14 @@ codeunit 50100 "MyMobile Adhoc Ext"
             ItemJnlLine.FieldCaption(Quantity) + ' ' +
             Format(Quantity);
 
-        // When using Serial Number Quantity is always = 1
-        if MobTrackingSetup."Serial No." <> '' then
-            Quantity := 1;
-
         // Initialize MobTrackingSetup (TrackingRequired and Tracking fields)
         Item.Get(ItemNo);
         MobTrackingSetup.DetermineItemTrackingRequiredByEntryType(Item."No.", true, 2, RegisterExpirationDate); // 2 = Positive Adjustment
         MobTrackingSetup.CopyTrackingFromRequestValues(_RequestValues); // LotNumber, SerialNumber, PackageNumber
+
+        // When using Serial Number Quantity is always = 1
+        if MobTrackingSetup."Serial No." <> '' then
+            Quantity := 1;
 
         // Make sure that the MOBADJQTY source code exist (for tracking purposes)
         if not SourceCode.Get('MOBADJQTY') then begin
@@ -237,7 +238,7 @@ codeunit 50100 "MyMobile Adhoc Ext"
                 // In this example ExpirationDate is always blank in current example as we do not collect ExpirationDate step 
                 // Therefore only it can only be supported when the Lot/Serial Number was previously on inventory
                 // Consider creating an optional step for Expiration Date using the OnPostAdhocRegistration_OnAddSteps event
-                MobCommonMgt.GetWhseExpirationDate(TempWhseJnlLine."Item No.", TempWhseJnlLine."Variant Code", Location, MobTrackingSetup, ExpirationDate);
+                MobItemTrackingManagement.GetWhseExpirationDate(TempWhseJnlLine."Item No.", TempWhseJnlLine."Variant Code", Location, MobTrackingSetup, ExpirationDate);
 
                 TempWhseJnlLine.Validate("Expiration Date", ExpirationDate);    // Will throw error on posting if blank (not previously on inventory)
                 TempWhseJnlLine.Validate("New Expiration Date", ExpirationDate);
