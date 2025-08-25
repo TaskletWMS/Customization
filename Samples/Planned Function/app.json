@@ -1,0 +1,40 @@
+{
+  "id": "14950bf7-22eb-4117-b694-95ef1b19ccdb",
+  "name": "Planned Function Example",
+  "publisher": "Tasklet Example",
+  "version": "1.0.0.0",
+  "brief": "Example of custom Planned Function",
+  "description": "Two examples of shipping sales orders—the first performs actual line shipment, the second is a barebones illustrative example.",
+  "privacyStatement": "",
+  "EULA": "https://taskletfactory.com/wp-content/uploads/2018/01/End-User-License-Agreement-Version-3.1.pdf",
+  "help": "https://university.taskletfactory.com",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "publisher": "Tasklet Factory",
+      "name": "Tasklet Mobile WMS",
+      "version": "5.57.0.0",
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c"
+    }
+  ],
+  "resourceFolders": ["TweakApplicationConfigFiles"],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "26.0.0.0",
+  "idRanges": [
+    {
+      "from": 62300,
+      "to": 63300
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "15.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}

@@ -1,0 +1,57 @@
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+    
+    <!--Service: This defines the mobile request names -->
+    <services>
+        <service id="MyFunction" tweak="Append" type="Order" orderType="MyFunction">
+            <requests>
+                <getOrders>GetMyOrders</getOrders>
+                <getOrderLines>GetMyOrderLines</getOrderLines>
+                <postOrder>PostMyOrder</postOrder>
+            </requests>
+        </service>
+    </services>
+
+    <!-- Menu: The menu item will open the page with the same "ID". In this case "MyFunction" which is the name of the Order List page -->
+    <pages>
+        <page id="MainMenu" type="Menu" icon="icon">
+            <menuConfiguration>
+                <menuItems>
+                    <menuItem id="MyFunction" tweak="Append" displayName="@{MainMenuMyFunction}" asd="asd" icon="document"/>
+                </menuItems>
+            </menuConfiguration>
+        </page>
+    </pages>
+
+    <!-- Order list page: Menu item opens this page -->
+    <pages>
+        <page id="MyFunction" tweak="Append" type="OrderList" icon="document">
+            <title defaultValue="@{PageMyOrderListTitle}"/>
+            <orderListConfiguration automaticOrderSelectionAfterFilter="true">
+                <service id="MyFunction"/>
+                <filter configurationKey="MyHeader" automaticAcceptOnOpen="true"/>
+                <list listId="Orders"/>
+                <onOrderSelected navigateTo="MyLines"/>
+                <unlockOrder title="@{ReleaseOrderMenuItemWithOrderId}"/>
+            </orderListConfiguration>
+        </page>
+    </pages>
+    
+    <!-- Lines list page: The OrderList page opens the OrderLines page -->
+    <pages>
+        <page id = "MyLines" tweak = "Append" type = "OrderLines" icon = "document">
+            <title defaultValue = "@{PageMyOrderLinesTitle}"/>
+            <orderLinesConfiguration suggestQuantity = "true" verifySingleScanRegistrations = "true" actionOnEmptyList = "ClosePage">
+                <service id="MyFunction"/>
+                <list listId = "OrderLinesWithImages"/>
+                <viewRegistrations title = "@{OrderLinesRegistrationMenuItem}" navigateTo = "ViewRegistrations" enabled = "true"/>
+                <deleteOrderRegistrations title = "@{OrderLinesDeleteAllOrderRegistrationsMenuItem}" enabled = "true"/>
+                <scanToSelectBehaviour gs1SearchTerm = "Item" behaviour = "Auto"/>
+            </orderLinesConfiguration>
+            <menu numberOfPromotedItems = "4"/>
+            <actions>
+                <open icon = "mainmenuprint" id = "PrintLabelTemplate" title = "@{PagePrintLabelTitle}" automaticValueTransfer = "true"/>
+            </actions>
+        </page>
+    </pages>
+</application>
