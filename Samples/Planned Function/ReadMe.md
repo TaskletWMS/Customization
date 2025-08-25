@@ -23,4 +23,4 @@ A minimal illustrative version that demonstrates the mobile logic without enhanc
 
 ## Example
 
-![MyFunction](Myfunction.gif)
+![MyFunction](./Myfunction.gif)
