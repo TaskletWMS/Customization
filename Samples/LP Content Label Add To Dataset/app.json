@@ -1,0 +1,39 @@
+{
+  "id": "df4d5037-ba36-4738-a9c1-8c96d8df9d71",
+  "name": "LP Content Label Add To Dataset",
+  "publisher": "Tasklet Example",
+  "version": "1.0.0.0",
+  "brief": "Example of custom LP Content Label layout adding fields to dataset",
+  "description": "An example of a custom layout for the License Plate Contents Label report that adds fields to the dataset using a subscriber event to insert.",
+  "privacyStatement": "",
+  "EULA": "https://taskletfactory.com/wp-content/uploads/2018/01/End-User-License-Agreement-Version-3.1.pdf",
+  "help": "https://university.taskletfactory.com",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "publisher": "Tasklet Factory",
+      "name": "Tasklet Mobile WMS",
+      "version": "5.60.260.0",
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c"
+    }
+  ],
+  "screenshots": [],
+  "platform": "26.0.0.0",
+  "application": "26.0.0.0",
+  "idRanges": [
+    {
+      "from": 60500,
+      "to": 60549
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "15.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
