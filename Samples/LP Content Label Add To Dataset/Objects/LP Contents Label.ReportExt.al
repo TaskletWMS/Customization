@@ -27,7 +27,7 @@ reportextension 60500 "LP Contents Label Ext" extends "MOB LP Contents Label"
             Caption = 'Custom LP Content Layout';
             Summary = 'A custom layout for License Plate Contents Label with additional field.';
             Type = RDLC;
-            LayoutFile = 'License Plate Contents GS1 4x6 AddToDataset.rdl';
+            LayoutFile = 'CustomLayout\License Plate Contents GS1 4x6 AddToDataset.rdl';
         }
     }
 }

@@ -19,8 +19,8 @@ To do this, you will need to find the layout under **Report Layouts** and press 
 
 
 ## Old Report
-![Old Report](Old%20License%20Plate%20Content%20Label.png)
+![Old Report](gfx\Old%20License%20Plate%20Content%20Label.png)
 
 ## New Customized Report
-![New Report](License%20Plate%20Content%20Label%20Custom%20Field.png)
+![New Report](gfx\License%20Plate%20Content%20Label%20Custom%20Field.png)
 
