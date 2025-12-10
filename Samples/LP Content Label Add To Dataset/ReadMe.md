@@ -18,9 +18,9 @@ In this example the original report layout has been exported and modifed using r
 To do this, you will need to find the layout under **Report Layouts** and press the action **Export layout**.
 
 
-## Old Report
-![Old Report](Gfx\Old%20License%20Plate%20Content%20Label.png)
+## Original Layout
+<img src="Gfx\Original License Plate Content Label.png" width="60%">
 
-## New Customized Report
-![New Report](Gfx\License%20Plate%20Content%20Label%20Custom%20Field.png)
+## New Customized Layout
+<img src="Gfx\License Plate Content Label Custom Field.png" width="60%">
 
