@@ -1,0 +1,557 @@
+report 6181274 "MOB LP Contents Label"
+{
+    Caption = 'Mobile WMS - License Plate Contents Label';
+    /* #if BC20+ */
+    AdditionalSearchTerms = 'Mobile WMS License Plate Contents Label Tasklet Print Barcode', Locked = true;
+    UsageCategory = ReportsAndAnalysis;
+    ApplicationArea = All;
+    DefaultRenderingLayout = "License Plate Contents GS1 4x6";
+
+    dataset
+    {
+        dataitem(CopyLoop; "Integer")
+        {
+            DataItemTableView = sorting(Number);
+            column(CopyNumber; Number)
+            {
+            }
+            dataitem(PageLoop; "Integer")
+            {
+                DataItemTableView = sorting(Number) where(Number = const(1));
+                dataitem("MOB License Plate"; "MOB License Plate")
+                {
+                    RequestFilterFields = "No.";
+                    DataItemTableView = sorting("No.");
+                    RequestFilterHeading = 'License Plate', Locked = true;
+
+                    column(No_; "No.")
+                    {
+                    }
+                    column(EncodedBarcode; EncodedBarcodeTxt)
+                    {
+                    }
+                    column(BarcodeTxt; BarcodeTxt)
+                    {
+                    }
+                    column(GS1EncodedBarcode; GS1EncodedBarcodeTxt)
+                    {
+                    }
+                    column(GS1BarcodeTxt; GS1BarcodeTxt)
+                    {
+                    }
+                    column(CompanyName; CompanyInformation.Name)
+                    {
+                    }
+                    column(CompanyAddress; CompanyAddressTxt)
+                    {
+                    }
+                    column(SourceName; SourceNameTxt)
+                    {
+                    }
+                    column(SourceAddress; SourceAddressTxt)
+                    {
+                    }
+
+                    dataitem("MOB Temp LP Report Content"; "MOB Temp LP Report Content")
+                    {
+                        DataItemTableView = sorting("Entry No.");  // Appy DataItemTableView to hide section on Request Page
+
+                        column(Temp_Entry_No_; "Entry No.")
+                        {
+                        }
+                        column(Temp_License_Plate_No_; "License Plate No.")
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(Temp_Type; Type)
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(Temp_No_; "No.")
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(Temp_Variant_Code; "Variant Code")
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(Temp_Description; Description)
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(Temp_Quantity; QuantityTxt)
+                        {
+                        }
+                        column(Temp_Quantity_Base; QuantityBaseTxt)
+                        {
+                        }
+                        column(Temp_Unit_Of_Measure_Code; "Unit Of Measure Code")
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(Temp_SerialNo; "Serial No.")
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(Temp_LotNo; "Lot No.")
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(temp_PackageNo; "Package No.")
+                        {
+                            IncludeCaption = true;
+                        }
+                        column(Temp_ExpirationDate; "Expiration Date")
+                        {
+                            IncludeCaption = true;
+                        }
+
+                        trigger OnAfterGetRecord()
+                        begin
+
+                            // Format Quantity shown on report, it will be formatted according to regional setting
+                            if Quantity <> 0 then
+                                QuantityTxt := MobWmsToolbox.Decimal2TextAsDisplayFormat(Quantity)
+                            else
+                                QuantityTxt := '';
+
+                            if "Quantity (Base)" <> 0 then
+                                QuantityBaseTxt := MobWmsToolbox.Decimal2TextAsDisplayFormat("Quantity (Base)")
+                            else
+                                QuantityBaseTxt := '';
+                        end;
+                    }
+
+                    trigger OnAfterGetRecord()
+                    begin
+                        // Add Company Information
+                        AddCompanyInfo();
+
+                        // Add Source Information
+                        AddSourceInfo();
+
+                        // Encode barcode without AI values
+                        Clear(BarcodeManagement2D);
+                        BarcodeManagement2D.Set_BarcodeFontProvider(Enum::"Barcode Font Provider 2D"::IDAutomation2D);
+                        BarcodeManagement2D.Set_BarcodeSymbology(Enum::"Barcode Symbology 2D"::"Data Matrix");
+                        BarcodeManagement2D.SetSimpleTextToEncode("No.");
+                        EncodedBarcodeTxt := BarcodeManagement2D.GetEncodedBarcodeText();
+                        BarcodeTxt := BarcodeManagement2D.GetBarcodeText();
+
+                        // Encode barcode with GS1 standard Ai values based on local AiDictionary
+                        UpdateAiDictionary();
+                        Clear(BarcodeManagement2D);
+                        BarcodeManagement2D.SetAiDictionary(InternalAiDictionary);
+                        BarcodeManagement2D.Set_BarcodeFontProvider(Enum::"Barcode Font Provider 2D"::IDAutomation2D);
+                        BarcodeManagement2D.Set_BarcodeSymbology(Enum::"Barcode Symbology 2D"::"Data Matrix");
+                        GS1EncodedBarcodeTxt := BarcodeManagement2D.GetEncodedBarcodeText();
+                        GS1BarcodeTxt := BarcodeManagement2D.GetBarcodeText();
+
+
+                        // Required to have dictionary available in the OnAfterAfterGetRecord
+                        AiDictionary := InternalAiDictionary;
+
+                        // Prepare for loop                    
+                        Clear(InternalAiDictionary);
+
+                        // Create temporary dataset to show License Plate levels and contents
+                        "MOB Temp LP Report Content".Reset();
+                        "MOB Temp LP Report Content".DeleteAll();
+                        CreateTempLicensePlateContent2Dataset("No.", "MOB Temp LP Report Content");
+                    end;
+
+                }
+
+
+            }
+            trigger OnPreDataItem()
+            begin
+                NoOfLoops := Abs(NoOfCopiesReq) + 1;
+                SetRange(Number, 1, NoOfLoops);
+            end;
+        }
+    }
+
+    requestpage
+    {
+        SaveValues = true;
+        layout
+        {
+            area(Content)
+            {
+                group(GroupName)
+                {
+                    Caption = 'Options';
+                    field(NoOfCopies; NoOfCopiesReq)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'No. of Copies';
+                        ToolTip = 'Specifies how many copies of the document to print.';
+                    }
+                }
+            }
+        }
+    }
+
+    rendering
+    {
+        layout("License Plate Contents 4x6")
+        {
+            Type = RDLC;
+            Caption = 'License Plate Contents Label 4x6';
+            Summary = 'Mobile WMS - License Plate Contents Label 4x6';
+            LayoutFile = './Objects/_ReportPack/_LicensePlateContents/MOB LP Contents Label 4x6.rdl';
+        }
+        layout("License Plate Contents GS1 4x6")
+        {
+            Type = RDLC;
+            Caption = 'License Plate Contents Label GS1 4x6';
+            Summary = 'Mobile WMS - License Plate Contents Label GS1 4x6';
+            LayoutFile = './Objects/_ReportPack/_LicensePlateContents/MOB LP Contents Label GS1 4x6.rdl';
+        }
+    }
+
+
+    labels
+    {
+        No_Caption = 'No.';
+        Description_Caption = 'Description';
+        UoM_Caption = 'Unit';
+        Quantity_Caption = 'Quantity';
+    }
+
+    local procedure AddCompanyInfo()
+    begin
+        CompanyInformation.Get();
+        FormatAddress.Company(CompanyAddrArray, CompanyInformation);
+        CompanyAddressTxt :=
+          CompanyAddrArray[2] + MobToolbox.CRLFSeparator() +
+          CompanyAddrArray[3] + MobToolbox.CRLFSeparator() +
+          CompanyAddrArray[4] + MobToolbox.CRLFSeparator() +
+          CompanyAddrArray[5];
+    end;
+
+    local procedure AddSourceInfo()
+    var
+        SalesHeader: Record "Sales Header";
+        SalesLine: Record "Sales Line";
+        TransferHeader: Record "Transfer Header";
+        TransferLine: Record "Transfer Line";
+        ServiceHeader: Record "Service Header";
+        ServiceLine: Record "Service Line";
+        PurchaseHeader: Record "Purchase Header";
+        PurchaseLine: Record "Purchase Line";
+        WarehouseShipmentLine: Record "Warehouse Shipment Line";
+        SourceRecRef: RecordRef;
+    begin
+        WarehouseShipmentLine.SetRange("No.", "MOB License Plate"."Whse. Document No.");
+        if WarehouseShipmentLine.FindFirst() then
+            case WarehouseShipmentLine."Source Type" of
+                Database::"Sales Line":
+                    if SalesLine.Get(WarehouseShipmentLine."Source Subtype", WarehouseShipmentLine."Source No.", WarehouseShipmentLine."Source Line No.") then begin
+                        SalesHeader.Get(SalesLine."Document Type", SalesLine."Document No.");
+                        SourceRecRef.Get(SalesHeader.RecordId());
+                        SourceNameTxt := SalesHeader."Ship-to Name";
+                        SourceAddressTxt := GetShipToAddress_FromRecRef(SourceRecRef);
+                    end;
+                Database::"Transfer Line":
+                    if TransferLine.Get(WarehouseShipmentLine."Source No.", WarehouseShipmentLine."Source Line No.") then begin
+                        TransferHeader.Get(TransferLine."Document No.");
+                        SourceRecRef.Get(TransferHeader.RecordId());
+                        SourceNameTxt := TransferHeader."Transfer-to Code";
+                        SourceAddressTxt := GetShipToAddress_FromRecRef(SourceRecRef);
+                    end;
+                Database::"Service Line":
+                    if ServiceLine.Get(WarehouseShipmentLine."Source Subtype", WarehouseShipmentLine."Source No.", WarehouseShipmentLine."Source Line No.") then begin
+                        ServiceHeader.Get(ServiceLine."Document Type", ServiceLine."Document No.");
+                        SourceRecRef.Get(ServiceHeader.RecordId());
+                        SourceNameTxt := ServiceHeader."Ship-to Name";
+                        SourceAddressTxt := GetShipToAddress_FromRecRef(SourceRecRef);
+                    end;
+                Database::"Purchase Line":
+                    if PurchaseLine.Get(WarehouseShipmentLine."Source Subtype", WarehouseShipmentLine."Source No.", WarehouseShipmentLine."Source Line No.") then begin
+                        PurchaseHeader.Get(PurchaseLine."Document Type", PurchaseLine."Document No.");
+                        SourceRecRef.Get(PurchaseHeader.RecordId());
+                        SourceNameTxt := PurchaseHeader."Ship-to Name";
+                        SourceAddressTxt := GetShipToAddress_FromRecRef(SourceRecRef);
+                    end;
+            end;
+    end;
+
+    local procedure GetShipToAddress_FromRecRef(_SourceRecRef: RecordRef): Text
+    var
+        SalesHeader: Record "Sales Header";
+        TransferHeader: Record "Transfer Header";
+        ServiceHeader: Record "Service Header";
+        PurchaseHeader: Record "Purchase Header";
+        AddrArray: array[8] of Text;
+    begin
+        case _SourceRecRef.Number() of
+            Database::"Sales Header":
+                begin
+                    _SourceRecRef.SetTable(SalesHeader);
+                    FormatAddress.SalesHeaderShipTo(AddrArray, CustAddrArray, SalesHeader);
+                    AddrArray[1] := SalesHeader."Sell-to Customer No.";
+                    exit(ConvertAddrArrayToText(AddrArray));
+                end;
+            Database::"Transfer Header":
+                begin
+                    _SourceRecRef.SetTable(TransferHeader);
+                    FormatAddress.TransferHeaderTransferTo(AddrArray, TransferHeader);
+                    AddrArray[1] := TransferHeader."Transfer-to Code";
+                    exit(ConvertAddrArrayToText(AddrArray));
+                end;
+            Database::"Service Header":
+                begin
+                    _SourceRecRef.SetTable(ServiceHeader);
+                    MobFormatAddress.ServiceHeaderShipTo(AddrArray, ServiceHeader);
+                    AddrArray[1] := ServiceHeader."Customer No.";
+                    exit(ConvertAddrArrayToText(AddrArray));
+                end;
+            Database::"Purchase Header":
+                begin
+                    _SourceRecRef.SetTable(PurchaseHeader);
+                    FormatAddress.PurchHeaderShipTo(AddrArray, PurchaseHeader);
+                    AddrArray[1] := PurchaseHeader."Buy-from Vendor No.";
+                    exit(ConvertAddrArrayToText(AddrArray));
+                end;
+        end;
+    end;
+
+    local procedure ConvertAddrArrayToText(_AddrArray: array[8] of Text): Text
+    begin
+        exit(_AddrArray[1] + MobToolbox.CRLFSeparator() +
+             _AddrArray[2] + MobToolbox.CRLFSeparator() +
+             _AddrArray[3] + MobToolbox.CRLFSeparator() +
+             _AddrArray[4] + MobToolbox.CRLFSeparator() +
+             _AddrArray[5]);
+    end;
+
+    local procedure CreateTempLicensePlateContent2Dataset(LicensePlateNo: Code[20]; var _Dataset: Record "MOB Temp LP Report Content")
+    var
+        LicensePlate: Record "MOB License Plate";
+    begin
+        if not LicensePlate.Get(LicensePlateNo) then
+            exit;
+
+        // Transfer Top-level License Plate as label header        
+        TransferLicensePlateContent2Dataset(LicensePlate."No.", _Dataset);
+    end;
+
+    local procedure TransferLicensePlateContent2Dataset(LicensePlateNo: Code[20]; var _Dataset: Record "MOB Temp LP Report Content")
+    var
+        LicensePlateContent: Record "MOB License Plate Content";
+    begin
+        LicensePlateContent.Reset();
+        LicensePlateContent.SetCurrentKey("Whse. Document Type", "Whse. Document No.", Type, "No.", "Package No.", "Lot No.", "Serial No.", "Variant Code");
+        LicensePlateContent.SetRange("License Plate No.", LicensePlateNo);
+        if LicensePlateContent.FindSet() then
+            repeat
+                if LicensePlateContent.Type = LicensePlateContent.Type::"License Plate" then begin
+                    // Print a Header-line for the License Plate, before it's lines
+                    LicensePlateContentHeader2Dataset(LicensePlateContent, _Dataset);
+                    TransferLicensePlateContent2Dataset(LicensePlateContent."No.", _Dataset);
+                end else
+                    // Print License Plate Content-line
+                    LicensePlateContent2Dataset(LicensePlateContent, _Dataset);
+            until LicensePlateContent.Next() = 0;
+    end;
+
+    /// <summary>
+    /// Transfer License Plate Content to Dataset
+    /// </summary>
+    local procedure LicensePlateContent2Dataset(_LicensePlateContent: Record "MOB License Plate Content"; var _Dataset: Record "MOB Temp LP Report Content")
+    var
+        Location: Record Location;
+        MobTrackingSetup: Record "MOB Tracking Setup";
+        ItemLedgEntry: Record "Item Ledger Entry"; // Dummy var used to get captions of tracking fields
+        MobItemTrackingManagement: Codeunit "MOB Item Tracking Management";
+        ExpDate: Date;
+    begin
+        // Get tracking setup
+        _LicensePlateContent.CopyTrackingToMobTrackingSetup(MobTrackingSetup);
+
+        // Get ExpDate
+        MobItemTrackingManagement.GetWhseExpirationDate(_LicensePlateContent."No.", _LicensePlateContent."Variant Code", Location, MobTrackingSetup, ExpDate);
+
+        _Dataset.Init();
+        _Dataset."Entry No." := GetNextEntryNo();
+        _Dataset."License Plate No." := _LicensePlateContent."License Plate No.";
+        _Dataset.Type := _LicensePlateContent.Type;
+        _Dataset."No." := _LicensePlateContent."No.";
+        _Dataset."Variant Code" := _LicensePlateContent."Variant Code";
+        _Dataset.Quantity := _LicensePlateContent.Quantity;
+        _Dataset."Quantity (Base)" := _LicensePlateContent."Quantity (Base)";
+        _Dataset."Unit Of Measure Code" := _LicensePlateContent."Unit Of Measure Code";
+        _Dataset."Serial No." := MobTrackingSetup."Serial No.";
+        _Dataset."Lot No." := MobTrackingSetup."Lot No.";
+        _Dataset."Package No." := MobTrackingSetup."Package No.";
+        _Dataset."Expiration Date" := ExpDate;
+
+        // Get the Variant Description if it exists - otherwise the Item Description
+        if _LicensePlateContent.Type = _LicensePlateContent.Type::Item then
+            _Dataset.Description := MobWmsToolbox.GetItemDescription(_LicensePlateContent."No.", _LicensePlateContent."Variant Code");
+
+        // Allow modification of dataset before inserting it
+        OnLicensePlateContent2Dataset_OnBeforeInsertDataset(_LicensePlateContent, MobTrackingSetup, _Dataset);
+
+        _Dataset.Insert();
+
+        if MobTrackingSetup."Serial No." <> '' then begin
+            _Dataset.Init();
+            _Dataset."Entry No." := GetNextEntryNo();
+            _Dataset.Description := ItemLedgEntry.FieldCaption("Serial No.") + ': ' + MobTrackingSetup."Serial No.";
+            _Dataset.Insert();
+        end;
+
+        if MobTrackingSetup."Lot No." <> '' then begin
+            _Dataset.Init();
+            _Dataset."Entry No." := GetNextEntryNo();
+            _Dataset.Description := ItemLedgEntry.FieldCaption("Lot No.") + ': ' + MobTrackingSetup."Lot No.";
+            _Dataset.Insert();
+        end;
+
+        if MobTrackingSetup."Package No." <> '' then begin
+            _Dataset.Init();
+            _Dataset."Entry No." := GetNextEntryNo();
+            _Dataset.Description := ItemLedgEntry.FieldCaption("Package No.") + ': ' + MobTrackingSetup."Package No.";
+            _Dataset.Insert();
+        end;
+
+        if ExpDate <> 0D then begin
+            _Dataset.Init();
+            _Dataset."Entry No." := GetNextEntryNo();
+            _Dataset.Description := ItemLedgEntry.FieldCaption("Expiration Date") + ': ' + MobWmsToolbox.Date2TextAsDisplayFormat(ExpDate);
+            _Dataset.Insert();
+        end;
+
+    end;
+
+    local procedure LicensePlateContentHeader2Dataset(_LicensePlateContent: Record "MOB License Plate Content"; var _Dataset: Record "MOB Temp LP Report Content")
+    var
+        LicensePlateMgt: Codeunit "MOB License Plate Mgt";
+        LPStructureTxt: Text;
+    begin
+        LPStructureTxt := Format(_LicensePlateContent."No.");
+        LicensePlateMgt.GetLicensePlateStructureAsText(_LicensePlateContent, LPStructureTxt);  // LPStructureTxt will contain info of the LP Structure, like '10 -> 12 -> 15' where 10 = LP No. on top level and 15 = LP No. on current level
+
+        // Insert Blank lines
+        _Dataset.Init();
+        _Dataset."Entry No." := GetNextEntryNo();
+        _Dataset.Description := '';
+        _Dataset.Insert();
+
+        _Dataset.Init();
+        _Dataset."Entry No." := GetNextEntryNo();
+        _Dataset.Description := LPStructureTxt;
+        _Dataset.Insert();
+    end;
+
+    local procedure GetNextEntryNo(): Integer
+    begin
+        NextEntryNo += 1;
+        exit(NextEntryNo);
+    end;
+
+    /// <summary>
+    /// Apply the values in sequence to encode as Ai´s acording to the GS1 standard
+    /// </summary>
+    local procedure UpdateAiDictionary()
+    begin
+        // License Plate Number encoded using Ai 98
+        Add_AiAndValueIfKeyNotExists('98', "MOB License Plate"."No.");
+    end;
+
+    /// <summary>
+    /// Adds a Application Identifier (AI) and its value to the AiDictionary.
+    /// AI added in the OnBeforeAfterGetRecord will not be overwritten by Mobile WMS.
+    /// If the AI is already present or marked to be excluded, the insertion will fail.
+    /// </summary>
+    procedure Add_CustomAiAndValue(_GS1AI: Text; _InputValue: Text)
+    begin
+        if _GS1AI <> '' then
+            InternalAiDictionary.Add(_GS1AI, _InputValue);
+    end;
+
+    /// <summary>
+    /// Prevents an AI to be added to the AiDictionary by Mobile WMS.
+    /// This enables customizations to omit an AI to be part of the encoded GS1 barcode.
+    /// </summary>
+    procedure Exclude_Ai(_GS1AI: Text)
+    begin
+        InternalAiDictionary.Set(_GS1AI, ''); // Blank values will be removed before the barcode is encoded
+    end;
+
+    local procedure Add_AiAndValueIfKeyNotExists(_GS1AI: Text; _InputValue: Text)
+    begin
+        if (_GS1AI = '') or (_InputValue = '') then
+            exit;
+
+        if not InternalAiDictionary.ContainsKey(_GS1AI) then
+            InternalAiDictionary.Add(_GS1AI, _InputValue);
+    end;
+
+    /// <summary>
+    /// Set the No. of Copies on the Request Page.
+    /// </summary>
+    /// <param name="_NoOfCopies">Please notice, that "2" copies results in 3 labels. One original and two copies. You should therefore specify "0" to get one label.</param>
+    procedure Set_NoOfCopies(_NoOfCopies: Integer)
+    begin
+        NoOfCopiesReq := _NoOfCopies;
+    end;
+
+    var
+        CompanyInformation: Record "Company Information";
+        BarcodeManagement2D: Codeunit "MOB Report Barcode Mgt. 2D";
+        FormatAddress: Codeunit "Format Address";
+        MobFormatAddress: Codeunit "MOB Format Address";
+        MobToolbox: Codeunit "MOB Toolbox";
+        MobWmsToolbox: Codeunit "MOB WMS Toolbox";
+        InternalAiDictionary: Dictionary of [Text, Text];
+        NextEntryNo: Integer;
+        NoOfLoops: Integer;
+
+    //OBS. Avoid changing protected variables not to cause errors if depending apps. 
+    protected var
+        EncodedBarcodeTxt: Text;
+        BarcodeTxt: Text;
+        GS1EncodedBarcodeTxt: Text;
+        GS1BarcodeTxt: Text;
+        NoOfCopiesReq: Integer;
+        QuantityTxt: Text;
+        QuantityBaseTxt: Text;
+        SourceAddressTxt: Text;
+        SourceNameTxt: Text;
+        CompanyAddrArray: array[8] of Text;
+        CompanyAddressTxt: Text;
+        CustAddrArray: array[8] of Text;
+
+        /// <summary>
+        /// This protected dictionary can be used in OnAfterAfterGetRecord to get the AIs added by Mobile WMS and any Report Extension if a different encoding is needed.
+        /// It should not be used in OnBeforeAfterGetRecord as it will not be used by Mobile WMS when encoding the barcode.
+        /// </summary>
+        AiDictionary: Dictionary of [Text, Text];
+
+    // INTEGRATION EVENTS
+
+    /// <summary>
+    /// Integration event that allows customizations to modify dataset record before it is inserted.
+    /// Use this to add custom fields, modify descriptions, or set additional values.
+    /// </summary>
+    /// <param name="_LicensePlateContent">Contains information about the License Plate Content</param>
+    /// <param name="_MobTrackingSetup">Tracking information for the content</param>
+    /// <param name="_Dataset">Report dataset to be modified</param>
+    [IntegrationEvent(false, false)]
+    local procedure OnLicensePlateContent2Dataset_OnBeforeInsertDataset(_LicensePlateContent: Record "MOB License Plate Content"; var _MobTrackingSetup: Record "MOB Tracking Setup"; var _Dataset: Record "MOB Temp LP Report Content")
+    begin
+        // This procedure is intended to be used in Report Extensions to modify the Dataset before inserting it.
+    end;
+
+    /* #endif */
+    /* #if BC19- ##
+    trigger OnPreReport()
+    begin
+        Error('This Mobile WMS Report is only available in BC 20 and later');
+    end;
+    /* #endif */
+}

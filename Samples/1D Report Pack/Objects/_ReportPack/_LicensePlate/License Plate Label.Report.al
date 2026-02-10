@@ -1,0 +1,357 @@
+report 81272 "MOB1D License Plate Label"
+{
+    Caption = 'Mobile WMS - License Plate Label (1D)';
+    /* #if BC20+ */
+    AdditionalSearchTerms = 'Mobile WMS License Plate Label Tasklet Print Barcode', Locked = true;
+    DefaultRenderingLayout = "License Plate Label GS1 3x2";
+    UsageCategory = ReportsAndAnalysis;
+    ApplicationArea = All;
+
+    dataset
+    {
+        dataitem(LicensePlate; "Integer")
+        {
+            DataItemTableView = sorting(Number);
+            dataitem(CopyLoop; "Integer")
+            {
+                DataItemTableView = sorting(Number);
+                column(No_; LicensePlateNoReq)
+                {
+                }
+                // Column that stores the barcode encoded string
+                column(EncodedBarcode; EncodedBarcodeTxt)
+                {
+                }
+                column(BarcodeTxt; BarcodeTxt)
+                {
+                }
+                column(GS1EncodedBarcode; GS1EncodedBarcodeTxt)
+                {
+                }
+                column(GS1BarcodeTxt; GS1BarcodeTxt)
+                {
+                }
+                column(CompanyName; CompanyInformation.Name)
+                {
+                }
+                column(CompanyAddress; CompanyAddressTxt)
+                {
+                }
+                column(SourceName; SourceNameTxt)
+                {
+                }
+                column(SourceAddress; SourceAddressTxt)
+                {
+                }
+
+                trigger OnAfterGetRecord()
+                var
+                    MobToolbox: Codeunit "MOB Toolbox";
+                    SourceRecRef: RecordRef;
+                begin
+
+                    // Add Company Information
+                    AddCompanyInfo();
+
+                    // Add Source Information                        
+                    MobToolbox.ReferenceIDText2RecRef(SourceReferenceIDReq, SourceRecRef);
+                    AddSourceInfo(SourceRecRef);
+
+                    // Assign new License Plate numbers
+                    if (NoOfLabelsReq = 1) and (LicensePlateNoReq = '') then
+                        LicensePlateNoReq := Mob1DInternalMobFunctions.GetNextLicensePlateNo(not CurrReport.Preview())
+                    else
+                        if NoOfLabelsReq > 1 then
+                            if CurrentLicensePlateNo <> LicensePlate.Number then begin
+                                CurrentLicensePlateNo := LicensePlate.Number;
+                                LicensePlateNoReq := Mob1DInternalMobFunctions.GetNextLicensePlateNo(not CurrReport.Preview());
+                            end;
+
+                    // Encode barcode without AI values
+                    Clear(BarcodeManagement1D);
+                    BarcodeManagement1D.Set_BarcodeFontProvider("Barcode Font Provider"::IDAutomation1D);
+                    BarcodeManagement1D.Set_BarcodeSymbology("Barcode Symbology"::Code128);
+                    BarcodeManagement1D.SetSimpleTextToEncode(LicensePlateNoReq);
+                    EncodedBarcodeTxt := BarcodeManagement1D.GetEncodedBarcodeText();
+                    BarcodeTxt := LicensePlateNoReq;
+
+                    // Encode dictionary as 1D GS1 Code128
+                    UpdateAiDictionary();
+                    GS1EncodedBarcodeTxt := Mob1DInternalMobFunctions.GetEncodedBarcodeText("Barcode Font Provider"::IDAutomation1D, "Barcode Symbology"::Code128, InternalAiDictionary);
+                    GS1BarcodeTxt := Mob1DInternalMobFunctions.GetBarcodeText(InternalAiDictionary);
+
+                    // Required to have dictionary available in the OnAfterAfterGetRecord
+                    AiDictionary := InternalAiDictionary;
+
+                    // Prepare for loop                    
+                    Clear(InternalAiDictionary);
+
+                end;
+
+                trigger OnPreDataItem()
+                begin
+                    NoOfLoops := Abs(NoOfCopiesReq) + 1;
+                    SetRange(Number, 1, NoOfLoops);
+                end;
+
+            }
+            trigger OnPreDataItem()
+            begin
+                if LicensePlateNoReq <> '' then
+                    NoOfLabelsReq := 1;
+
+                SetRange(Number, 1, NoOfLabelsReq);
+            end;
+        }
+    }
+
+    requestpage
+    {
+        SaveValues = true;
+
+        layout
+        {
+            area(Content)
+            {
+                group(Options)
+                {
+                    Caption = 'Options';
+
+                    field(LicensePlateNo; LicensePlateNoReq)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'License Plate No.';
+                        ToolTip = 'Specifies the value of License Plate No.';
+                    }
+                    field(NoOfLabels; NoOfLabelsReq)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'No. of new Labels';
+                        ToolTip = 'Specifies how many new Labels you want to print. Numbers are assigned from the Number-Series specified in Mobile WMS Setup.';
+                    }
+                    field(NoOfCopies; NoOfCopiesReq)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'No. of Copies';
+                        ToolTip = 'Specifies how many copies of each Label you want to print.';
+                    }
+                    field(SourceReferenceID; SourceReferenceIDReq)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Source Reference ID';
+                        ToolTip = 'Specifies the value of Source Reference ID';
+                        Visible = false;
+                    }
+                }
+            }
+        }
+    }
+
+    rendering
+    {
+        layout("License Plate Label 3x2")
+        {
+            Type = RDLC;
+            Caption = 'License Plate Label 3x2';
+            Summary = 'Mobile WMS - License Plate Label 3x2';
+            LayoutFile = './Objects/_ReportPack/_LicensePlate/MOB License Plate Label 3x2.rdl';
+        }
+        layout("License Plate Label GS1 3x2")
+        {
+            Type = RDLC;
+            Caption = 'License Plate Label GS1 3x2';
+            Summary = 'Mobile WMS - License Plate Label GS1 3x2';
+            LayoutFile = './Objects/_ReportPack/_LicensePlate/MOB License Plate Label GS1 3x2.rdl';
+        }
+    }
+
+    local procedure AddCompanyInfo()
+    begin
+        CompanyInformation.Get();
+        FormatAddress.Company(CompanyAddrArray, CompanyInformation);
+
+        CompanyAddressTxt :=
+          CompanyAddrArray[2] + MobToolbox.CRLFSeparator() +
+          CompanyAddrArray[3] + MobToolbox.CRLFSeparator() +
+          CompanyAddrArray[4] + MobToolbox.CRLFSeparator() +
+          CompanyAddrArray[5];
+    end;
+
+    local procedure AddSourceInfo(var _SourceRecRef: RecordRef)
+    var
+        SalesHeader: Record "Sales Header";
+        TransferHeader: Record "Transfer Header";
+        ServiceHeader: Record "Service Header";
+        PurchaseHeader: Record "Purchase Header";
+        AddrArray: array[8] of Text;
+    begin
+
+        case _SourceRecRef.Number() of
+            Database::"Sales Header":
+                begin
+                    _SourceRecRef.SetTable(SalesHeader);
+                    SourceNameTxt := SalesHeader."Ship-to Name";
+                    FormatAddress.SalesHeaderShipTo(AddrArray, CustAddrArray, SalesHeader);
+                    AddrArray[1] := SalesHeader."Sell-to Customer No.";
+                    SourceAddressTxt := ConvertAddrArrayToText(AddrArray);
+                end;
+            Database::"Transfer Header":
+                begin
+                    _SourceRecRef.SetTable(TransferHeader);
+                    SourceNameTxt := TransferHeader."Transfer-to Code";
+                    FormatAddress.TransferHeaderTransferTo(AddrArray, TransferHeader);
+                    AddrArray[1] := TransferHeader."Transfer-to Code";
+                    SourceAddressTxt := ConvertAddrArrayToText(AddrArray);
+                end;
+            Database::"Service Header":
+                begin
+                    _SourceRecRef.SetTable(ServiceHeader);
+                    SourceNameTxt := ServiceHeader."Ship-to Name";
+                    Mob1DInternalMobFunctions.ServiceHeaderShipTo(AddrArray, ServiceHeader);
+                    AddrArray[1] := ServiceHeader."Customer No.";
+                    SourceAddressTxt := ConvertAddrArrayToText(AddrArray);
+                end;
+            Database::"Purchase Header":
+                begin
+                    _SourceRecRef.SetTable(PurchaseHeader);
+                    SourceNameTxt := PurchaseHeader."Ship-to Name";
+                    FormatAddress.PurchHeaderShipTo(AddrArray, PurchaseHeader);
+                    AddrArray[1] := PurchaseHeader."Buy-from Vendor No.";
+                    SourceAddressTxt := ConvertAddrArrayToText(AddrArray);
+                end;
+        end;
+    end;
+
+    local procedure ConvertAddrArrayToText(_AddrArray: array[8] of Text): Text
+    begin
+        exit(_AddrArray[1] + MobToolbox.CRLFSeparator() +
+             _AddrArray[2] + MobToolbox.CRLFSeparator() +
+             _AddrArray[3] + MobToolbox.CRLFSeparator() +
+             _AddrArray[4] + MobToolbox.CRLFSeparator() +
+             _AddrArray[5]);
+    end;
+
+    internal procedure SetLicensePlateNo(_LicensePlateNo: Code[20])
+    begin
+        LicensePlateNoReq := _LicensePlateNo
+    end;
+
+    trigger OnPreReport()
+    begin
+        MobSetup.Get();
+    end;
+
+    /// <summary>
+    /// Apply the values in sequence to encode as Ai´s acording to the GS1 standard
+    /// </summary>
+    local procedure UpdateAiDictionary()
+    begin
+        // License Plate Number encoded using Ai 98
+        Add_AiAndValueIfKeyNotExists('98', Format(LicensePlateNoReq));
+    end;
+
+    /// <summary>
+    /// Adds a Application Identifier (AI) and its value to the AiDictionary.
+    /// AI added in the OnBeforeAfterGetRecord will not be overwritten by Mobile WMS.
+    /// If the AI is already present or marked to be excluded, the insertion will fail.
+    /// </summary>
+    procedure Add_CustomAiAndValue(_GS1AI: Text; _InputValue: Text)
+    begin
+        if _GS1AI <> '' then
+            InternalAiDictionary.Add(_GS1AI, _InputValue);
+    end;
+
+    /// <summary>
+    /// Prevents an AI to be added to the AiDictionary by Mobile WMS.
+    /// This enables customizations to omit an AI to be part of the encoded GS1 barcode.
+    /// </summary>
+    procedure Exclude_Ai(_GS1AI: Text)
+    begin
+        InternalAiDictionary.Set(_GS1AI, ''); // Blank values will be removed before the barcode is encoded
+    end;
+
+    local procedure Add_AiAndValueIfKeyNotExists(_GS1AI: Text; _InputValue: Text)
+    begin
+        if (_GS1AI = '') or (_InputValue = '') then
+            exit;
+
+        if not InternalAiDictionary.ContainsKey(_GS1AI) then
+            InternalAiDictionary.Add(_GS1AI, _InputValue);
+    end;
+
+    /// <summary>
+    /// Set the License Plate No. on the Request Page.
+    /// </summary>
+    procedure Set_LicensePlateNo(_LicensePlateNo: Code[20])
+    begin
+        LicensePlateNoReq := _LicensePlateNo;
+    end;
+
+    /// <summary>
+    /// Set the No. of Labels on the Request Page.
+    /// </summary>
+    procedure Set_NoOfLabels(_NoOfLabels: Integer)
+    begin
+        NoOfLabelsReq := _NoOfLabels;
+    end;
+
+    /// <summary>
+    /// Set the No. of Copies on the Request Page.
+    /// </summary>
+    /// <param name="_NoOfCopies">Please notice, that "2" copies results in 3 labels. One original and two copies. You should therefore specify "0" to get one label.</param>
+    procedure Set_NoOfCopies(_NoOfCopies: Integer)
+    begin
+        NoOfCopiesReq := _NoOfCopies;
+    end;
+
+    /// <summary>
+    /// Set the Source Reference ID on the Request Page (hidden field). This is used to add the Ship-to Name and Address to the labels
+    /// </summary>
+    procedure Set_SourceReferenceID(_SourceReferenceID: Text)
+    begin
+        SourceReferenceIDReq := _SourceReferenceID;
+    end;
+
+    var
+        CompanyInformation: Record "Company Information";
+        MobSetup: Record "MOB Setup";
+        BarcodeManagement1D: Codeunit "MOB Report Barcode Mgt. 1D";
+        MobToolbox: Codeunit "MOB Toolbox";
+        FormatAddress: Codeunit "Format Address";
+        MobFormatAddress: Codeunit "MOB Format Address";
+        LicensePlateMgt: Codeunit "MOB License Plate Mgt";
+        Mob1DInternalMobFunctions: Codeunit "MOB1D Internal MOB Functions";
+        NoOfLoops: Integer;
+        InternalAiDictionary: Dictionary of [Text, Text];
+
+    //OBS. Avoid changing protected variables to not cause errors in depending apps.
+    protected var
+        CurrentLicensePlateNo: Integer;
+        NoOfCopiesReq: Integer;
+        EncodedBarcodeTxt: Text;
+        GS1EncodedBarcodeTxt: Text;
+        GS1BarcodeTxt: Text;
+        BarcodeTxt: Text;
+        SourceNameTxt: Text;
+        SourceAddressTxt: Text;
+        NoOfLabelsReq: Integer;
+        LicensePlateNoReq: Code[20];
+        SourceReferenceIDReq: Text;
+        CompanyAddrArray: array[8] of Text;
+        CompanyAddressTxt: Text;
+        CustAddrArray: array[8] of Text;
+
+        /// <summary>
+        /// This protected dictionary can be used in OnAfterAfterGetRecord to get the AIs added by Mobile WMS and any Report Extension if a different encoding is needed.
+        /// It should not be used in OnBeforeAfterGetRecord as it will not be used by Mobile WMS when encoding the barcode.
+        /// </summary>
+        AiDictionary: Dictionary of [Text, Text];
+
+    /* #endif */
+    /* #if BC19- ##
+    trigger OnPreReport()
+    begin
+        Error('This Mobile WMS Report is only available in BC 20 and later');
+    end;
+    /* #endif */
+}
