@@ -1,0 +1,40 @@
+{
+  "id": "3de7fac1-d9a3-44ab-9916-0c5daa7ffc52",
+  "name": "Tasklet Mobile WMS - 1D Barcode Report Pack",
+  "publisher": "Tasklet Factory",
+  "version": "1.0.0.1",
+  "description": "",
+    "privacyStatement": "https://taskletfactory.com/cookie-and-privacy-policy/",
+  "EULA": "https://taskletfactory.com/media/eb1kcb0z/end-user-license-agreement-version-3-2.pdf",
+  "help": "https://university.taskletfactory.com",
+  "url": "https://taskletfactory.com",
+  "logo": "./gfx/applogo.png",
+  "contextSensitiveHelpUrl": "https://taskletfactory.atlassian.net/wiki/spaces/TFSK/pages/78943297/Business+Central",
+  "dependencies": [
+  { 
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c", 
+      "name": "Tasklet Mobile WMS", 
+      "publisher": "Tasklet Factory", 
+      "version": "5.58.260.0" 
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "26.0.0.0",
+  "idRanges": [
+    {
+      "from": 81272,
+      "to": 81274
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "applicationInsightsConnectionString": "InstrumentationKey=a88d74df-1a4b-4593-a86f-fccde5697936;IngestionEndpoint=https://northeurope-0.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/",
+  "runtime": "15.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
