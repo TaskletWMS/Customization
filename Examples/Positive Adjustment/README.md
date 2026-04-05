@@ -27,6 +27,6 @@ Please visit https://taskletfactory.atlassian.net/wiki/x/rZC0B for more informat
 Please renumber and rename the objects before using the sample code at a production environment.
 
 ## Disclaimer
-The sample extension is provided as-is so please carefully validate and test the code and any solution made with the code. The code is not supported to the same degree as Mobile WMS but it is expected periodically to be kept up to date if future changes in Business Central or Mobile WMS requires it.
+This example extension is provided as-is, so please carefully validate and test the code and any solution built from it. The code is not supported to the same degree as Mobile WMS, but we aim to keep it up to date as Business Central and Mobile WMS evolve.
 
-Please report bugs in the sample extension directly in GitHub.
+Please report bugs directly in GitHub.

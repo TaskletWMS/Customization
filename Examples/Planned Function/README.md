@@ -24,3 +24,8 @@ A minimal illustrative version that demonstrates the mobile logic without enhanc
 ## Example
 
 ![MyFunction](./MyFunction.gif)
+
+## Disclaimer
+This example extension is provided as-is, so please carefully validate and test the code and any solution built from it. The code is not supported to the same degree as Mobile WMS, but we aim to keep it up to date as Business Central and Mobile WMS evolve.
+
+Please report bugs directly in GitHub.
