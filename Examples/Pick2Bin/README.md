@@ -1,5 +1,5 @@
 ## Introduction
-This Pick2Bin sample extension can be used as a starting point for a custom extension for Business Central solutions with Mobile WMS.
+This Pick2Bin example extension can be used as a starting point for a custom extension for Business Central solutions with Mobile WMS.
 
 The extension makes it easy to pick and move items to a specific bin for further processing. This could be used to gather different items in a "basket" created as a bin in Business Central. The bin can then be processed as a collection of items. All transactions are done online so each item added to the bin is moved like posting an unplanned move and creates Item Ledger Entries and Warehouse Entries in Business Central.
 
@@ -11,7 +11,7 @@ A quality assurance employee goes through the warehouse and pick defect or expir
 It is important to notice that the processing will typically need to insure the items are removed from the bin so it can be used again.
 
 ### Demo
-Please view this for a quick demo of the sample extension: https://vimeo.com/838599704/bdadc6796e
+Please view this for a quick demo of the example extension: https://vimeo.com/838599704/bdadc6796e
 
 In the demo the items are collected to bins on the BASKETS location. The items are picked from the WHITE location as this is the default location for the user.
 
@@ -31,12 +31,12 @@ Mobile WMS normally uses the location configured as the warehouse employee's def
 
 It can therefor be necessary to create a new location without the need for picks. 
 
-To use the sample extension directly you will need to create a new location called BASKETS with "Bin Mandatory" = true and create some bins and configure Inventory Posting Setup for it.
+To use the example extension directly you will need to create a new location called BASKETS with "Bin Mandatory" = true and create some bins and configure Inventory Posting Setup for it.
 
 This hardcoded solution is not recommended in a real extension and you should adjust the code in the **X02 Lookup PickToBin List** codeunit to find the proper location. If you search for TODO you will quickly find where to add the proper code.
 
 ### Processing the bin
-The **X02 PickToBin Process Bin** codeunit receives the bin but doesn't actual do any processing in the sample extension. This is where you will need to add code to process the contents of the bin. You can find inspiration in the **X02 PickToBin Remove Item** codeunit to find detailed bin contents including item tracking.
+The **X02 PickToBin Process Bin** codeunit receives the bin but doesn't actual do any processing in the example extension. This is where you will need to add code to process the contents of the bin. You can find inspiration in the **X02 PickToBin Remove Item** codeunit to find detailed bin contents including item tracking.
 
 ## Pages
 <table><tbody><tr><td>
@@ -120,6 +120,6 @@ This page is handled by the **X02 PickToBin Remove Item** codeunit.
 </td></tr></tbody></table>
 
 ## Disclaimer
-The sample extension is provided as-is so please carefully validate and test the code and any solution made with the code. The code is not supported to the same degree as Mobile WMS but it is expected periodically to be kept up to date if future changes in Business Central or Mobile WMS requires it.
+This example extension is provided as-is, so please carefully validate and test the code and any solution built from it. The code is not supported to the same degree as Mobile WMS, but we aim to keep it up to date as Business Central and Mobile WMS evolve.
 
-Please report bugs in the sample extension directly in GitHub.
+Please report bugs directly in GitHub.

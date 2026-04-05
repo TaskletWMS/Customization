@@ -1,14 +1,30 @@
 # Customizing [Mobile WMS](https://taskletfactory.com/solutions/mobile-wms-365-bc-nav/) for Business Central
 
 ## Welcome
-This repository is a companion to [Tasklet Docs](https://docs.taskletfactory.com/display/TFSK/Customization) and [Tasklet University](https://university.taskletfactory.com/), providing ready-to-use sample code and training material for extending Mobile WMS in Business Central.
+This repository accompanies [Tasklet Docs](https://docs.taskletfactory.com/display/TFSK/Customization) and [Tasklet University](https://university.taskletfactory.com/), providing example code and training material for extending Mobile WMS in Business Central.
 
 ## Folders
 
-- **Samples** — Working sample projects you can modify and develop further.
-- **TaskletUniversity** — Source code used in Tasklet University training videos.
+### Examples
+Working example projects you can modify and develop further.
+
+| Example | Description |
+|---------|-------------|
+| [ISV Shipping Connector](Examples/ISV%20Shipping%20Connector/) | Connects the Pack & Ship process to an external shipping provider using the Pack & Ship API. Use as a base for building your own connector. |
+| [ISV Shipping Solution](Examples/ISV%20Shipping%20Solution/) | A simple Transport Document extension with Package Types, intended as a companion to the ISV Shipping Connector. |
+| [Job Jnl Item Posting](Examples/Job%20Jnl%20Item%20Posting/) | Adds a mobile function for selecting a Job and registering positive and negative item consumptions via the Job Journal. |
+| [LP Content Label Add To Dataset](Examples/LP%20Content%20Label%20Add%20To%20Dataset/) | Extends the License Plate Content Label report with a custom field using a subscriber event. |
+| [Pick2Bin](Examples/Pick2Bin/) | Lets warehouse employees pick items into a bin for further processing, posting each movement immediately to Business Central. |
+| [Planned Function](Examples/Planned%20Function/) | A custom Planned Function that registers "Qty. To Ship" on Sales Order Picking documents. |
+| [Positive Adjustment](Examples/Positive%20Adjustment/) | Adds a dedicated mobile menu item for positive quantity adjustments. |
+
+### TaskletUniversity
+Source code used in Tasklet University training videos.
 
 ## Support
 As a Tasklet Partner you have access to [Tasklet Support](https://taskletfactory.com/about/support/) when needed.
 
-> All sample code is provided "as is" and is subject to change.
+## Disclaimer
+The example extensions are provided as-is, so please carefully validate and test the code and any solution built from it. The code is not supported to the same degree as Mobile WMS, but we aim to keep it up to date as Business Central and Mobile WMS evolve.
+
+Please report bugs directly in GitHub.
