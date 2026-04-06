@@ -1,0 +1,42 @@
+{
+  "id": "e0d9d04b-6512-4e28-85b0-015e00ac8c89",
+  "name": "Tasklet Mobile WMS Customization Example: Unplanned Function as Action",
+  "publisher": "Tasklet Factory Example",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "platform": "27.0.0.0",
+  "application": "27.0.0.0",
+  "runtime": "16.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "ExampleLogo.png",
+  "dependencies": [
+    {
+      "publisher": "Tasklet Factory",
+      "name": "Tasklet Mobile WMS",
+      "version": "5.57.0.0",
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c"
+    }
+  ],
+  "screenshots": [],
+  "resourceFolders": [
+    "resources"
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "features": [
+    "NoImplicitWith"
+  ],
+  "idRanges": [
+    {
+      "from": 60000,
+      "to": 60049
+    }
+  ]
+}
