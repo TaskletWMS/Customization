@@ -1,0 +1,29 @@
+{
+  "id": "939062d5-2e9d-49f2-90d6-318d3836220f",
+  "name": "Mobile WMS - Pick to Bin",
+  "publisher":  "Tasklet Factory",
+  "version": "1.0.0.0",
+  "runtime": "9.0",
+  "target": "Cloud",
+  "platform": "21.0.0.0",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "application": "21.0.0.0",
+  "dependencies": [  
+    { 
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c", 
+      "name": "Mobile WMS", 
+      "publisher": "Tasklet Factory", 
+      "version": "5.40.200.0"
+    }
+  ],
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 50009
+    }
+  ]
+}
