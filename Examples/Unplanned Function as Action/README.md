@@ -8,7 +8,7 @@ Based on the documentation: [How-to: Add action to Order Line menu](https://task
 
 A warehouse operator is picking an order and finds they are unable to pick the full quantity of a line (e.g. damaged goods, out of stock). They need a quick way to register the shortfall directly from the Pick Lines page, without leaving the picking flow.
 
-<video src="media/PickOrderLines_UnableToPickAction.mp4" controls width="600"></video>
+![Unable To Pick action on Pick Lines](media/PickOrderLines_UnableToPickAction.gif)
 
 ## What this example implements
 
@@ -43,6 +43,8 @@ The tweak defines:
 > **Requirements:** Android App 1.8.0+ and Mobile WMS 5.55+
 >
 > See: [OnGetApplicationConfiguration_OnAddTweaks](https://taskletfactory.atlassian.net/wiki/spaces/TFSK/pages/994050068/OnGetApplicationConfiguration_OnAddTweaks)
+
+Once published, the tweak appears in the **Mobile Tweak List**, which is opened from the Mobile Document Queue page in BC:
 
 ![Mobile Tweak List showing the UnableToPick tweak registered in BC](media/MobileTweakList_UnableToPick.png)
 
