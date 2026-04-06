@@ -1,0 +1,54 @@
+{
+	"folders": [
+		{
+			"name": "ISV Shipping Connector",
+			"path": "Examples/ISV Shipping Connector"
+		},
+		{
+			"name": "ISV Shipping Solution",
+			"path": "Examples/ISV Shipping Solution"
+		},
+		{
+			"name": "Job Jnl Item Posting",
+			"path": "Examples/Job Jnl Item Posting"
+		},
+		{
+			"name": "LP Content Label Add To Dataset",
+			"path": "Examples/LP Content Label Add To Dataset"
+		},
+		{
+			"name": "Pick2Bin",
+			"path": "Examples/Pick2Bin"
+		},
+		{
+			"name": "Planned Function",
+			"path": "Examples/Planned Function"
+		},
+		{
+			"name": "Positive Adjustment",
+			"path": "Examples/Positive Adjustment"
+		},
+		{
+			"name": "Unplanned Function as Action",
+			"path": "Examples/Unplanned Function as Action"
+		},
+		{
+			"name": "University: Advanced Customization",
+			"path": "TaskletUniversity/Advanced Customization"
+		},
+		{
+			"name": "University: Basic Customization",
+			"path": "TaskletUniversity/Basic Customization"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.alpackages": false,
+			"**/.alcache": true,
+			"**/.altemplates": true,
+			"**/.altestrunner": true,
+			"**/.snapshots": true,
+			"**/rad.json": true
+		}
+	}
+}
