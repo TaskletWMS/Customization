@@ -1,0 +1,34 @@
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+
+    <!--
+        Step 1: Define the new Unplanned Function page and add an action to existing Pick Lines page
+        
+        In this example the page title and action title use placeholder @{UnableToPickTitle} to be able to support multiple languages.
+        If you are only using one language, you can replace the placeholder with a hardcoded string.
+        The placeholder is resolved by a Mobile Message record with the same key as the placeholder (without the @{}).
+        Translations are supported by providing a message for each language code via the OnAddMessages event subscriber (Step 5 in the codeunit).
+    -->
+
+    <pages>
+        <!-- New page: the Unplanned Function "Unable To Pick"
+            IMPORTANT: the following values must match the string values used in the AL code:
+              - type              (= _RegistrationType in OnGetRegistrationConfiguration_OnAddSteps and OnPostAdhocRegistrationOnCustomRegistrationType)
+              - configurationKey  (= passed to InitConfigurationKey in OnGetReferenceData_OnAddHeaderConfigurations)
+        -->
+        <page tweak="Append" id="UnableToPick" type="UnplannedItemRegistration" icon="mainmenunegativeadjustment">
+            <title defaultValue="@{UnableToPickTitle}" />
+            <unplannedItemRegistrationConfiguration type="UnableToPick">
+                <header configurationKey="UnableToPick" automaticAcceptOnOpen="true" />
+            </unplannedItemRegistrationConfiguration>
+        </page>
+        <!-- Tweak the existing Pick Lines page to add the action.
+             The open id must match the page id defined above. -->
+        <page id="PickLines">
+            <actions>
+                <open tweak="Append" id="UnableToPick" title="@{UnableToPickTitle}" icon="mainmenunegativeadjustment" />
+            </actions>
+        </page>
+    </pages>
+</application>
