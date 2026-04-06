@@ -1,0 +1,8 @@
+# AL hidden folders
+.*/ 
+
+# Translation files
+*.xlf
+
+# Compiled app files
+*.app
