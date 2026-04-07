@@ -1,4 +1,4 @@
-codeunit 60000 "Unplanned Function As Action"
+codeunit 60000 "Unable to Pick Example"
 {
     // Example: Add an "Unable To Pick" action to Pick Lines.
     // When triggered from the mobile device, it collects the quantity the user was unable to pick
