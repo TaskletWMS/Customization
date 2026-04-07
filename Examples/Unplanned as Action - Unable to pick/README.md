@@ -12,72 +12,24 @@ A warehouse operator is picking an order and finds they are unable to pick the f
 
 ## What this example implements
 
-- One new **Unplanned Function** (`UnableToPick`)
-  - One action on the **Pick Lines** page that opens this function
-- Three **Header fields** transferred from the Order Line (locked, read-only):
-  - `Location`
-  - `FromBin`
-  - `ItemNumber`
-- One **Step** to collect the quantity that could not be picked
-  - Defaults to the remaining unregistered quantity on the line
-- A **success message** that echoes the order, line and quantity back to the user
-- **Mobile Messages** for the page and action title, with translation support via xlf files
+The UI is configured using a **configuration tweak** — an XML snippet distributed from AL to the Mobile App at login. This is the recommended approach for adding pages and actions without modifying the base configuration files.
 
-## Files
+The tweak (`resources/UnableToPickTweak.xml`) defines:
+- A new **Unplanned Function** page (`UnableToPick`) of type `UnplannedItemRegistration`
+- An **action on the Pick Lines page** that opens it
 
-| File | Description |
-|------|-------------|
-| `src/UnplannedFunctionAsAction.Codeunit.al` | AL codeunit with all event subscribers (Steps 1–5) |
-| `resources/UnableToPickTweak.xml` | Mobile WMS configuration tweak distributed via Step 1 |
+The AL codeunit (`src/UnableToPickExample.Codeunit.al`) wires up the behaviour using five event subscribers:
+- **Configuration tweak** — loads and distributes the tweak XML to the Mobile App at login (`OnGetApplicationConfiguration_OnAddTweaks`)
+- **Header fields** — three read-only fields (`Location`, `FromBin`, `ItemNumber`) transferred automatically from the Order Line context (`OnGetReferenceData_OnAddHeaderConfigurations`)
+- **Steps** — one decimal input defaulting to the remaining unregistered quantity (`OnGetRegistrationConfiguration_OnAddSteps`)
+- **Registration handler** — called on accept; replace the placeholder with your own business logic (`OnPostAdhocRegistrationOnCustomRegistrationType`)
+- **Mobile Messages** — text for the page/action title placeholders, with xlf translation support (`OnAddMessages`)
 
-## Implementation steps
-
-### Step 1 — Distribute configuration tweak (AL: `OnGetApplicationConfiguration_OnAddTweaks`)
-
-The tweak XML (`resources/UnableToPickTweak.xml`) is distributed to the Mobile App automatically from the backend using the `OnGetApplicationConfiguration_OnAddTweaks` event. It is loaded on login — configuration changes require the user to log out and back in.
-
-The tweak defines:
-- The new `UnableToPick` unplanned function page
-- An action on the **Pick Lines** page that opens it
-
-> **Requirements:** Android App 1.8.0+ and Mobile WMS 5.55+
->
-> See: [OnGetApplicationConfiguration_OnAddTweaks](https://taskletfactory.atlassian.net/wiki/spaces/TFSK/pages/994050068/OnGetApplicationConfiguration_OnAddTweaks)
-
-Once published, the tweak appears in the **Mobile Tweak List**, which is opened from the Mobile Document Queue page in BC:
+Once published, the tweak appears in the **Mobile Tweak List** (opened from the Mobile Document Queue page in BC):
 
 ![Mobile Tweak List showing the UnableToPick tweak registered in BC](media/MobileTweakList_UnableToPick.png)
 
-### Step 2 — Header fields (AL: `OnGetReferenceData_OnAddHeaderConfigurations`)
-
-Declares the three locked header fields for the `UnableToPick` configuration key. The values are automatically populated from the Order Line context when the user opens the action.
-
-### Step 3 — Steps (AL: `OnGetRegistrationConfiguration_OnAddSteps`)
-
-Returns a single decimal step `UnableToPickQuantity`. The default value is calculated as:
-
-```
-Quantity (line total) − RegisteredQuantity (already registered, not yet posted)
-```
-
-### Step 4 — Handle registration (AL: `OnPostAdhocRegistrationOnCustomRegistrationType`)
-
-Called when the user accepts. The example writes a success message using the collected values. Replace the placeholder comment with your own business logic (e.g. create a journal line, update a planning record).
-
-### Step 5 — Mobile Messages (AL: `OnAddMessages`)
-
-Defines the text values for the `@{UnableToPickTitle}` placeholder used in the tweak XML. Messages are created via the `OnAddMessages` event and sent to the device on Reference Data load.
-
-This example uses AL `Label` variables so translations can be managed through standard xlf files. Alternatively, values can be hardcoded per language code using the `CreateHardcodedMessages` procedure.
-
-Messages are created automatically when:
-- **"Create Document Types"** is run from the Mobile WMS Setup page
-- **"Create Messages"** is run from the Mobile Language page
-- Tasklet Mobile WMS is upgraded
-
-To ensure messages exist from first install, also create them in your own Install or Upgrade codeunit.
-
-The following screenshot shows the complete request sequence in the Mobile Document Queue after running through the full flow — from login to the final PostAdhocRegistration:
+The full request sequence in the Mobile Document Queue after running through the complete flow:
 
 ![Mobile Document Queue showing the full flow from login to completed PostAdhocRegistration for UnableToPick](media/DocumentQueue_UnableToPick.png)
 
