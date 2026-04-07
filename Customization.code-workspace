@@ -9,36 +9,36 @@
 			"path": "Examples/ISV Shipping Solution"
 		},
 		{
-			"name": "Job Jnl Item Posting",
-			"path": "Examples/Job Jnl Item Posting"
-		},
-		{
 			"name": "LP Content Label Add To Dataset",
 			"path": "Examples/LP Content Label Add To Dataset"
-		},
-		{
-			"name": "Pick2Bin",
-			"path": "Examples/Pick2Bin"
 		},
 		{
 			"name": "Planned Function",
 			"path": "Examples/Planned Function"
 		},
 		{
-			"name": "Positive Adjustment",
-			"path": "Examples/Positive Adjustment"
+			"name": "Unplanned as Action - Unable to pick",
+			"path": "Examples/Unplanned as Action - Unable to pick"
 		},
 		{
-			"name": "Unplanned Function as Action",
-			"path": "Examples/Unplanned Function as Action"
+			"name": "Unplanned in Main Menu - Job Jnl Item Posting",
+			"path": "Examples/Unplanned in Main Menu - Job Jnl Item Posting"
 		},
 		{
-			"name": "University: Advanced Customization",
-			"path": "TaskletUniversity/Advanced Customization"
+			"name": "Unplanned in Main Menu - Pick to Bin",
+			"path": "Examples/Unplanned in Main Menu - Pick to Bin"
+		},
+		{
+			"name": "Unplanned in Main Menu - Positive Adjustment",
+			"path": "Examples/Unplanned in Main Menu - Positive Adjustment"
 		},
 		{
 			"name": "University: Basic Customization",
 			"path": "TaskletUniversity/Basic Customization"
+		},
+		{
+			"name": "University: Advanced Customization",
+			"path": "TaskletUniversity/Advanced Customization"
 		}
 	],
 	"settings": {
