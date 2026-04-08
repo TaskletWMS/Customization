@@ -123,7 +123,7 @@ codeunit 60000 "Unable to Pick Example"
         Language: Codeunit Language;
         InputLanguageId: Integer;
         SessionLanguageId: Integer;
-        KeyLbl: Label 'UnableToPickTitle', Locked = true; // Message key matching the placeholder used in the Tweak.xml (without the @{})
+        KeyLbl: Label 'UNABLE_TO_PICK_TITLE', Locked = true; // Message key matching the placeholder used in the Tweak.xml (without the @{})
         ValueLbl: Label 'Unable To Pick'; // Translate this value for each language you want to support in xlf files
     begin
         InputLanguageId := Language.GetLanguageId(_LanguageCode);
@@ -142,7 +142,7 @@ codeunit 60000 "Unable to Pick Example"
 
     local procedure CreateHardcodedMessages(var _LanguageCode: Code[10]; var _Messages: Record "MOB Message")
     var
-        KeyLbl: Label 'UnableToPickTitle', Locked = true; // Message key matching the placeholder used in the Tweak.xml (without the @{})
+        KeyLbl: Label 'UNABLE_TO_PICK_TITLE', Locked = true; // Message key matching the placeholder used in the Tweak.xml (without the @{})
     begin
         case _LanguageCode of
             'ENU':
