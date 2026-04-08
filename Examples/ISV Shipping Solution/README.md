@@ -10,11 +10,11 @@ This 'ISV Shipping Solution' can be used together with the sample 'ISV Shipping 
 Please see the [Pack & Ship userguide](https://docs.taskletfactory.com/x/xQKiCQ) for more details.
 
 #### ISV Transport Document
-<img src="./gfx/ISV Transport Document.png"/>
+<img src="./media/ISV Transport Document.png"/>
 
 
 #### ISV Package Types
-<img src="./gfx/ISV Package Types.png"/>
+<img src="./media/ISV Package Types.png"/>
 
 
 ## Support
