@@ -1,5 +1,4 @@
 ## ISV Shipping Solution
-<img src="./gfx/applogo.png" width="256"/>
 
 ## Introduction
 This extension provides a simple example of an ISV Shipping Connector<p>
