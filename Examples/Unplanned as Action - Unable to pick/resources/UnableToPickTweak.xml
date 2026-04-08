@@ -5,29 +5,39 @@
     <!--
         Step 1: Define the new Unplanned Function page and add an action to existing Pick Lines page
         
-        In this example the page title and action title use placeholder @{UnableToPickTitle} to be able to support multiple languages.
+        In this example the page title and action title use placeholder @{UNABLE_TO_PICK_TITLE} to be able to support multiple languages.
         If you are only using one language, you can replace the placeholder with a hardcoded string.
         The placeholder is resolved by a Mobile Message record with the same key as the placeholder (without the @{}).
         Translations are supported by providing a message for each language code via the OnAddMessages event subscriber (Step 5 in the codeunit).
     -->
 
     <pages>
-        <!-- New page: the Unplanned Function "Unable To Pick"
-            IMPORTANT: the following values must match the string values used in the AL code:
-              - type              (= _RegistrationType in OnGetRegistrationConfiguration_OnAddSteps and OnPostAdhocRegistrationOnCustomRegistrationType)
-              - configurationKey  (= passed to InitConfigurationKey in OnGetReferenceData_OnAddHeaderConfigurations)
+        <!--
+            New UnplannedItemRegistration page — for Unable To Pick function
+              - tweak="Append"                   : registers this as a new page
+              - type="UnplannedItemRegistration" : freestanding registration page, not tied to a document/order
+              - RegistrationConfiguration type   : registration type key; must match _RegistrationType used in
+                                                   OnGetRegistrationConfiguration_OnAddSteps and
+                                                   OnPostAdhocRegistrationOnCustomRegistrationType in AL
+              - header configurationKey          : must match the key in OnGetReferenceData_OnAddHeaderConfigurations in AL
+              - automaticAcceptOnOpen            : header is accepted automatically when the page opens
         -->
         <page tweak="Append" id="UnableToPick" type="UnplannedItemRegistration" icon="mainmenunegativeadjustment">
-            <title defaultValue="@{UnableToPickTitle}" />
+            <title defaultValue="@{UNABLE_TO_PICK_TITLE}" />
             <unplannedItemRegistrationConfiguration type="UnableToPick">
                 <header configurationKey="UnableToPick" automaticAcceptOnOpen="true" />
             </unplannedItemRegistrationConfiguration>
         </page>
-        <!-- Tweak the existing Pick Lines page to add the action.
-             The open id must match the page id defined above. -->
+        <!--
+            Modifies the existing PickLines page by adding a new open action:
+              - tweak="Append"  : adds to the existing list rather than replacing it
+              - id              : id must match the id for the page to open 
+              - title           : label shown on the action menu; supports @{} message placeholders
+              - icon            : references an image id from the shared resources in application.cfg    
+        -->
         <page id="PickLines">
             <actions>
-                <open tweak="Append" id="UnableToPick" title="@{UnableToPickTitle}" icon="mainmenunegativeadjustment" />
+                <open tweak="Append" id="UnableToPick" title="@{UNABLE_TO_PICK_TITLE}" icon="mainmenunegativeadjustment" />
             </actions>
         </page>
     </pages>
