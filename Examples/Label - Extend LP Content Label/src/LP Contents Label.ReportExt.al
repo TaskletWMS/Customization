@@ -1,16 +1,15 @@
-reportextension 60500 "LP Contents Label Ext" extends "MOB LP Contents Label"
+reportextension 60500 "LP Contents Label" extends "MOB LP Contents Label"
 {
-    //
-    // Add a custom field to the dataset and layout of an existing report
-    //
+    // -----------------------------------------------------------------------------------------------------------------------
+    // Step 2: Add the custom field as a dataset column and register a new layout
+    // The column makes the field from Step 1 available to the report layout.
+    // The layout is a modified copy of the original, exported from Report Layouts and edited in Report Builder.
+    // -----------------------------------------------------------------------------------------------------------------------
 
     dataset
     {
-        // Add changes to dataitems and columns here
         add("MOB Temp LP Report Content")
         {
-            // Add new custom field to dataset
-            // It does not get more custom than "Custom Field" for this example
             column(Custom_Field; "Custom Field")
             {
                 IncludeCaption = true;
@@ -20,10 +19,8 @@ reportextension 60500 "LP Contents Label Ext" extends "MOB LP Contents Label"
 
     rendering
     {
-        // Define a new layout that includes the custom field
         layout("Custom LP Content Layout")
         {
-            // This example has exported the original layout and Modified it using report builder.
             Caption = 'Custom LP Content Layout';
             Summary = 'A custom layout for License Plate Contents Label with additional field.';
             Type = RDLC;
