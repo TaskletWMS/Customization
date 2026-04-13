@@ -132,7 +132,7 @@ codeunit 60011 "MyUnplanned Samples"
             'ENU':
                 begin
                     // The second parameter of Create() is the message key — it must match the @{} placeholder used in the Tweak.xml file.
-                    Message.Create(LanguageCode, 'MY_UNPLANNED_1_MENU', 'My Unplanned');
+                    Message.Create(LanguageCode, 'MY_UNPLANNED_1_MENU', 'My Unplanned One');
                     Message.Create(LanguageCode, 'MY_UNPLANNED_1_TITLE', 'My Unplanned (Header and Steps)');
                 end;
         // Add more languages here and hardcode the corresponding translations for each message key.
