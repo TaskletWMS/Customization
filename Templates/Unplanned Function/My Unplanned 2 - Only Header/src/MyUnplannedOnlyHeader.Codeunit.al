@@ -1,10 +1,8 @@
-codeunit 60001 "MyUnplanned Only Header"
+codeunit 60020 "MyUnplanned Only Header"
 {
     // Template: Unplanned function with Header fields ONLY, no steps. Added to the Main Menu.
     //
     // Flow: User selects the menu item → fills in header fields → accepts header → business logic runs immediately (no steps collected).
-    //
-    // Tweak file: MyUnplanned2_OnlyHeaderTweak.xml
     //
     // Implements:
     //   Distribute Tweak     — sends the tweak XML to the mobile device on login
@@ -26,7 +24,7 @@ codeunit 60001 "MyUnplanned Only Header"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB Application Configuration", OnGetApplicationConfiguration_OnAddTweaks, '', false, false)]
     local procedure AddTweak_OnGetApplicationConfiguration_OnAddTweaks(var _MobTweakContainer: Codeunit "MOB Tweak Container")
     begin
-        _MobTweakContainer.Add(60001, 'My Unplanned Only Header Tweak', NavApp.GetResourceAsText('MyUnplanned2_OnlyHeaderTweak.xml'));
+        _MobTweakContainer.Add(60001, 'My Unplanned Only Header Tweak', NavApp.GetResourceAsText('MyUnplannedOnlyHeaderTweak.xml'));
     end;
 
     // -----------------------------------------------------------------------------------------------------------------------
