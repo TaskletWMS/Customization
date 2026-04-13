@@ -94,7 +94,7 @@ codeunit 60020 "MyUnplanned Only Header"
     // Setup data is created via event subscribers that run when manually triggering actions in the BC client or during a Mobile WMS upgrade.
     //
     // The event OnAfterCreateDefaultMenuOptions is triggered by the action "Create Document Types" on the Mobile WMS Setup page.
-    // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Language page, that must be run for each language you want to support.
+    // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Messages page, that must be run for each language you want to support.
     // Both are also triggered during upgrade of the Tasklet Mobile WMS app.
     //
     // To create the setup data automatically when your extension is installed or upgraded, implement the code in an Install/Upgrade codeunit also.
