@@ -1,6 +1,6 @@
 codeunit 60011 "MyUnplanned Samples"
 {
-    // This codeunit contains sample implementations used in then MyUnplanned template.
+    // This codeunit contains sample implementations used in the MyUnplanned template.
     // Use these procedures as inspiration — adapt the field names, labels, and logic to your customization.
 
     /// <summary>
@@ -97,7 +97,7 @@ codeunit 60011 "MyUnplanned Samples"
     end;
 
     /// <summary>
-    /// This sample creates two Mobile Messages per template variant — a page title and a shorter menu/action label — each matching a placeholder in its Tweak.xml.
+    /// This sample creates two Mobile Messages — a page title and a shorter menu/action label — each matching a placeholder in the Tweak.xml.
     /// The sample uses labels for the message values, enabling translation via xlf files. Provide translations for the labels in each language you want to support.
     /// Replace the keys and values to match your customization.
     /// </summary>
@@ -105,26 +105,18 @@ codeunit 60011 "MyUnplanned Samples"
     /// <param name="Message">The Mobile Message record passed by the OnAddMessages event subscriber.</param>
     internal procedure CreateSampleMessages(LanguageCode: Code[10]; var Message: Record "MOB Message")
     var
-        Language: Codeunit Language;
-        InputLanguageId: Integer;
-        SessionLanguageId: Integer;
-        MyMenuLbl: Label 'My Unplanned One', Comment = 'Menu label for MyUnplannedHeaderAndSteps';
-        MyTitleLbl: Label 'My Unplanned (Header and Steps)', Comment = 'Page title for MyUnplannedHeaderAndSteps';
+        TranslationHelper: Codeunit "Translation Helper";
+        MyMenuLbl: Label 'My Unplanned One', Comment = 'Menu label';
+        MyTitleLbl: Label 'My Unplanned (Header and Steps)', Comment = 'Page title';
     begin
-        InputLanguageId := Language.GetLanguageId(LanguageCode);
-        SessionLanguageId := GlobalLanguage();
-        if (InputLanguageId = 0) or (SessionLanguageId = 0) then
-            exit;
-
-        if InputLanguageId <> SessionLanguageId then
-            GlobalLanguage(InputLanguageId); // Change the session language to the input language so that the title labels are resolved in the correct language
+        TranslationHelper.SetGlobalLanguageToDefault(); // Because if LanguageCode does not match a supported language, we want to fall back to en-US.
+        TranslationHelper.SetGlobalLanguageByCode(LanguageCode);
 
         // The second parameter of Create() is the message code — it must match the @{} placeholder used in the Tweak.xml file.
         Message.Create(LanguageCode, 'MY_UNPLANNED_1_MENU', MyMenuLbl);
         Message.Create(LanguageCode, 'MY_UNPLANNED_1_TITLE', MyTitleLbl);
 
-        if SessionLanguageId <> GlobalLanguage() then
-            GlobalLanguage(SessionLanguageId); // Change the session language back to the original language
+        TranslationHelper.RestoreGlobalLanguage();
     end;
 
     /// <summary>

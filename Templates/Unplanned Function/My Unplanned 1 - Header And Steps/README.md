@@ -4,7 +4,7 @@ An unplanned registration function with a header and steps, added to the Main Me
 
 ## User flow
 
-Main Menu → fill in header fields → accept → fill in steps → run business logic → success message
+Select menu item → fill in header fields → accept → fill in steps → confirm → success message
 
 ## Files
 
@@ -13,6 +13,7 @@ Main Menu → fill in header fields → accept → fill in steps → run busines
 | `src/MyUnplannedHeaderAndSteps.Codeunit.al` | Main codeunit — header fields, steps, and business logic |
 | `src/MyUnplannedSamples.Codeunit.al` | Sample helper — replace or remove when implementing |
 | `resources/MyUnplannedHeaderAndStepsTweak.xml` | Tweak — registers the page and the Main Menu item on the device |
+| `resources/myicon.png` | Icon image — served to the device as Base64 on request |
 
 ## How to use
 
