@@ -1,10 +1,8 @@
-codeunit 60000 "MyUnplanned Header And Steps"
+codeunit 60010 "MyUnplanned Header And Steps"
 {
     // Template: Unplanned function with Header fields AND Steps, added to the Main Menu.
     //
     // Flow: User selects the menu item → fills in header fields → accepts header → fills in steps → business logic runs.
-    //
-    // Tweak file: MyUnplanned1_HeaderAndStepsTweak.xml
     //
     // Implements:
     //   Distribute Tweak     — sends the tweak XML to the mobile device on login
@@ -28,7 +26,7 @@ codeunit 60000 "MyUnplanned Header And Steps"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB Application Configuration", OnGetApplicationConfiguration_OnAddTweaks, '', false, false)]
     local procedure AddTweak_OnGetApplicationConfiguration_OnAddTweaks(var _MobTweakContainer: Codeunit "MOB Tweak Container")
     begin
-        _MobTweakContainer.Add(60000, 'My Unplanned Header And Steps Tweak', NavApp.GetResourceAsText('MyUnplanned1_HeaderAndStepsTweak.xml'));
+        _MobTweakContainer.Add(60010, 'My Unplanned Header And Steps Tweak', NavApp.GetResourceAsText('MyUnplannedHeaderAndStepsTweak.xml'));
     end;
 
     // -----------------------------------------------------------------------------------------------------------------------
@@ -105,6 +103,7 @@ codeunit 60000 "MyUnplanned Header And Steps"
     // When the mobile device does not have an image cached for the media id defined in the tweak, it requests the image from the backend via a GetMedia call.
     // Use this event to return the icon image as a Base64 string when the expected media id is requested.
     // -----------------------------------------------------------------------------------------------------------------------
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Media", OnGetMedia_OnBeforeAddImageToMedia, '', false, false)]
     local procedure HandleMyIcon_OnGetMedia_OnBeforeAddImageToMedia(_MediaID: Text; var _Base64Media: Text; var _IsHandled: Boolean)
     begin
@@ -123,11 +122,12 @@ codeunit 60000 "MyUnplanned Header And Steps"
     // Setup data is created via event subscribers that run when manually triggering actions in the BC client or during a Mobile WMS upgrade.
     //
     // The event OnAfterCreateDefaultMenuOptions is triggered by the action "Create Document Types" on the Mobile WMS Setup page.
-    // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Language page, that must be run for each language you want to support.
+    // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Messages page, that must be run for each language you want to support.
     // Both are also triggered during upgrade of the Tasklet Mobile WMS app.
     //
     // To create the setup data automatically when your extension is installed or upgraded, implement the code in an Install/Upgrade codeunit also.
     // -----------------------------------------------------------------------------------------------------------------------
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Setup Doc. Types", OnAfterCreateDefaultMenuOptions, '', false, false)]
     local procedure CreateMenu_OnAfterCreateDefaultMenuOptions()
     begin

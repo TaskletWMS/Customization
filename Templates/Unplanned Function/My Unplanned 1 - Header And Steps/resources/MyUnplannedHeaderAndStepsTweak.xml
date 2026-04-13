@@ -1,0 +1,56 @@
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+
+    <!--
+        Template: Unplanned with Header AND Steps — added to the Main Menu.
+
+        This tweak includes two main parts:
+        - A new page:
+            <page>
+              - tweak="Append"                      : registers as a new page without replacing existing ones
+              - id                                  : unique identifier for this page
+              - type="UnplannedItemRegistration"    : freestanding registration, not tied to a document/order
+              - icon                                : id of the icon shown for the page
+            <title>
+              - defaultValue                        : page title shown on the device (placeholder or hardcoded string)
+            <unplannedItemRegistrationConfiguration>
+              - type                                : registration type key — must match _RegistrationType in AL
+              - useRegistrationCollector            : controls whether steps are fetched after the header is accepted
+            <header>
+              - configurationKey                    : identifies which header fields to load — must match the key in AL
+              - automaticAcceptOnOpen               : controls whether header values are automatically accepted when the page opens
+              - clearAfterPost                      : clears header fields whose clearOnClear attribute is true after a successful post
+
+        - A new menu item in the Main Menu:
+            <page>
+              - id               : identifier for the page to which the menu item belongs (in this case, the built-in MainMenu page)
+            <menuItem>
+              - tweak="Append"   : appends the item inside the existing MainMenu menuItems list
+              - id               : must match the id of the page to open
+              - displayName      : label shown in the menu — uses a separate placeholder from the page title
+              - icon             : id of the icon shown in the menu
+
+        Replace all placeholders to match your customization:
+        - "MyUnplannedHeaderAndSteps" (function id - used in page id, type and configurationKey)
+        - "MY_UNPLANNED_1_TITLE" (page title)
+        - "MY_UNPLANNED_1_MENU" (menu label)
+        - "myicon" (icon id)
+    -->
+
+    <pages>
+        <page tweak="Append" id="MyUnplannedHeaderAndSteps" type="UnplannedItemRegistration" icon="myicon">
+            <title defaultValue="@{MY_UNPLANNED_1_TITLE}" />
+            <unplannedItemRegistrationConfiguration type="MyUnplannedHeaderAndSteps" useRegistrationCollector="true">
+                <header configurationKey="MyUnplannedHeaderAndSteps" automaticAcceptOnOpen="false" clearAfterPost="true" />
+            </unplannedItemRegistrationConfiguration>
+        </page>
+        <page id="MainMenu">
+            <menuConfiguration>
+                <menuItems>
+                    <menuItem tweak="Append" id="MyUnplannedHeaderAndSteps" displayName="@{MY_UNPLANNED_1_MENU}" icon="myicon"/>
+                </menuItems>
+            </menuConfiguration>
+        </page>
+    </pages>
+</application>
