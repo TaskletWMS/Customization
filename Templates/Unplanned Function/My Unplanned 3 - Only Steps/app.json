@@ -1,6 +1,6 @@
 {
-  "id": "7f425637-7804-4bb0-8276-898decf4da6c",
-  "name": "Customization Template: Unplanned Function",
+  "id": "83daf512-4f0f-40d7-959f-a767d17af26b",
+  "name": "Customization Template: My Unplanned - Only Steps",
   "publisher": "Your Publisher Name",
   "version": "1.0.0.0",
   "brief": "",
@@ -31,8 +31,8 @@
   ],
   "idRanges": [
     {
-      "from": 60000,
-      "to": 60019
+      "from": 60030,
+      "to": 60039
     }
   ]
 }

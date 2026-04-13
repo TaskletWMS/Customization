@@ -1,11 +1,9 @@
-codeunit 60002 "MyUnplanned Only Steps"
+codeunit 60030 "MyUnplanned Only Steps"
 {
     // Template: Unplanned function with Steps ONLY, no user-fillable header fields. Added as an action on an existing page.
     //
     // Flow: Action triggered from a parent page → header shows a context field and auto-accepts immediately →
     //       user fills in steps → business logic runs.
-    //
-    // Tweak file: MyUnplanned3_OnlyStepsTweak.xml
     //
     // Implements:
     //   Distribute Tweak     — sends the tweak XML to the mobile device on login
@@ -28,7 +26,7 @@ codeunit 60002 "MyUnplanned Only Steps"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB Application Configuration", OnGetApplicationConfiguration_OnAddTweaks, '', false, false)]
     local procedure AddTweak_OnGetApplicationConfiguration_OnAddTweaks(var _MobTweakContainer: Codeunit "MOB Tweak Container")
     begin
-        _MobTweakContainer.Add(60002, 'My Unplanned Only Steps Tweak', NavApp.GetResourceAsText('MyUnplanned3_OnlyStepsTweak.xml'));
+        _MobTweakContainer.Add(60030, 'My Unplanned Only Steps Tweak', NavApp.GetResourceAsText('MyUnplannedOnlyStepsTweak.xml'));
     end;
 
     // -----------------------------------------------------------------------------------------------------------------------
@@ -56,11 +54,16 @@ codeunit 60002 "MyUnplanned Only Steps"
     // -----------------------------------------------------------------------------------------------------------------------
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Adhoc Registr.", OnGetRegistrationConfiguration_OnAddSteps, '', false, false)]
     local procedure AddSteps_OnGetRegistrationConfiguration_OnAddSteps(_RegistrationType: Text; var _HeaderFieldValues: Record "MOB NS Request Element"; var _Steps: Record "MOB Steps Element"; var _RegistrationTypeTracking: Text)
+    var
+        DisplayLine1: Text;
+        Location: Text;
     begin
         if _RegistrationType <> 'MyUnplannedOnlySteps' then // IMPORTANT: must match the type attribute in the Tweak.xml
             exit;
 
-        Samples.CreateSampleSteps(_Steps, 0D, '', 0);
+        Samples.ReadSampleContextValues(_HeaderFieldValues, DisplayLine1, Location); // Sample of reading context values from the calling page, to use in step logic or default values. Replace with reads for the context fields relevant to your target page.
+
+        Samples.CreateSampleSteps(_Steps, 0D, DisplayLine1, 0);
     end;
 
     // -----------------------------------------------------------------------------------------------------------------------
@@ -113,8 +116,7 @@ codeunit 60002 "MyUnplanned Only Steps"
     // -----------------------------------------------------------------------------------------------------------------------
     // CREATE SETUP DATA
     //
-    // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Language page,
-    // that must be manually run for each language you want to support.
+    // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Messages page, that must be manually run for each language you want to support.
     // It is also triggered during upgrade of the Tasklet Mobile WMS app.
     //
     // To create the setup data automatically when your extension is installed or upgraded, implement the code in an Install/Upgrade codeunit also.
