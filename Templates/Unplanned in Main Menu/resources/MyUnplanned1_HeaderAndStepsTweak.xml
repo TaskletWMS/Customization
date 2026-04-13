@@ -1,0 +1,49 @@
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+
+    <!--
+        Template: Unplanned with Header AND Steps — added to the Main Menu.
+
+        Flow: User fills in header fields → accepts header → fills in steps → posts.
+
+        Replace all occurrences of "MyUnplannedHeaderAndSteps", "MY_UNPLANNED_ONE_TITLE", and "MY_UNPLANNED_ONE"
+        with names that reflect your customization. Replace "myicon" with the icon id for your function.
+    -->
+
+    <pages>
+        <!--
+            New UnplannedItemRegistration page — reachable from the Main Menu.
+              - tweak="Append"                   : registers as a new page without replacing existing ones
+              - type="UnplannedItemRegistration" : freestanding registration, not tied to a document/order
+              - useRegistrationCollector="true"  : after header accept, the device requests which steps to collect
+              - header configurationKey          : must match the key in OnGetReferenceData_OnAddHeaderConfigurations in AL
+              - automaticAcceptOnOpen="false"    : the user manually fills in the header before accepting
+              - type (on configuration)          : registration type key — must match _RegistrationType in
+                                                   OnGetRegistrationConfiguration_OnAddSteps and
+                                                   OnPostAdhocRegistrationOnCustomRegistrationType in AL
+        -->
+        <page tweak="Append" id="MyUnplannedHeaderAndSteps" type="UnplannedItemRegistration" icon="myicon">
+            <title defaultValue="@{MY_UNPLANNED_ONE_TITLE}" />
+            <unplannedItemRegistrationConfiguration type="MyUnplannedHeaderAndSteps" useRegistrationCollector="true">
+                <header configurationKey="MyUnplannedHeaderAndSteps" automaticAcceptOnOpen="false" clearAfterPost="true" />
+            </unplannedItemRegistrationConfiguration>
+        </page>
+
+        <!--
+            Adds the new page as a visible item in the Main Menu.
+              - <menuItem tweak="Append">   : appends inside the existing MainMenu menuItems
+              - id                          : must match the id of the page registered above
+              - displayName                 : the shorter label shown in the menu (uses a separate message key from the page title)
+              - icon                        : the icon shown to the user for this menu item
+        -->
+        <page id="MainMenu">
+            <menuConfiguration>
+                <menuItems>
+                    <menuItem tweak="Append" id="MyUnplannedHeaderAndSteps" displayName="@{MY_UNPLANNED_ONE}" icon="myicon"/>
+                </menuItems>
+            </menuConfiguration>
+        </page>
+    </pages>
+
+</application>
