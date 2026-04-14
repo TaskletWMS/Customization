@@ -12,11 +12,11 @@
           - defaultValue                        : page title shown on the device (placeholder or hardcoded string)
         <unplannedItemRegistrationConfiguration>
           - type                                : registration type key — must match _RegistrationType in AL
-          - useRegistrationCollector            : controls whether steps are fetched after the header is accepted
+          - useRegistrationCollector="false"    : no step collection — business logic fires immediately after header
         <header>
           - configurationKey                    : identifies which header fields to load — must match the key in AL
-          - automaticAcceptOnOpen               : controls whether header values are automatically accepted when the page opens
-          - clearAfterPost                      : clears header fields whose clearOnClear attribute is true after a successful post
+          - automaticAcceptOnOpen="false"       : the header does not auto-accept on open, user must interact with the page to accept
+          - clearAfterPost="true"               : clears header fields whose clearOnClear attribute is true after a successful post
 
     - A new menu item in the Main Menu:
         <page>
