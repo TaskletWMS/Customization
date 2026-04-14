@@ -7,6 +7,13 @@ The header auto-accepts on open, passing context from the parent page directly i
 
 Select action on parent page → fill in steps → accept → success message
 
+## Technical flow
+
+1. User selects action on parent page → header auto-accepts with context values from the calling page
+2. Device sends `GetRegistrationConfiguration` with context values → **Define Steps** returns step definitions
+3. User fills in steps and confirms
+4. Device sends `PostAdhocRegistration` with context + step values → **Handle Registration** runs business logic → success message returned to device
+
 ## Files
 
 | File | Purpose |
