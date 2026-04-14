@@ -1,71 +1,33 @@
-# Template: Unplanned Function
+# Unplanned Function Templates
 
-Barebones starting points for adding a custom Unplanned function to Tasklet Mobile WMS. Four patterns cover different combinations of header input, step input, and context values — pick the one that fits your use case.
-
----
+These templates provide ready-to-use starting points for adding a custom Unplanned function to Tasklet Mobile WMS. Each template covers a different combination of header input, step input, and context values — pick the one that fits your use case.
 
 ## What is an Unplanned function?
 
-An Unplanned function is a freestanding registration page that is not tied to an order or document. It can collect input through two optional phases, or skip both and rely entirely on context values from the calling page:
+An Unplanned function is a custom registration not driven by an order. It can be surfaced as a Main Menu item or as an action on an existing page, and may open a dedicated registration page or execute immediately without one.
 
-- **Header** — fields shown to and filled in by the user before the registration starts. Static configuration; sent to the device on login as Reference Data.
-- **Steps** — fields collected one at a time after the header is accepted. Dynamic; returned from the backend on request.
-- **Context values** — data from the currently selected row on the calling page (e.g. document number, item, location). Available in patterns triggered as an action.
+User input is optional and comes in two forms:
 
-Both the header and steps phases are optional and can be combined freely.
+- **Header** — user-filled fields collected before the registration starts. Defined as static configuration and delivered to the device on login.
+- **Steps** — fields collected one at a time after the header is accepted. Defined dynamically and returned from the backend per registration.
 
----
+When triggered as an action on an existing page, the function also has access to:
 
-## Unplanned patterns
+- **Context values** — data from the currently selected row (e.g. document number, item, location). Passed automatically from the calling page, no user input required.
 
-The table below shows the four patterns and their input combinations. Each can be placed in the **Main Menu** or triggered as an **action on an existing page** — except `MyUnplanned4_OnlyContext`, which requires context values from a calling page and therefore only works as an action.
+## Templates
 
-| Pattern | Header input | Step input | Context values | Flow |
-|---|---|---|---|---|
-| `MyUnplanned1_HeaderAndSteps` | Yes | Yes | No | Menu item → header fields → steps → business logic |
-| `MyUnplanned2_OnlyHeader` | Yes | No | No | Menu item → header fields → business logic |
-| `MyUnplanned3_OnlySteps` | No | Yes | Yes | Action on existing page → (auto-accepted header) → steps → business logic |
-| `MyUnplanned4_OnlyContext` | No | No | Yes | Action on existing page → (auto-accepted header) → business logic |
+The table below lists the available templates and their input combinations. Use it to identify the pattern that matches your use case, then follow the link to the template's own README for setup instructions.
 
----
-
-## How to use a template pattern
-
-Each pattern is self-contained: one XML tweak file in `resources/` and one codeunit in `src/`. A shared `MyUnplanned Samples` codeunit provides sample implementations used by all four patterns — use it as inspiration and copy the patterns you need.
-
-1. **Copy** the pattern's `.al` file, tweak `.xml`, and `MyUnplanned_Samples.Codeunit.al` into your project. Renumber the objects to fit your object range.
-2. **Rename** objects and all occurrences of the placeholder names (see table below).
-3. **Define the access point** — update the tweak XML and CREATE SETUP DATA to match. To switch from a menu item to an action (or vice versa), use one of the opposite-access patterns as a reference. Main Menu patterns include a menu option created as data; action patterns do not.
-5. **Adjust** the header fields (DEFINE HEADER FIELDS) and/or steps (DEFINE STEPS) to match your data model.
-6. **Implement** your business logic in the registration handler (HANDLE REGISTRATION).
-7. **Update the Mobile Messages** in CREATE SETUP DATA — set the page title and menu/action label texts for your function.
-8. **Log out and back in** on the device after changing anything delivered as Reference Data (see note below).
-
-### Rename targets
-
-| Pattern | Type/key placeholder | Page title key | Menu/action label key | Icon placeholder |
-|---|---|---|---|---|
-| `MyUnplanned1_HeaderAndSteps` | `MyUnplannedHeaderAndSteps` | `MY_UNPLANNED_ONE_TITLE` | `MY_UNPLANNED_ONE` | `myicon` |
-| `MyUnplanned2_OnlyHeader` | `MyUnplannedOnlyHeader` | `MY_UNPLANNED_TWO_TITLE` | `MY_UNPLANNED_TWO` | `myicon` |
-| `MyUnplanned3_OnlySteps` | `MyUnplannedOnlySteps` | `MY_UNPLANNED_THREE_TITLE` | `MY_UNPLANNED_THREE` | `myicon` |
-| `MyUnplanned4_OnlyContext` | `MyUnplannedOnlyContext` | `MY_UNPLANNED_FOUR_TITLE` | `MY_UNPLANNED_FOUR` | `myicon` |
-
-The template uses the same value for all placeholder occurrences, but only some must match across files:
-- XML `configurationKey` must match AL `InitConfigurationKey(...)` (header field definition)
-- XML `type` must match the `_RegistrationType` check in AL (step and registration handlers)
-- XML page `id` must match the `id` on the menu item or action within the same XML file
-
-Replace `myicon` with the icon id for your function in both the page definition and the menu item or action.
-
-> **Reference Data and login refresh**  
-> The tweak XML (DISTRIBUTE TWEAK), header field definitions (DEFINE HEADER FIELDS), and Mobile Messages (CREATE SETUP DATA) are all delivered to the device as Reference Data on login. Field labels and mobile messages are returned to the mobile app in the requested language (user language).
-Any changes to these require the mobile user to log out and back in before they take effect.
-Step definitions (DEFINE STEPS) are fetched dynamically per registration and do not require a re-login.
-
----
+| Template | Registration page | Header input | Step input | Context values | Entry point |
+|---|---|---|---|---|---|
+| [My Unplanned 1 — Header And Steps](My%20Unplanned%201%20-%20Header%20And%20Steps/README.md) | Yes | Yes | Yes | No | Main Menu |
+| [My Unplanned 2 — Only Header](My%20Unplanned%202%20-%20Only%20Header/README.md) | Yes | Yes | No | No | Main Menu |
+| [My Unplanned 3 — Only Steps](My%20Unplanned%203%20-%20Only%20Steps/README.md) | Yes | No | Yes | Yes | Action on existing page |
+| [My Unplanned 4 — Only Context](My%20Unplanned%204%20-%20Only%20Context/README.md) | Yes | No | No | Yes | Action on existing page |
 
 ## Disclaimer
 
-This template is provided as-is. Validate and test thoroughly before use in production. It is not supported to the same degree as Tasklet Mobile WMS, but we aim to keep it up to date as Business Central and Mobile WMS evolve.
+These templates are provided as-is. Validate and test thoroughly before use in production. It is not supported to the same degree as Tasklet Mobile WMS, but we aim to keep it up to date as Business Central and Mobile WMS evolve.
 
 Report bugs directly in GitHub.
