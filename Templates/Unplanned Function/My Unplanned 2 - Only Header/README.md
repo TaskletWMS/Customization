@@ -7,6 +7,11 @@ Business logic runs immediately when the header is accepted.
 
 Select menu item → fill in header fields → accept → success message
 
+## Technical flow
+
+1. User selects menu item, fills in header fields, and accepts
+2. Device sends `PostAdhocRegistration` with header values → **Handle Registration** runs business logic → success message returned to device
+
 ## Files
 
 | File | Purpose |
