@@ -1,11 +1,9 @@
-codeunit 60003 "MyUnplanned Only Context"
+codeunit 60040 "MyUnplanned Only Context"
 {
     // Template: Unplanned function with no user-fillable header fields and no steps. Added as an action on an existing page.
     //
     // Flow: Action triggered from a parent page → header shows a context field and auto-accepts immediately →
-    //       business logic reads context values from the calling page (no user input collected).
-    //
-    // Tweak file: MyUnplanned4_OnlyContextTweak.xml
+    //       business logic runs (using context values from the calling page, no user input collected).
     //
     // Implements:
     //   Distribute Tweak     — sends the tweak XML to the mobile device on login
@@ -27,7 +25,7 @@ codeunit 60003 "MyUnplanned Only Context"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB Application Configuration", OnGetApplicationConfiguration_OnAddTweaks, '', false, false)]
     local procedure AddTweak_OnGetApplicationConfiguration_OnAddTweaks(var _MobTweakContainer: Codeunit "MOB Tweak Container")
     begin
-        _MobTweakContainer.Add(60003, 'My Unplanned Only Context Tweak', NavApp.GetResourceAsText('MyUnplanned4_OnlyContextTweak.xml'));
+        _MobTweakContainer.Add(60040, 'My Unplanned Only Context Tweak', NavApp.GetResourceAsText('MyUnplannedOnlyContextTweak.xml'));
     end;
 
     // -----------------------------------------------------------------------------------------------------------------------
