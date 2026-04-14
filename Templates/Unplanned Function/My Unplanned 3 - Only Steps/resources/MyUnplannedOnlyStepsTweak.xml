@@ -12,10 +12,10 @@
           - defaultValue                        : page title shown on the device (placeholder or hardcoded string)
         <unplannedItemRegistrationConfiguration>
           - type                                : registration type key — must match _RegistrationType in AL
-          - useRegistrationCollector            : controls whether steps are fetched after the header is accepted
+          - useRegistrationCollector="true"     : steps are fetched after the header is accepted
         <header>
           - configurationKey                    : identifies which header fields to load — must match the key in AL
-          - automaticAcceptOnOpen               : controls whether header values are automatically accepted when the page opens
+          - automaticAcceptOnOpen="true"        : the header auto-accepts on open without user interaction
 
     - A new action on the Receive page:
         <page>
