@@ -4,7 +4,14 @@ An unplanned registration function with a header and steps, added to the Main Me
 
 ## User flow
 
-Select menu item → fill in header fields → accept → fill in steps → confirm → success message
+Select menu item → fill in header fields → accept → fill in steps → confirm → read success message
+
+## Technical flow
+
+1. User selects menu item, fills in header fields, and accepts
+2. Device sends `GetRegistrationConfiguration` with header values → **Define Steps** returns step definitions
+3. User fills in steps and confirms
+4. Device sends `PostAdhocRegistration` with header + step values → **Handle Registration** runs business logic → success message returned to device
 
 ## Files
 
