@@ -1,0 +1,56 @@
+<!--
+    Template: Unplanned with no user-fillable header fields and no steps — action on an existing page.
+
+    This tweak includes two main parts:
+    - A new page:
+        <page>
+          - tweak="Append"                      : registers as a new page without replacing existing ones
+          - id                                  : unique identifier for this page
+          - type="UnplannedItemRegistration"    : freestanding registration, not tied to a document/order
+          - icon                                : id of the icon shown for the page
+        <title>
+          - defaultValue                        : page title shown on the device (placeholder or hardcoded string)
+        <unplannedItemRegistrationConfiguration>
+          - type                                : registration type key — must match _RegistrationType in AL
+          - useRegistrationCollector="false"    : no step collection — business logic fires immediately after header
+        <header>
+          - configurationKey                    : identifies which header fields to load — must match the key in AL
+          - automaticAcceptOnOpen="true"        : the header auto-accepts on open without user interaction
+
+    - A new action on the Receive page:
+        <page>
+          - id               : identifier for the page to which the action is added (in this case, the built-in Receive page)
+        <open>
+          - tweak="Append"   : appends the action to the existing actions list on the page
+          - id               : must match the id of the page to open
+          - title            : label shown for the action in the menu
+          - icon             : id of the icon shown for the action
+        <returnTransfer>
+          - property         : the value/state to read from the opened page when returning
+          - to               : where to apply that value on the parent page
+                               e.g. property="UnplannedItemRegistrationCompleted" to="RefreshOnResume" refreshes
+                               the parent page when returning, if the unplanned page performed a successful post
+
+    Replace all placeholders to match your customization:
+    - "MyUnplannedOnlySteps" (function id - used in page id, type and configurationKey)
+    - "MY_UNPLANNED_4_TITLE" (page title)
+    - "MY_UNPLANNED_4_ACTION" (menu label)
+    - "myicon" (icon id)
+-->
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+    <pages>
+        <page tweak="Append" id="MyUnplannedOnlyContext" type="UnplannedItemRegistration" icon="myicon">
+            <title defaultValue="@{MY_UNPLANNED_4_TITLE}" />
+            <unplannedItemRegistrationConfiguration type="MyUnplannedOnlyContext" useRegistrationCollector="false">
+                <header configurationKey="MyUnplannedOnlyContext" automaticAcceptOnOpen="true" />
+            </unplannedItemRegistrationConfiguration>
+        </page>
+        <page id="Receive">
+            <actions>
+                <open tweak="Append" id="MyUnplannedOnlyContext" title="@{MY_UNPLANNED_4_ACTION}" icon="myicon">
+                    <returnTransfer property="UnplannedItemRegistrationCompleted" to="RefreshOnResume" />
+                </open>
+            </actions>
+        </page>
+    </pages>
+</application>

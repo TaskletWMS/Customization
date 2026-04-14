@@ -1,0 +1,38 @@
+{
+  "id": "83daf512-4f0f-40d7-959f-a767d17af26b",
+  "name": "Customization Template: My Unplanned - Only Steps",
+  "publisher": "Your Publisher Name",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "platform": "27.0.0.0",
+  "application": "27.0.0.0",
+  "runtime": "16.0",
+  "target": "Cloud",
+  "logo": "TemplateLogo.png",
+  "dependencies": [
+    {
+      "publisher": "Tasklet Factory",
+      "name": "Tasklet Mobile WMS",
+      "version": "5.55.0.0",
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c"
+    }
+  ],
+  "resourceFolders": [
+    "resources"
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "features": [
+    "NoImplicitWith"
+  ],
+  "idRanges": [
+    {
+      "from": 60030,
+      "to": 60039
+    }
+  ]
+}
