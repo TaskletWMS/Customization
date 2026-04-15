@@ -1,0 +1,58 @@
+<!--
+    Template: Lookup function — added as an action on an existing page (e.g., Receive Lines list).
+
+    This tweak includes two main parts:
+    - A new Lookup page:
+        <page>
+          - tweak="Append"                      : registers as a new page without replacing existing ones
+          - id                                  : unique identifier for this page — referenced by the action below
+          - type="Lookup"                       : read-only lookup — no registration is posted
+          - icon                                : id of the icon shown on the action button
+        <title>
+          - defaultValue                        : page title shown on the device (placeholder or hardcoded string)
+        <lookupConfiguration>
+          - type                                : lookup type key — must match _LookupType in AL
+          - useRegistrationCollector="false"    : no step collector needed for a simple lookup
+        <header>
+          - configurationKey                    : identifies which header fields to load — must match the key in AL
+          - automaticAcceptOnOpen="true"        : header is accepted automatically when the page opens (the user never sees it)
+          - hideAfterAccept="true"              : hides the header area after it is accepted
+        <onResultSelected>
+          - enabled="true"                      : enables navigation when the user selects the lookup result
+          - close="true"                        : closes the lookup page and returns to the calling page after the result is selected
+        <list>
+          - listId="Lookup"                     : uses the standard Lookup list layout
+
+    - A new action on an existing page (in this example, ReceiveLines):
+        <page>
+          - id="ReceiveLines"                   : the page where the action is added — replace with your target page id
+        <actions>
+          - <open tweak="Append">               : appends a navigation action that opens the lookup page
+            - id                               : must match the id of the lookup page above
+            - icon                             : id of the icon shown for the action
+            - title                            : label shown for the action — resolved via Mobile Messages
+
+    Replace all placeholders to match your customization:
+    - "MyLookupFromContext" (function id - used in page id, type and configuration key)
+    - "MY_LOOKUP_2_TITLE" (page title)
+    - "MY_LOOKUP_2_ACTION" (action label)
+    - "myicon" (icon id)
+    - "ReceiveLines" (target page id for the action — replace with your page, e.g. "PickLines", "ShipmentLines")
+-->
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+    <pages>
+        <page tweak="Append" id="MyLookupFromContext" type="Lookup" icon="myicon">
+            <title defaultValue="@{MY_LOOKUP_2_TITLE}" />
+            <lookupConfiguration type="MyLookupFromContext" useRegistrationCollector="false">
+                <header configurationKey="MyLookupFromContext" automaticAcceptOnOpen="true" hideAfterAccept="true" />
+                <onResultSelected enabled="true" close="true"/>
+                <list listId="Lookup" />
+            </lookupConfiguration>
+        </page>
+        <page id="ReceiveLines">
+            <actions>
+                <open tweak="Append" id="MyLookupFromContext" icon="myicon" title="@{MY_LOOKUP_2_ACTION}" />
+            </actions>
+        </page>
+    </pages>
+</application>
