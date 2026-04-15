@@ -1,0 +1,58 @@
+<!--
+    Template: Lookup function with user-input header — the user fills in search criteria and a filtered list is returned.
+
+    This tweak includes two main parts:
+    - A new Lookup page:
+        <page>
+          - tweak="Append"                      : registers as a new page without replacing existing ones
+          - id                                  : unique identifier for this page
+          - type="Lookup"                       : read-only lookup — no registration is posted
+          - icon                                : id of the icon
+        <title>
+          - defaultValue                        : page title shown on the device (placeholder or hardcoded string)
+        <lookupConfiguration>
+          - type                                : lookup type key — must match _LookupType in AL
+          - useRegistrationCollector="false"    : no step collector; this is a read-only filtered list
+        <header>
+          - configurationKey                    : identifies which header fields to load — must match the key in AL
+          - automaticAccept="Never"             : the user must manually accept the header before the list is fetched
+          - hideAfterAccept="true"              : hides the header area after it is accepted, so more of the list is visible
+        <onResultSelected>                        (remove <onResultSelected> entirely for a purely read-only list with no row selection)
+          - enabled="false"                     : disables navigation when the user selects a lookup result — the lookup is purely for reference
+        <list>
+          - listId="Lookup"                     : uses the standard Lookup list layout
+
+    - A new menu item in the Main Menu:
+        <page>
+          - id               : identifier for the page to which the menu item belongs (in this case, the built-in MainMenu page)
+        <menuItem>
+          - tweak="Append"   : appends the item inside the existing MainMenu menuItems list
+          - id               : must match the id of the page to open
+          - displayName      : label shown in the menu — uses a separate placeholder from the page title
+          - icon             : id of the icon shown in the menu
+
+    Replace all placeholders to match your customization:
+    - "MyLookupFromInput" (function id - used in page id, type and configuration key)
+    - "MY_LOOKUP_1_TITLE" (page title)
+    - "MY_LOOKUP_1_MENU" (menu label)
+    - "myicon" (icon id)
+-->
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+    <pages>
+        <page tweak="Append" id="MyLookupFromInput" type="Lookup" icon="myicon">
+            <title defaultValue="@{MY_LOOKUP_1_TITLE}" />
+            <lookupConfiguration type="MyLookupFromInput" useRegistrationCollector="false">
+                <header configurationKey="MyLookupFromInput" automaticAccept="Never" hideAfterAccept="true" />
+                <onResultSelected enabled="false"/>
+                <list listId="Lookup" />
+            </lookupConfiguration>
+        </page>
+        <page id="MainMenu">
+            <menuConfiguration>
+                <menuItems>
+                    <menuItem tweak="Append" id="MyLookupFromInput" displayName="@{MY_LOOKUP_1_MENU}" icon="myicon" />
+                </menuItems>
+            </menuConfiguration>
+        </page>
+    </pages>
+</application>
