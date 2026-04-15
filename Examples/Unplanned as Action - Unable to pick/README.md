@@ -18,12 +18,12 @@ The tweak (`resources/UnableToPickTweak.xml`) defines:
 - A new **Unplanned Function** page (`UnableToPick`) of type `UnplannedItemRegistration`
 - An **action on the Pick Lines page** that opens it
 
-The AL codeunit (`src/UnableToPickExample.Codeunit.al`) wires up the behaviour using five event subscribers:
-- **Configuration tweak** — loads and distributes the tweak XML to the Mobile App at login (`OnGetApplicationConfiguration_OnAddTweaks`)
-- **Header fields** — three read-only fields (`Location`, `FromBin`, `ItemNumber`) transferred automatically from the Order Line context (`OnGetReferenceData_OnAddHeaderConfigurations`)
-- **Steps** — one decimal input defaulting to the remaining unregistered quantity (`OnGetRegistrationConfiguration_OnAddSteps`)
-- **Registration handler** — called on accept; replace the placeholder with your own business logic (`OnPostAdhocRegistrationOnCustomRegistrationType`)
-- **Mobile Messages** — text for the page/action title placeholders, with xlf translation support (`OnAddMessages`)
+The AL code is split across four codeunits, each responsible for one area of the integration:
+
+- `src/UnableToPick_CreateSetupData.Codeunit.al` — **Create Setup Data**: creates message records for the page/action title placeholders, with xlf translation support (`OnAddMessages`)
+- `src/UnableToPick_GetReferenceData.Codeunit.al` — **Distribute Tweak** and **Define Header Fields**: distributes the tweak XML to the Mobile App at login (`OnGetApplicationConfiguration_OnAddTweaks`), and defines three read-only fields (`Location`, `FromBin`, `ItemNumber`) transferred automatically from the Order Line context (`OnGetReferenceData_OnAddHeaderConfigurations`)
+- `src/UnableToPick_GetRegistrationConfiguration.Codeunit.al` — **Define Steps**: one decimal input defaulting to the remaining unregistered quantity (`OnGetRegistrationConfiguration_OnAddSteps`)
+- `src/UnableToPick_PostAdhocRegistration.Codeunit.al` — **Handle Registration**: called on accept; replace the placeholder with your own business logic (`OnPostAdhocRegistrationOnCustomRegistrationType`)
 
 Once published, the tweak appears in the **Mobile Tweak List** (opened from the Mobile Document Queue page in BC):
 

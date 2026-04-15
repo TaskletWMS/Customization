@@ -1,43 +1,52 @@
-<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+<!--
+    This tweak includes two main parts:
+    - A new page:
+        <page>
+          - tweak="Append"                      : registers as a new page without replacing existing ones
+          - id                                  : unique identifier for this page
+          - type="UnplannedItemRegistration"    : freestanding registration, not tied to a document/order
+          - icon                                : id of the icon shown for the page
+        <title>
+          - defaultValue                        : page title shown on the device (placeholder or hardcoded string)
+        <unplannedItemRegistrationConfiguration>
+          - type                                : registration type key — must match _RegistrationType in AL
+          - useRegistrationCollector="true"     : steps are fetched after the header is accepted
+        <header>
+          - configurationKey                    : identifies which header fields to load — must match the key in AL
+          - automaticAcceptOnOpen="true"        : the header auto-accepts on open without user interaction
 
-    <!--
-        Step 1: Define the new Unplanned Function page and add an action to existing Pick Lines page
+    - A new action on the PickLines page:
+        <page>
+          - id               : identifier for the page to which the action is added (in this case, the built-in PickLines page)
+        <open>
+          - tweak="Append"   : appends the action to the existing actions list on the page
+          - id               : must match the id of the page to open
+          - title            : label shown for the action in the menu
+          - icon             : id of the icon shown for the action
+        <returnTransfer>
+          - property         : the value/state to read from the opened page when returning
+          - to               : where to apply that value on the parent page
+                               e.g. property="UnplannedItemRegistrationCompleted" to="RefreshOnResume" refreshes
+                               the parent page when returning, if the unplanned page performed a successful post
         
         In this example the page title and action title use placeholder @{UNABLE_TO_PICK_TITLE} to be able to support multiple languages.
         If you are only using one language, you can replace the placeholder with a hardcoded string.
         The placeholder is resolved by a Mobile Message record with the same key as the placeholder (without the @{}).
-        Translations are supported by providing a message for each language code via the OnAddMessages event subscriber (Step 5 in the codeunit).
-    -->
-
+        Translations are supported by providing a message for each language code.
+-->
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
     <pages>
-        <!--
-            New UnplannedItemRegistration page — for Unable To Pick function
-              - tweak="Append"                   : registers this as a new page
-              - type="UnplannedItemRegistration" : freestanding registration page, not tied to a document/order
-              - RegistrationConfiguration type   : registration type key; must match _RegistrationType used in
-                                                   OnGetRegistrationConfiguration_OnAddSteps and
-                                                   OnPostAdhocRegistrationOnCustomRegistrationType in AL
-              - header configurationKey          : must match the key in OnGetReferenceData_OnAddHeaderConfigurations in AL
-              - automaticAcceptOnOpen            : header is accepted automatically when the page opens
-        -->
         <page tweak="Append" id="UnableToPick" type="UnplannedItemRegistration" icon="mainmenunegativeadjustment">
             <title defaultValue="@{UNABLE_TO_PICK_TITLE}" />
-            <unplannedItemRegistrationConfiguration type="UnableToPick">
+            <unplannedItemRegistrationConfiguration type="UnableToPick" useRegistrationCollector="true">
                 <header configurationKey="UnableToPick" automaticAcceptOnOpen="true" />
             </unplannedItemRegistrationConfiguration>
         </page>
-        <!--
-            Modifies the existing PickLines page by adding a new open action:
-              - tweak="Append"  : adds to the existing list rather than replacing it
-              - id              : id must match the id for the page to open 
-              - title           : label shown on the action menu; supports @{} message placeholders
-              - icon            : references an image id from the shared resources in application.cfg    
-        -->
         <page id="PickLines">
             <actions>
-                <open tweak="Append" id="UnableToPick" title="@{UNABLE_TO_PICK_TITLE}" icon="mainmenunegativeadjustment" />
+                <open tweak="Append" id="UnableToPick" title="@{UNABLE_TO_PICK_TITLE}" icon="mainmenunegativeadjustment">
+                    <returnTransfer property="UnplannedItemRegistrationCompleted" to="RefreshOnResume" />
+                </open>
             </actions>
         </page>
     </pages>
