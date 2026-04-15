@@ -31,14 +31,6 @@
 		{
 			"name": "Unplanned in Main Menu - Positive Adjustment",
 			"path": "Examples/Unplanned in Main Menu - Positive Adjustment"
-		},
-		{
-			"name": "University: Basic Customization",
-			"path": "TaskletUniversity/Basic Customization"
-		},
-		{
-			"name": "University: Advanced Customization",
-			"path": "TaskletUniversity/Advanced Customization"
 		}
 	],
 	"settings": {

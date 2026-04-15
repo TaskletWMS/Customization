@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"name": "My Unplanned 1 - Header And Steps",
+			"path": "Unplanned Function/My Unplanned 1 - Header And Steps"
+		},
+		{
+			"name": "My Unplanned 2 - Only Header",
+			"path": "Unplanned Function/My Unplanned 2 - Only Header"
+		},
+		{
+			"name": "My Unplanned 3 - Only Steps",
+			"path": "Unplanned Function/My Unplanned 3 - Only Steps"
+		},
+		{
+			"name": "My Unplanned 4 - Only Context",
+			"path": "Unplanned Function/My Unplanned 4 - Only Context"
+		},
+		{
+			"name": "My Lookup 1 - From Input",
+			"path": "Lookup Function/My Lookup 1 - From Input"
+		},
+		{
+			"name": "My Lookup 2 - From Context",
+			"path": "Lookup Function/My Lookup 2 - From Context"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.alpackages": false,
+			"**/.alcache": true,
+			"**/.altemplates": true,
+			"**/.altestrunner": true,
+			"**/.snapshots": true,
+			"**/rad.json": true
+		}
+	}
+}
