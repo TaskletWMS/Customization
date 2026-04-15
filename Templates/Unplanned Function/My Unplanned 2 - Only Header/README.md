@@ -16,8 +16,8 @@ Select menu item → fill in header fields → accept → success message
 
 | File | Purpose |
 |------|---------|
-| `src/MyUnplannedOnlyHeader.Codeunit.al` | Main codeunit — header fields and business logic |
-| `src/MyUnplannedSamples.Codeunit.al` | Sample helper — replace or remove when implementing |
+| `src/MyUnplannedOnlyHeader.Codeunit.al` | Main codeunit — event subscribers wiring up the template |
+| `src/MyUnplannedSamples.Codeunit.al` | Sample implementations — replace with your own logic when implementing |
 | `resources/MyUnplannedOnlyHeaderTweak.xml` | Tweak — registers the page and the Main Menu item on the device |
 | `resources/myicon.png` | Icon image — served to the device as Base64 on request |
 

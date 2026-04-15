@@ -17,8 +17,8 @@ Select menu item → fill in header fields → accept → fill in steps → conf
 
 | File | Purpose |
 |------|---------|
-| `src/MyUnplannedHeaderAndSteps.Codeunit.al` | Main codeunit — header fields, steps, and business logic |
-| `src/MyUnplannedSamples.Codeunit.al` | Sample helper — replace or remove when implementing |
+| `src/MyUnplannedHeaderAndSteps.Codeunit.al` | Main codeunit — event subscribers wiring up the template |
+| `src/MyUnplannedSamples.Codeunit.al` | Sample implementations — replace with your own logic when implementing |
 | `resources/MyUnplannedHeaderAndStepsTweak.xml` | Tweak — registers the page and the Main Menu item on the device |
 | `resources/myicon.png` | Icon image — served to the device as Base64 on request |
 
