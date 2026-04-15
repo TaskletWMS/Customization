@@ -2,35 +2,35 @@
 	"folders": [
 		{
 			"name": "ISV Shipping Connector",
-			"path": "Examples/ISV Shipping Connector"
+			"path": "ISV Shipping Connector"
 		},
 		{
 			"name": "ISV Shipping Solution",
-			"path": "Examples/ISV Shipping Solution"
+			"path": "ISV Shipping Solution"
 		},
 		{
 			"name": "Label - Extend LP Content Label",
-			"path": "Examples/Label - Extend LP Content Label"
+			"path": "Label - Extend LP Content Label"
 		},
 		{
 			"name": "Planned Function",
-			"path": "Examples/Planned Function"
+			"path": "Planned Function"
 		},
 		{
 			"name": "Unplanned as Action - Unable to pick",
-			"path": "Examples/Unplanned as Action - Unable to pick"
+			"path": "Unplanned as Action - Unable to pick"
 		},
 		{
 			"name": "Unplanned in Main Menu - Job Jnl Item Posting",
-			"path": "Examples/Unplanned in Main Menu - Job Jnl Item Posting"
+			"path": "Unplanned in Main Menu - Job Jnl Item Posting"
 		},
 		{
 			"name": "Unplanned in Main Menu - Pick to Bin",
-			"path": "Examples/Unplanned in Main Menu - Pick to Bin"
+			"path": "Unplanned in Main Menu - Pick to Bin"
 		},
 		{
 			"name": "Unplanned in Main Menu - Positive Adjustment",
-			"path": "Examples/Unplanned in Main Menu - Positive Adjustment"
+			"path": "Unplanned in Main Menu - Positive Adjustment"
 		}
 	],
 	"settings": {
