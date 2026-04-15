@@ -21,10 +21,15 @@ The table below lists the available templates and their input combinations. Use 
 
 | Template | Registration page | Header input | Step input | Context values | Entry point |
 |---|---|---|---|---|---|
-| [My Unplanned 1 — Header And Steps](My%20Unplanned%201%20-%20Header%20And%20Steps/README.md) | Yes | Yes | Yes | No | Main Menu |
-| [My Unplanned 2 — Only Header](My%20Unplanned%202%20-%20Only%20Header/README.md) | Yes | Yes | No | No | Main Menu |
-| [My Unplanned 3 — Only Steps](My%20Unplanned%203%20-%20Only%20Steps/README.md) | Yes | No | Yes | Yes | Action on existing page |
-| [My Unplanned 4 — Only Context](My%20Unplanned%204%20-%20Only%20Context/README.md) | Yes | No | No | Yes | Action on existing page |
+| [My Unplanned 1 — Header And Steps](My%20Unplanned%201%20-%20Header%20And%20Steps/README.md) | Yes | Yes | Yes | No | Main Menu ¹ |
+| [My Unplanned 2 — Only Header](My%20Unplanned%202%20-%20Only%20Header/README.md) | Yes | Yes | No | No | Main Menu ¹ |
+| [My Unplanned 3 — Only Steps](My%20Unplanned%203%20-%20Only%20Steps/README.md) | Yes | No | Yes | Yes | Action ¹ |
+| [My Unplanned 4 — Only Context](My%20Unplanned%204%20-%20Only%20Context/README.md) | Yes | No | No | Yes | Action only ² |
+
+¹ Can be switched to the opposite entry point. Switching requires changes in both the code and the XML. Use one of the templates with the opposite entry point as a reference. Main Menu patterns include a menu option created as data; action patterns do not.
+
+² Can only be surfaced as an action on an existing page. Context values are passed from the calling page, and a Main Menu item has no calling page to provide them.
+
 
 ## Disclaimer
 

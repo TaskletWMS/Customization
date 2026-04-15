@@ -44,6 +44,8 @@ Select menu item → fill in header fields → accept → fill in steps → conf
 
 8. In **Create Setup Data**, replace `MyUnplannedHeaderAndSteps` in the menu option, `MY_UNPLANNED_1_TITLE` and `MY_UNPLANNED_1_MENU` with your own message keys, and set their actual values (and translation).
 
+9. **Optional:** To switch the entry point to an action on an existing page, use one of the action-based templates as a reference. Switching requires changes in both the code and the XML.
+
 ## When changes take effect
 The following are delivered as Reference Data on login. Any changes require the mobile user to re-login:
 - **Distribute Tweak** — tweak XML

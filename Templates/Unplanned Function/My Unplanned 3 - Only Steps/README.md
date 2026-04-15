@@ -45,6 +45,8 @@ Select action on parent page → fill in steps → accept → success message
 
 8. In **Create Setup Data**, replace `MY_UNPLANNED_3_TITLE` and `MY_UNPLANNED_3_ACTION` with your own message keys, and set their actual values (and translation).
 
+9. **Optional:** To switch the entry point to a Main Menu item, use one of the Main Menu-based templates as a reference. Switching requires changes in both the code and the XML.
+
 ## When changes take effect
 The following are delivered as Reference Data on login. Any changes require the mobile user to re-login:
 - **Distribute Tweak** — tweak XML

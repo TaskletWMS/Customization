@@ -95,8 +95,7 @@ codeunit 60040 "MyUnplanned Only Context"
     // -----------------------------------------------------------------------------------------------------------------------
     // CREATE SETUP DATA
     //
-    // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Language page,
-    // that must be manually run for each language you want to support.
+    // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Messages page, that must be manually run for each language you want to support.
     // It is also triggered during upgrade of the Tasklet Mobile WMS app.
     //
     // To create the setup data automatically when your extension is installed or upgraded, implement the code in an Install/Upgrade codeunit also.

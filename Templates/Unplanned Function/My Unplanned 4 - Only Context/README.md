@@ -2,6 +2,7 @@
 
 An unplanned registration function with no user-fillable header fields and no steps, added as an action on an existing page.
 The header shows a locked context field (BackendID from the calling page) and auto-accepts immediately — no user input is collected.
+This template can only be surfaced as an action. Context values are passed from the calling page, and a Main Menu item has no calling page to provide them.
 
 ## User flow
 
