@@ -1,6 +1,7 @@
 # Template: Lookup - From Context
 
 A lookup function that displays read-only information for the currently selected record, added as an action on an existing page (e.g., Receive Lines list).
+This template can only be surfaced as an action. Context values are passed from the calling page, and a Main Menu item has no calling page to provide them.
 
 ## User flow
 

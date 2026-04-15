@@ -1,6 +1,6 @@
 # Template: Lookup 1 - From Input
 
-A lookup function where the user fills in search criteria in the header, and the device fetches a filtered list of results. Added as a Main Menu item. Can alternatively be placed as an action on an existing page — see the tweak XML.
+A lookup function where the user fills in search criteria in the header, and the device fetches a filtered list of results. Added as a Main Menu item.
 
 ## User flow
 
@@ -41,6 +41,8 @@ Open the page → fill in search fields → accept → filtered list is displaye
 6. In **Handle Icon**, replace `myicon` with your icon id and provide your own image (`myicon.png` in `resources/`).
 
 7. In **Create Messages**, replace `MY_LOOKUP_1_TITLE` and `MY_LOOKUP_1_MENU` with your message keys and update the label texts.
+
+8. **Optional:** To switch the entry point to an action on an existing page, use one of the action-based templates as a reference. Switching requires changes in both the code and the XML.
 
 ## Notes
 
