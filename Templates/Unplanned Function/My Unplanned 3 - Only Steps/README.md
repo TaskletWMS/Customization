@@ -18,8 +18,8 @@ Select action on parent page → fill in steps → accept → success message
 
 | File | Purpose |
 |------|---------|
-| `src/MyUnplannedOnlySteps.Codeunit.al` | Main codeunit — header context field, steps, and business logic |
-| `src/MyUnplannedSamples.Codeunit.al` | Sample helper — replace or remove when implementing |
+| `src/MyUnplannedOnlySteps.Codeunit.al` | Main codeunit — event subscribers wiring up the template |
+| `src/MyUnplannedSamples.Codeunit.al` | Sample implementations — replace with your own logic when implementing |
 | `resources/MyUnplannedOnlyStepsTweak.xml` | Tweak — registers the page and the action on an existing page |
 | `resources/myicon.png` | Icon image — served to the device as Base64 on request |
 
