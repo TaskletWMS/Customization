@@ -17,12 +17,17 @@ Select action on parent page → success message
 
 | File | Purpose |
 |------|---------|
-| `src/MyUnplannedOnlyContext.Codeunit.al` | Main codeunit — event subscribers wiring up the template |
-| `src/MyUnplannedSamples.Codeunit.al` | Sample implementations — replace with your own logic when implementing |
-| `resources/MyUnplannedOnlyContextTweak.xml` | Tweak — registers the page and the action on an existing page |
-| `resources/myicon.png` | Icon image — served to the device as Base64 on request |
+| `src/MyUnplanned4_GetReferenceData.Codeunit.al` | **Distribute Tweak** + **Define Header Fields** |
+| `src/MyUnplanned4_PostAdhocRegistration.Codeunit.al` | **Handle Registration** |
+| `src/MyUnplanned4_GetMedia.Codeunit.al` | **Handle Icon** |
+| `src/MyUnplanned4_SetupData.Codeunit.al` | **Create Setup Data** |
+| `src/MyUnplanned4_Install.Codeunit.al` | Install codeunit |
+| `resources/MyUnplannedOnlyContextTweak.xml` | Tweak XML |
+| `resources/myicon.png` | Icon image |
 
 ## How to use
+
+The codeunits contain `CreateSample*` and `ReadSample*` procedures as starting points — use them as inspiration and adapt the logic, labels, and identifiers to your customization.
 
 1. Rename the files and renumber the objects to fit your customization.
 

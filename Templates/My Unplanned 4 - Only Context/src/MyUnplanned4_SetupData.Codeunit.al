@@ -1,11 +1,12 @@
-codeunit 70023 "MyLookup2_SetupData"
+codeunit 60043 "MyUnplanned4_SetupData"
 {
     // -----------------------------------------------------------------------------------------------------------------------
     // CREATE SETUP DATA
     //
-    // To make this customization work, you need to provide setup data such as menu options and messages.
-    // This codeunit includes event subscribers that create the necessary setup data when manually triggering actions in the BC client or during a Mobile WMS upgrade.
-    // The procedures are also called during the installation of the extension, so the setup data is created automatically when the extension is installed.
+    // To make this customization work, you need to provide Mobile Messages for the placeholders used in the Tweak.xml.
+    // This codeunit includes event subscribers that create the messages when manually triggering the "Create Messages" action
+    // on the Mobile Messages page, or during a Mobile WMS upgrade.
+    // The procedure is also called during the installation of the extension, so the setup data is created automatically when the extension is installed.
     // If you want to run this code when the extension is upgraded to a new version, you can implement it in an Upgrade codeunit as well.
     //
     // The event OnAfterCreateDefaultMenuOptions is triggered by the action "Create Document Types" on the Mobile WMS Setup page.
@@ -56,15 +57,15 @@ codeunit 70023 "MyLookup2_SetupData"
     local procedure CreateSampleMessages(LanguageCode: Code[10]; var Message: Record "MOB Message")
     var
         TranslationHelper: Codeunit "Translation Helper";
-        MyActionLbl: Label 'My Lookup Two', Comment = 'Action label on the source page';
-        MyTitleLbl: Label 'My Lookup (From Context)', Comment = 'Lookup page title';
+        MyActionLbl: Label 'My Unplanned Four', Comment = 'Action label';
+        MyTitleLbl: Label 'My Unplanned (Only Context)', Comment = 'Page title';
     begin
         TranslationHelper.SetGlobalLanguageToDefault(); // Because if LanguageCode does not match a supported language, we want to fall back to en-US.
         TranslationHelper.SetGlobalLanguageByCode(LanguageCode);
 
         // The second parameter of Create() is the message code — it must match the @{} placeholder used in the Tweak.xml file.
-        Message.Create(LanguageCode, 'MY_LOOKUP_2_ACTION', MyActionLbl);
-        Message.Create(LanguageCode, 'MY_LOOKUP_2_TITLE', MyTitleLbl);
+        Message.Create(LanguageCode, 'MY_UNPLANNED_4_ACTION', MyActionLbl);
+        Message.Create(LanguageCode, 'MY_UNPLANNED_4_TITLE', MyTitleLbl);
 
         TranslationHelper.RestoreGlobalLanguage();
     end;
@@ -80,8 +81,8 @@ codeunit 70023 "MyLookup2_SetupData"
             'ENU':
                 begin
                     // The second parameter of Create() is the message key — it must match the @{} placeholder used in the Tweak.xml file.
-                    Message.Create(LanguageCode, 'MY_LOOKUP_2_ACTION', 'My Lookup Two');
-                    Message.Create(LanguageCode, 'MY_LOOKUP_2_TITLE', 'My Lookup (From Context)');
+                    Message.Create(LanguageCode, 'MY_UNPLANNED_4_ACTION', 'My Unplanned Four');
+                    Message.Create(LanguageCode, 'MY_UNPLANNED_4_TITLE', 'My Unplanned (Only Context)');
                 end;
             // Add more languages here and hardcode the corresponding translations for each message key.
         end;

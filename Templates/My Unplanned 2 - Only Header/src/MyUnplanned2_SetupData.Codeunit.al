@@ -1,4 +1,4 @@
-codeunit 70023 "MyLookup2_SetupData"
+codeunit 60023 "MyUnplanned2_SetupData"
 {
     // -----------------------------------------------------------------------------------------------------------------------
     // CREATE SETUP DATA
@@ -16,6 +16,7 @@ codeunit 70023 "MyLookup2_SetupData"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Setup Doc. Types", OnAfterCreateDefaultMenuOptions, '', false, false)]
     local procedure CreateSetupData_OnAfterCreateDefaultMenuOptions()
     begin
+        CreateMobileMenuOption();
         CreateMobileMessages();
     end;
 
@@ -25,6 +26,16 @@ codeunit 70023 "MyLookup2_SetupData"
         CreateSampleMessages(_LanguageCode, _Messages);
         // Alternatively, hardcode values per language without xlf translations:
         // CreateSampleMessagesHardcoded(_LanguageCode, _Messages);
+    end;
+
+    /// <summary>
+    /// Creates a menu option and adds it to a group to make it show up in the mobile app.
+    /// The menu option must match the menuItem/page id used in the Tweak.xml.
+    /// The group code must match an existing group in the Mobile Group table.
+    /// </summary>
+    internal procedure CreateMobileMenuOption()
+    begin
+        CreateSampleMenuOption('MyUnplannedOnlyHeader', 'WMS');
     end;
 
     /// <summary>
@@ -49,6 +60,21 @@ codeunit 70023 "MyLookup2_SetupData"
     end;
 
     /// <summary>
+    /// Creates a Mobile Menu Option, optionally adding it to a group.
+    /// </summary>
+    /// <param name="MenuOption">The menu option to register.</param>
+    /// <param name="GroupCode">The group code to add the menu option to, or '' to create a standalone menu option.</param>
+    local procedure CreateSampleMenuOption(MenuOption: Text; GroupCode: Text)
+    var
+        MobWmsSetupDocTypes: Codeunit "MOB WMS Setup Doc. Types";
+    begin
+        if GroupCode = '' then
+            MobWmsSetupDocTypes.CreateMobileMenuOption(MenuOption) // Only created as menu option
+        else
+            MobWmsSetupDocTypes.CreateMobileMenuOptionAndAddToMobileGroup(MenuOption, GroupCode, 0); // Also added to group. Sorting = 0 adds to the beginning — adjust as needed.
+    end;
+
+    /// <summary>
     /// Creates the Mobile Messages that resolve the placeholders used in the Tweak.xml, using labels to allow translations to be provided in xlf files.
     /// </summary>
     /// <param name="LanguageCode">The Language code to create messages for.</param>
@@ -56,15 +82,15 @@ codeunit 70023 "MyLookup2_SetupData"
     local procedure CreateSampleMessages(LanguageCode: Code[10]; var Message: Record "MOB Message")
     var
         TranslationHelper: Codeunit "Translation Helper";
-        MyActionLbl: Label 'My Lookup Two', Comment = 'Action label on the source page';
-        MyTitleLbl: Label 'My Lookup (From Context)', Comment = 'Lookup page title';
+        MyMenuLbl: Label 'My Unplanned Two', Comment = 'Menu label';
+        MyTitleLbl: Label 'My Unplanned (Only Header)', Comment = 'Page title';
     begin
         TranslationHelper.SetGlobalLanguageToDefault(); // Because if LanguageCode does not match a supported language, we want to fall back to en-US.
         TranslationHelper.SetGlobalLanguageByCode(LanguageCode);
 
         // The second parameter of Create() is the message code — it must match the @{} placeholder used in the Tweak.xml file.
-        Message.Create(LanguageCode, 'MY_LOOKUP_2_ACTION', MyActionLbl);
-        Message.Create(LanguageCode, 'MY_LOOKUP_2_TITLE', MyTitleLbl);
+        Message.Create(LanguageCode, 'MY_UNPLANNED_2_MENU', MyMenuLbl);
+        Message.Create(LanguageCode, 'MY_UNPLANNED_2_TITLE', MyTitleLbl);
 
         TranslationHelper.RestoreGlobalLanguage();
     end;
@@ -80,8 +106,8 @@ codeunit 70023 "MyLookup2_SetupData"
             'ENU':
                 begin
                     // The second parameter of Create() is the message key — it must match the @{} placeholder used in the Tweak.xml file.
-                    Message.Create(LanguageCode, 'MY_LOOKUP_2_ACTION', 'My Lookup Two');
-                    Message.Create(LanguageCode, 'MY_LOOKUP_2_TITLE', 'My Lookup (From Context)');
+                    Message.Create(LanguageCode, 'MY_UNPLANNED_2_MENU', 'My Unplanned Two');
+                    Message.Create(LanguageCode, 'MY_UNPLANNED_2_TITLE', 'My Unplanned (Only Header)');
                 end;
             // Add more languages here and hardcode the corresponding translations for each message key.
         end;

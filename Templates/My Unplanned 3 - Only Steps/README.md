@@ -18,12 +18,18 @@ Select action on parent page → fill in steps → accept → success message
 
 | File | Purpose |
 |------|---------|
-| `src/MyUnplannedOnlySteps.Codeunit.al` | Main codeunit — event subscribers wiring up the template |
-| `src/MyUnplannedSamples.Codeunit.al` | Sample implementations — replace with your own logic when implementing |
-| `resources/MyUnplannedOnlyStepsTweak.xml` | Tweak — registers the page and the action on an existing page |
-| `resources/myicon.png` | Icon image — served to the device as Base64 on request |
+| `src/MyUnplanned3_GetReferenceData.Codeunit.al` | **Distribute Tweak** + **Define Header Fields** |
+| `src/MyUnplanned3_GetRegistrationConfiguration.Codeunit.al` | **Define Steps** |
+| `src/MyUnplanned3_PostAdhocRegistration.Codeunit.al` | **Handle Registration** |
+| `src/MyUnplanned3_GetMedia.Codeunit.al` | **Handle Icon** |
+| `src/MyUnplanned3_SetupData.Codeunit.al` | **Create Setup Data** |
+| `src/MyUnplanned3_Install.Codeunit.al` | Install codeunit |
+| `resources/MyUnplannedOnlyStepsTweak.xml` | Tweak XML |
+| `resources/myicon.png` | Icon image |
 
 ## How to use
+
+The codeunits contain `CreateSample*` and `ReadSample*` procedures as starting points — use them as inspiration and adapt the logic, labels, and identifiers to your customization.
 
 1. Rename the files and renumber the objects to fit your customization.
 
