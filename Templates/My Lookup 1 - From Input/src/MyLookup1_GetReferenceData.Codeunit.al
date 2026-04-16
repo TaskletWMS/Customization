@@ -38,7 +38,7 @@ codeunit 70011 MyLookup1_RefData
     /// Replace this with the search fields your lookup requires.
     /// </summary>
     /// <param name="HeaderFields">The header field element record passed by the event subscriber.</param>
-    internal procedure CreateSampleHeaderFields(var HeaderFields: Record "MOB HeaderField Element")
+    local procedure CreateSampleHeaderFields(var HeaderFields: Record "MOB HeaderField Element")
     var
         SearchFieldLbl: Label 'Search';
     begin

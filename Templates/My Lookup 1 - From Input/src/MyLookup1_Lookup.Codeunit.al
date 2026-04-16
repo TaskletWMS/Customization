@@ -27,7 +27,7 @@ codeunit 70012 "MyLookup1_Lookup"
     /// </summary>
     /// <param name="RequestValues">The request values record passed by the event subscriber.</param>
     /// <returns>The value entered by the user in the search field.</returns>
-    internal procedure ReadSampleHeaderValue(var RequestValues: Record "MOB NS Request Element"): Text
+    local procedure ReadSampleHeaderValue(var RequestValues: Record "MOB NS Request Element"): Text
     begin
         exit(RequestValues.GetValue('MySearchField'));
     end;
@@ -38,7 +38,7 @@ codeunit 70012 "MyLookup1_Lookup"
     /// </summary>
     /// <param name="LookupResponseElement">The lookup response element record passed by the event subscriber.</param>
     /// <param name="SearchValue">The search value entered by the user in the header.</param>
-    internal procedure AddSampleLookupRows(var LookupResponseElement: Record "MOB NS WhseInquery Element"; SearchValue: Text)
+    local procedure AddSampleLookupRows(var LookupResponseElement: Record "MOB NS WhseInquery Element"; SearchValue: Text)
     var
         i: Integer;
         RowLbl: Label 'Row %1', Comment = '%1 = row number';

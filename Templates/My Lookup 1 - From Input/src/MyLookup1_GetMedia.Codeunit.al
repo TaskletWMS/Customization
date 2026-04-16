@@ -25,7 +25,7 @@ codeunit 70013 MyLookup1_GetMedia
     /// </summary>
     /// <param name="ResourceName">The filename of the image resource (e.g. 'myicon.png').</param>
     /// <returns>The Base64-encoded image string to assign to _Base64Media.</returns>
-    internal procedure GetIconAsBase64(ResourceName: Text): Text
+    local procedure GetIconAsBase64(ResourceName: Text): Text
     var
         Base64Convert: Codeunit "Base64 Convert";
         ImageStream: InStream;
