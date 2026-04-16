@@ -14,9 +14,10 @@ codeunit 70010 "MyLookup1_SetupData"
     // -----------------------------------------------------------------------------------------------------------------------
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Setup Doc. Types", OnAfterCreateDefaultMenuOptions, '', false, false)]
-    local procedure CreateMenu_OnAfterCreateDefaultMenuOptions()
+    local procedure CreateSetupData_OnAfterCreateDefaultMenuOptions()
     begin
         CreateMobileMenuOption();
+        CreateMobileMessages();
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Language", OnAddMessages, '', false, false)]
@@ -59,8 +60,7 @@ codeunit 70010 "MyLookup1_SetupData"
     end;
 
     /// <summary>
-    /// This sample creates a Mobile WMS menu option, optionally adding it to a group.
-    /// Replace this sample code with your own menu option creation logic.
+    /// Creates a Mobile Menu Option, optionally adding it to a group.
     /// </summary>
     /// <param name="MenuOption">The menu option to register.</param>
     /// <param name="GroupCode">The group code to add the menu option to, or '' to create a standalone menu option.</param>
@@ -75,12 +75,10 @@ codeunit 70010 "MyLookup1_SetupData"
     end;
 
     /// <summary>
-    /// This sample creates two Mobile Messages — a page title and a shorter menu/action label — each matching a placeholder in the Tweak.xml.
-    /// The sample uses labels for the message values, enabling translation via xlf files.
-    /// Replace the keys and values to match your customization.
+    /// Creates the Mobile Messages that resolve the placeholders used in the Tweak.xml, using labels to allow translations to be provided in xlf files.
     /// </summary>
-    /// <param name="LanguageCode">The language code passed by the OnAddMessages event subscriber.</param>
-    /// <param name="Message">The Mobile Message record passed by the OnAddMessages event subscriber.</param>
+    /// <param name="LanguageCode">The Language code to create messages for.</param>
+    /// <param name="Message">The Mobile Message record to create messages on.</param>
     local procedure CreateSampleMessages(LanguageCode: Code[10]; var Message: Record "MOB Message")
     var
         TranslationHelper: Codeunit "Translation Helper";
@@ -98,12 +96,10 @@ codeunit 70010 "MyLookup1_SetupData"
     end;
 
     /// <summary>
-    /// This sample creates two Mobile Messages — a page title and a shorter menu/action label — each matching a placeholder in the Tweak.xml.
-    /// This alternative to CreateSampleMessages uses hardcoded text values instead of labels, so it does not require xlf translation files.
-    /// Replace the keys and values to match your customization.
+    /// Creates the Mobile Messages that resolve the placeholders used in the Tweak.xml, using hardcoded values instead of labels.
     /// </summary>
-    /// <param name="LanguageCode">The language code passed by the OnAddMessages event subscriber.</param>
-    /// <param name="Message">The Mobile Message record passed by the OnAddMessages event subscriber.</param>
+    /// <param name="LanguageCode">The Language code to create messages for.</param>
+    /// <param name="Message">The Mobile Message record to create messages on.</param>
     local procedure CreateSampleMessagesHardcoded(LanguageCode: Code[10]; var Message: Record "MOB Message")
     begin
         case LanguageCode of
