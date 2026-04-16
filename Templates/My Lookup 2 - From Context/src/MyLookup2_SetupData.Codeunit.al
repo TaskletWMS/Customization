@@ -3,15 +3,21 @@ codeunit 70023 "MyLookup2_SetupData"
     // -----------------------------------------------------------------------------------------------------------------------
     // CREATE SETUP DATA
     //
-    // To make this customization work, you need to provide Mobile Messages for the placeholders used in the Tweak.xml.
-    // This codeunit includes an event subscriber that creates the messages when manually triggering the "Create Messages" action
-    // on the Mobile Messages page, or during a Mobile WMS upgrade.
-    // The procedure is also called during the installation of the extension, so the setup data is created automatically when the extension is installed.
+    // To make this customization work, you need to provide setup data such as menu options and messages.
+    // This codeunit includes event subscribers that create the necessary setup data when manually triggering actions in the BC client or during a Mobile WMS upgrade.
+    // The procedures are also called during the installation of the extension, so the setup data is created automatically when the extension is installed.
     // If you want to run this code when the extension is upgraded to a new version, you can implement it in an Upgrade codeunit as well.
     //
+    // The event OnAfterCreateDefaultMenuOptions is triggered by the action "Create Document Types" on the Mobile WMS Setup page.
     // The event OnAddMessages is triggered by the action "Create Messages" on the Mobile Messages page, that must be run for each language you want to support.
-    // It is also triggered during upgrade of the Tasklet Mobile WMS app.
+    // Both are also triggered during upgrade of the Tasklet Mobile WMS app.
     // -----------------------------------------------------------------------------------------------------------------------
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Setup Doc. Types", OnAfterCreateDefaultMenuOptions, '', false, false)]
+    local procedure CreateSetupData_OnAfterCreateDefaultMenuOptions()
+    begin
+        CreateMobileMessages();
+    end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Language", OnAddMessages, '', false, false)]
     local procedure AddMessages_OnAddMessages(_LanguageCode: Code[10]; var _Messages: Record "MOB Message")
@@ -43,12 +49,10 @@ codeunit 70023 "MyLookup2_SetupData"
     end;
 
     /// <summary>
-    /// This sample creates two Mobile Messages — a page title and a shorter action label — each matching a placeholder in the Tweak.xml.
-    /// The sample uses labels for the message values, enabling translation via xlf files.
-    /// Replace the keys and values to match your customization.
+    /// Creates the Mobile Messages that resolve the placeholders used in the Tweak.xml, using labels to allow translations to be provided in xlf files.
     /// </summary>
-    /// <param name="LanguageCode">The language code passed by the OnAddMessages event subscriber.</param>
-    /// <param name="Message">The Mobile Message record passed by the OnAddMessages event subscriber.</param>
+    /// <param name="LanguageCode">The Language code to create messages for.</param>
+    /// <param name="Message">The Mobile Message record to create messages on.</param>
     local procedure CreateSampleMessages(LanguageCode: Code[10]; var Message: Record "MOB Message")
     var
         TranslationHelper: Codeunit "Translation Helper";
@@ -66,12 +70,10 @@ codeunit 70023 "MyLookup2_SetupData"
     end;
 
     /// <summary>
-    /// This sample creates two Mobile Messages — a page title and a shorter action label — each matching a placeholder in the Tweak.xml.
-    /// This alternative to CreateSampleMessages uses hardcoded text values instead of labels, so it does not require xlf translation files.
-    /// Replace the keys and values to match your customization.
+    /// Creates the Mobile Messages that resolve the placeholders used in the Tweak.xml, using hardcoded values instead of labels.
     /// </summary>
-    /// <param name="LanguageCode">The language code passed by the OnAddMessages event subscriber.</param>
-    /// <param name="Message">The Mobile Message record passed by the OnAddMessages event subscriber.</param>
+    /// <param name="LanguageCode">The Language code to create messages for.</param>
+    /// <param name="Message">The Mobile Message record to create messages on.</param>
     local procedure CreateSampleMessagesHardcoded(LanguageCode: Code[10]; var Message: Record "MOB Message")
     begin
         case LanguageCode of
