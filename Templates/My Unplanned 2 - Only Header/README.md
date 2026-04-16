@@ -16,12 +16,17 @@ Select menu item → fill in header fields → accept → success message
 
 | File | Purpose |
 |------|---------|
-| `src/MyUnplannedOnlyHeader.Codeunit.al` | Main codeunit — event subscribers wiring up the template |
-| `src/MyUnplannedSamples.Codeunit.al` | Sample implementations — replace with your own logic when implementing |
-| `resources/MyUnplannedOnlyHeaderTweak.xml` | Tweak — registers the page and the Main Menu item on the device |
-| `resources/myicon.png` | Icon image — served to the device as Base64 on request |
+| `src/MyUnplanned2_GetReferenceData.Codeunit.al` | **Distribute Tweak** + **Define Header Fields** |
+| `src/MyUnplanned2_PostAdhocRegistration.Codeunit.al` | **Handle Registration** |
+| `src/MyUnplanned2_GetMedia.Codeunit.al` | **Handle Icon** |
+| `src/MyUnplanned2_SetupData.Codeunit.al` | **Create Setup Data** |
+| `src/MyUnplanned2_Install.Codeunit.al` | Install codeunit |
+| `resources/MyUnplannedOnlyHeaderTweak.xml` | Tweak XML |
+| `resources/myicon.png` | Icon image |
 
 ## How to use
+
+The codeunits contain `CreateSample*` and `ReadSample*` procedures as starting points — use them as inspiration and adapt the logic, labels, and identifiers to your customization.
 
 1. Rename the files and renumber the objects to fit your customization.
 
