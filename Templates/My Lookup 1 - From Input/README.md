@@ -17,14 +17,19 @@ Open the page → fill in search fields → accept → filtered list is displaye
 
 | File | Purpose |
 |------|---------|
-| `src/MyLookupFromInput.Codeunit.al` | Main codeunit — event subscribers wiring up the template |
-| `src/MyLookupSamples.Codeunit.al` | Sample implementations — replace with your own logic when implementing |
-| `resources/MyLookupFromInputTweak.xml` | Tweak — registers the lookup page and the Main Menu item |
-| `resources/myicon.png` | Icon image — served to the device as Base64 on request |
+| `src/MyLookup1_GetReferenceData.Codeunit.al` | **Distribute Tweak** + **Define Header Fields** |
+| `src/MyLookup1_Lookup.Codeunit.al` | **Handle Lookup** |
+| `src/MyLookup1_GetMedia.Codeunit.al` | **Handle Icon** |
+| `src/MyLookup1_SetupData.Codeunit.al` | **Create Setup Data** |
+| `src/MyLookup1_Install.Codeunit.al` | Install codeunit |
+| `resources/MyLookupFromInputTweak.xml` | Tweak XML |
+| `resources/myicon.png` | Icon image |
 
 ## How to use
 
-1. Rename the file and renumber the object to fit your customization.
+The codeunits contain `CreateSample*` procedures as starting points — use them as inspiration and adapt the logic, labels, and identifiers to your customization.
+
+1. Rename the files and renumber the objects to fit your customization.
 
 2. In the tweak XML, replace:
    - `MyLookupFromInput` — your lookup identifier (page id, type, menu item id, and header configuration key)
@@ -40,7 +45,7 @@ Open the page → fill in search fields → accept → filtered list is displaye
 
 6. In **Handle Icon**, replace `myicon` with your icon id and provide your own image (`myicon.png` in `resources/`).
 
-7. In **Create Messages**, replace `MY_LOOKUP_1_TITLE` and `MY_LOOKUP_1_MENU` with your message keys and update the label texts.
+7. In **Create Setup Data**, replace `MY_LOOKUP_1_TITLE` and `MY_LOOKUP_1_MENU` with your message keys and update the label texts.
 
 8. **Optional:** To switch the entry point to an action on an existing page, use one of the action-based templates as a reference. Switching requires changes in both the code and the XML.
 
