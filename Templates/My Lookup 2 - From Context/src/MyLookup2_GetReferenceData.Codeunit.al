@@ -1,4 +1,4 @@
-codeunit 70011 MyLookup1_RefData
+codeunit 70020 "MyLookup2_RefData"
 {
     // -----------------------------------------------------------------------------------------------------------------------
     // DISTRIBUTE TWEAK
@@ -14,35 +14,22 @@ codeunit 70011 MyLookup1_RefData
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB Application Configuration", OnGetApplicationConfiguration_OnAddTweaks, '', false, false)]
     local procedure AddTweak_OnGetApplicationConfiguration_OnAddTweaks(var _MobTweakContainer: Codeunit "MOB Tweak Container")
     begin
-        _MobTweakContainer.Add(70010, 'My Lookup From Input Tweak', NavApp.GetResourceAsText('MyLookupFromInputTweak.xml'));
+        _MobTweakContainer.Add(70020, 'My Lookup From Context Tweak', NavApp.GetResourceAsText('MyLookupFromContextTweak.xml'));
     end;
 
     // -----------------------------------------------------------------------------------------------------------------------
     // DEFINE HEADER FIELDS
     //
-    // Defines the fields the user fills in to filter the list. The user sees and accepts these before the list is loaded.
-    // Replace the sample fields with whatever search criteria your lookup requires.
+    // The header contains a single field, automatically filled from the context value of the same name on the calling page.
+    // The field name must match a context value available on the source page — this is what triggers the automatic value transfer.
+    // Because automaticAcceptOnOpen="true" is set in the Tweak.xml, the user never sees the header — it is accepted silently.
     // -----------------------------------------------------------------------------------------------------------------------
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Reference Data", OnGetReferenceData_OnAddHeaderConfigurations, '', false, false)]
     local procedure AddHeader_OnGetReferenceData_OnAddHeaderConfigurations(var _HeaderFields: Record "MOB HeaderField Element")
     begin
-        _HeaderFields.InitConfigurationKey('MyLookupFromInput'); // IMPORTANT: must match configurationKey in the Tweak.xml
+        _HeaderFields.InitConfigurationKey('MyLookupFromContext'); // IMPORTANT: must match configurationKey in the Tweak.xml
 
-        CreateSampleHeaderFields(_HeaderFields);
-    end;
-
-    /// <summary>
-    /// This sample creates a search text field for the header configuration.
-    /// The field name must match the name read in ReadSampleHeaderValue.
-    /// Replace this with the search fields your lookup requires.
-    /// </summary>
-    /// <param name="HeaderFields">The header field element record passed by the event subscriber.</param>
-    local procedure CreateSampleHeaderFields(var HeaderFields: Record "MOB HeaderField Element")
-    var
-        SearchFieldLbl: Label 'Search';
-    begin
-        HeaderFields.Create_TextField(10, 'MySearchField', SearchFieldLbl); // e.g. Item No., Bin Code, Location Code
-        HeaderFields.Set_optional(true); // Set optional if a blank value should return all results
+        _HeaderFields.Create_TextField_OrderBackendID(10); // Locked — shows the OrderBackendID context value from the calling page; the user cannot edit it.
     end;
 }
