@@ -1,6 +1,14 @@
 {
 	"folders": [
 		{
+			"name": "My Lookup 1 - From Input",
+			"path": "My Lookup 1 - From Input"
+		},
+		{
+			"name": "My Lookup 2 - From Context",
+			"path": "My Lookup 2 - From Context"
+		},
+		{
 			"name": "My Unplanned 1 - Header And Steps",
 			"path": "My Unplanned 1 - Header And Steps"
 		},
@@ -15,14 +23,6 @@
 		{
 			"name": "My Unplanned 4 - Only Context",
 			"path": "My Unplanned 4 - Only Context"
-		},
-		{
-			"name": "My Lookup 1 - From Input",
-			"path": "My Lookup 1 - From Input"
-		},
-		{
-			"name": "My Lookup 2 - From Context",
-			"path": "My Lookup 2 - From Context"
 		}
 	],
 	"settings": {
