@@ -20,10 +20,10 @@ The AL code is split across four codeunits, each responsible for one area of the
 
 | File | Role | Description |
 |:---|:---|:---|
-| `src/UnableToPick_CreateSetupData.Codeunit.al` | **Create Setup Data** | Creates message records for the page/action title placeholders, with xlf translation support (`OnAddMessages`) |
-| `src/UnableToPick_GetReferenceData.Codeunit.al` | **Distribute Tweak & Header Fields** | Distributes the tweak XML to the Mobile App at login (`OnGetApplicationConfiguration_OnAddTweaks`), and defines three read-only fields (`Location`, `FromBin`, `ItemNumber`) transferred automatically from the Order Line context (`OnGetReferenceData_OnAddHeaderConfigurations`) |
-| `src/UnableToPick_GetRegistrationConfiguration.Codeunit.al` | **Define Steps** | One decimal input defaulting to the remaining unregistered quantity (`OnGetRegistrationConfiguration_OnAddSteps`) |
-| `src/UnableToPick_PostAdhocRegistration.Codeunit.al` | **Handle Registration** | Called on accept; replace the placeholder with your own business logic (`OnPostAdhocRegistrationOnCustomRegistrationType`) |
+| `src/UnableToPick_CreateSetupData.Codeunit.al` | **Create Setup Data** | Creates the message records for the page/action title placeholders, with xlf translation support |
+| `src/UnableToPick_GetReferenceData.Codeunit.al` | **Distribute Tweak & Header Fields** | Distributes the tweak XML to the Mobile App at login, and defines three read-only header fields transferred automatically from the Order Line context |
+| `src/UnableToPick_GetRegistrationConfiguration.Codeunit.al` | **Define Steps** | Defines the input steps shown on the registration page — a single quantity input defaulting to the remaining unregistered quantity |
+| `src/UnableToPick_PostAdhocRegistration.Codeunit.al` | **Handle Registration** | Posts the registered quantity; replace the placeholder with your own business logic |
 
 Once published, the tweak appears in the **Mobile Tweak List** (opened from the Mobile Document Queue page in BC):
 
