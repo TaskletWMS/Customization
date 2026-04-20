@@ -13,24 +13,24 @@
 			"path": "Label - Extend LP Content Label"
 		},
 		{
+			"name": "Pick to Bin",
+			"path": "Pick to Bin"
+		},
+		{
 			"name": "Planned Function",
 			"path": "Planned Function"
 		},
 		{
-			"name": "Unplanned as Action - Unable to pick",
-			"path": "Unplanned as Action - Unable to pick"
+			"name": "Positive Adjustment",
+			"path": "Positive Adjustment"
 		},
 		{
-			"name": "Unplanned in Main Menu - Job Jnl Item Posting",
-			"path": "Unplanned in Main Menu - Job Jnl Item Posting"
+			"name": "Unable to pick - Project Item Posting",
+			"path": "Unable to pick - Project Item Posting"
 		},
 		{
-			"name": "Unplanned in Main Menu - Pick to Bin",
-			"path": "Unplanned in Main Menu - Pick to Bin"
-		},
-		{
-			"name": "Unplanned in Main Menu - Positive Adjustment",
-			"path": "Unplanned in Main Menu - Positive Adjustment"
+			"name": "Project Item Posting - Lookup + unplanned",
+			"path": "Project Item Posting - Lookup + unplanned"
 		}
 	],
 	"settings": {
