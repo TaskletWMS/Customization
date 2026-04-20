@@ -1,8 +1,6 @@
-# Add Action to Order Line Menu (Unplanned Function)
+# Unable to Pick - Unplanned function as action on existing page
 
 This example shows how to add a custom **Unplanned Function** as an action on the Pick Order Lines page in Mobile WMS.
-
-Based on the documentation: [How-to: Add action to Order Line menu](https://taskletfactory.atlassian.net/wiki/spaces/TFSK/pages/78951469/How-to+Add+action+to+Order+Line+menu)
 
 ## Use case
 
@@ -20,10 +18,12 @@ The tweak (`resources/UnableToPickTweak.xml`) defines:
 
 The AL code is split across four codeunits, each responsible for one area of the integration:
 
-- `src/UnableToPick_CreateSetupData.Codeunit.al` — **Create Setup Data**: creates message records for the page/action title placeholders, with xlf translation support (`OnAddMessages`)
-- `src/UnableToPick_GetReferenceData.Codeunit.al` — **Distribute Tweak** and **Define Header Fields**: distributes the tweak XML to the Mobile App at login (`OnGetApplicationConfiguration_OnAddTweaks`), and defines three read-only fields (`Location`, `FromBin`, `ItemNumber`) transferred automatically from the Order Line context (`OnGetReferenceData_OnAddHeaderConfigurations`)
-- `src/UnableToPick_GetRegistrationConfiguration.Codeunit.al` — **Define Steps**: one decimal input defaulting to the remaining unregistered quantity (`OnGetRegistrationConfiguration_OnAddSteps`)
-- `src/UnableToPick_PostAdhocRegistration.Codeunit.al` — **Handle Registration**: called on accept; replace the placeholder with your own business logic (`OnPostAdhocRegistrationOnCustomRegistrationType`)
+| File | Role | Description |
+|:---|:---|:---|
+| `src/UnableToPick_CreateSetupData.Codeunit.al` | **Create Setup Data** | Creates message records for the page/action title placeholders, with xlf translation support (`OnAddMessages`) |
+| `src/UnableToPick_GetReferenceData.Codeunit.al` | **Distribute Tweak & Header Fields** | Distributes the tweak XML to the Mobile App at login (`OnGetApplicationConfiguration_OnAddTweaks`), and defines three read-only fields (`Location`, `FromBin`, `ItemNumber`) transferred automatically from the Order Line context (`OnGetReferenceData_OnAddHeaderConfigurations`) |
+| `src/UnableToPick_GetRegistrationConfiguration.Codeunit.al` | **Define Steps** | One decimal input defaulting to the remaining unregistered quantity (`OnGetRegistrationConfiguration_OnAddSteps`) |
+| `src/UnableToPick_PostAdhocRegistration.Codeunit.al` | **Handle Registration** | Called on accept; replace the placeholder with your own business logic (`OnPostAdhocRegistrationOnCustomRegistrationType`) |
 
 Once published, the tweak appears in the **Mobile Tweak List** (opened from the Mobile Document Queue page in BC):
 

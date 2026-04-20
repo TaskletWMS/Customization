@@ -21,7 +21,7 @@ The tweak (`resources/ProjectItemPostingTweak.xml`) defines:
 The integration is implemented across the following AL files:
 
 | File | Role | Description |
-|---|---|---|
+|:---|:---|:---|
 | `MOB Setup.TableExt.al` / `MOB Setup.PageExt.al` | **Setup** | Extends the Mobile WMS Setup table and page with fields for Project Journal Template, Batch Name, and Project Line Type |
 | `ProjectItemPosting_CreateSetupData.Codeunit.al` | **Create Setup Data** | Creates the menu option and message records for page/action title placeholders, with xlf translation support |
 | `ProjectItemPosting_GetReferenceData.Codeunit.al` | **Distribute Tweak & Header Fields** | Distributes the tweak XML to the Mobile App at login, and defines the header fields for the lookup page (Project Search) and both registration pages (Project No., Project Task No., Location, Item Number) |
