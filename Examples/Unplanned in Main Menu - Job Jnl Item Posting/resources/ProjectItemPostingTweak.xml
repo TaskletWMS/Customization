@@ -1,0 +1,50 @@
+<!--
+    This tweak includes four main parts:
+      - A new menu item in the Main Menu that opens a lookup page (ProjectItemPosting)
+      - A new Lookup page for the ProjectItemPosting with actions to open the UnplannedItemRegistration pages.
+      - Two new UnplannedItemRegistration pages: ProjectItemReturn and ProjectItemConsumption.
+
+    Titles use message placeholders (@{SOME_TEXT}) to support multiple languages.
+    These are resolved by Mobile Message records with matching keys.
+    If you are only using one language, you can replace the placeholder with a hardcoded string in this file.
+-->
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+    <pages>
+        <page id="MainMenu">
+            <menuConfiguration>
+                <menuItems>
+                    <menuItem tweak="Append" id="ProjectItemPosting" displayName="@{PROJECT_LOOKUP_TITLE}" icon="mainmenupick" />
+                </menuItems>
+            </menuConfiguration>
+        </page>
+        <page tweak="Append" id="ProjectItemPosting" type="Lookup" icon="mainmenupick">
+            <title defaultValue="@{PROJECT_LOOKUP_TITLE}" />
+            <lookupConfiguration type="ProjectItemPosting" useRegistrationCollector="false">
+                <header configurationKey="ProjectItemPosting" automaticAcceptOnOpen="true" hideAfterAccept="true" />
+                <onResultSelected enabled="true" navigateTo="ProjectItemConsumption" />
+                <list listId="Lookup" />
+            </lookupConfiguration>
+            <actions>
+                <open id="ProjectItemConsumption" title="@{PROJECT_CONSUME_ACTION}" icon="menuplus">
+                    <returnTransfer property="UnplannedItemRegistrationCompleted" to="RefreshOnResume" />
+                </open>
+                <open id="ProjectItemReturn" title="@{PROJECT_RETURN_ACTION}" icon="menuminusred">
+                    <returnTransfer property="UnplannedItemRegistrationCompleted" to="RefreshOnResume" />
+                </open>
+            </actions>
+            <menu numberOfPromotedItems="2" />
+        </page>
+        <page tweak="Append" id="ProjectItemConsumption" type="UnplannedItemRegistration" icon="menuplus">
+            <title defaultValue="@{PROJECT_CONSUME_TITLE}" />
+            <unplannedItemRegistrationConfiguration type="ProjectItemConsumption" useRegistrationCollector="true">
+                <header configurationKey="ProjectItemConsumption" clearAfterPost="true" />
+            </unplannedItemRegistrationConfiguration>
+        </page>
+        <page tweak="Append" id="ProjectItemReturn" type="UnplannedItemRegistration" icon="menuminusred">
+            <title defaultValue="@{PROJECT_RETURN_TITLE}" />
+            <unplannedItemRegistrationConfiguration type="ProjectItemReturn" useRegistrationCollector="true">
+                <header configurationKey="ProjectItemReturn" clearAfterPost="true" />
+            </unplannedItemRegistrationConfiguration>
+        </page>
+    </pages>
+</application>
