@@ -1,61 +1,59 @@
 
-<img src="gfx/applogo.png" width="25%">
+# Project Item Posting - Lookup with Unplanned item registration
 
-<p>
+This example shows how to combine a **custom lookup** with **Unplanned Item Registration** in Mobile WMS to look up Projects and post Item Consumptions and Item Returns via the Project Journal.
 
-<h1>Job Journal Item Posting</h1>
+## Use case
 
-This example show how to build a custom lookup and add-hoc functions to support select a Job and register positive and negative Item Consumptions.
+A warehouse operator needs to register item consumption or item returns against a specific Project directly from the Mobile WMS main menu — without being in a document flow. They can search for a Project or scan a GS1 barcode to populate Project No. and Project Task No. in a single scan, then scan an item and post the quantity directly from the device.
 
-<p>
-Includes custom AL code and custom application.cfg file.
-<p>
+![Project Item Consumption flow](media/ProjectItemPosting_ConsumeItem.gif)
 
-<h2>How-to get started</h2>
-This documentation assumes you are experienced making customizations to Mobile WMS or have been through the technical training for Business Central developers at Tasklet University.
+## What this example implements
 
-<h2>Configuration file</h2>
-The extension contains several new pages for the mobile device and they need to be configured in the Configuration\application.cfg file on the device. Everything related to this example can be found by searching for 'JOB'.<p>
+The UI is configured using a **configuration tweak** — an XML snippet distributed from AL to the Mobile App at login. This is the recommended approach for adding pages and actions without modifying the base configuration files.
 
-Please visit https://taskletfactory.atlassian.net/wiki/x/rZC0B for more information.
+The tweak (`resources/ProjectItemPostingTweak.xml`) defines:
+- A **Project lookup page** (`ProjectItemPosting`) of type `Lookup` — lets the operator search for and select a Project
+- Two **Unplanned Function pages** (`ProjectItemConsumption` and `ProjectItemReturn`) of type `UnplannedItemRegistration`
+- A **menu item** in the main menu that opens the Project lookup
 
-<h2>Object numbers and prefix</h2>
-Please renumber and rename the objects before using the sample code at a production environment.
+The integration is implemented across the following AL files:
 
-<h2>Setup</h2>
-When the App is installed, new Menu Items and Mobile Messages are created automatically.<p>
+| File | Role | Description |
+|---|---|---|
+| `MOB Setup.TableExt.al` / `MOB Setup.PageExt.al` | **Setup** | Extends the Mobile WMS Setup table and page with fields for Project Journal Template, Batch Name, and Project Line Type |
+| `ProjectItemPosting_CreateSetupData.Codeunit.al` | **Create Setup Data** | Creates the menu option and message records for page/action title placeholders, with xlf translation support |
+| `ProjectItemPosting_GetReferenceData.Codeunit.al` | **Distribute Tweak & Header Fields** | Distributes the tweak XML to the Mobile App at login, and defines the header fields for the lookup page (Project Search) and both registration pages (Project No., Project Task No., Location, Item Number) |
+| `ProjectItemPosting_Lookup.Codeunit.al` | **Handle Lookup** | Returns the list of open, unblocked Projects when the operator opens the Project search page |
+| `ProjectItemPosting_GetRegistrationConfiguration.Codeunit.al` | **Define Steps** | Defines the input steps shown on the registration pages — Project Task No. (if not provided in the header), Variant, Bin, Unit of Measure, Quantity, and item tracking |
+| `ProjectItemPosting_PostAdhocRegistration.Codeunit.al` | **Handle Registration** | Posts the collected values as a Project Journal line; for consumption, validates bin content and confirms with the operator if recent entries exist for the same Project and Item |
 
-You must manually setup the Job Journal Template and Batch Name along with the Job Line Type to use.
+## GS1 Barcode Support
 
-<img src="gfx/image.png" width="75%">
+The header fields for Project No. and Project Task No. are configured with custom GS1 Application Identifiers (AIs):
 
-<h2>Screenshots</h2>
+- AI `92` → maps to the **Project No.** header field (`ProjectNo`)
+- AI `93` → maps to the **Project Task No.** header field (`ProjectTaskNo`)
 
-New Menu Items on Main Screen
+This is done by calling `Set_eanAi('92')` and `Set_eanAi('93')` on the respective fields in `ProjectItemPosting_GetReferenceData.Codeunit.al`. When the operator scans a GS1-128 barcode containing these AIs, Mobile WMS automatically routes each value to the correct header field — so both Project No. and Project Task No. can be populated in a single scan.
 
-<img src="gfx/image5.png" width="50%"><p>
+Example GS1-128 barcode encoding Project No. (AI 92) and Project Task No. (AI 93):
 
-Lookup with Jobs
+![Example GS1-128 barcode](media/GS1_128_barcode.png)
 
-<img src="gfx/image2.png" width="50%"><p>
+## Setup
 
-Job Journal Item Consumption
+When the extension is installed, the menu option and Mobile Messages are created automatically.
 
-<img src="gfx/image3.png" width="50%"><p>
+You must manually configure the **Project Journal Template**, **Batch Name**, and **Project Line Type** on the Mobile WMS Setup page before use.
 
-Result after posting
+## Object numbers and prefix
 
-<img src="gfx/image4.png" width="75%"><p>
-
-<h2>Example barcode GS1-128</h2>
-
-We use these custom AI´s
-AI 92 = JOB
-AI 93 = JOBTASK
-
-<img src="gfx/barcode.png" width="25%">
+Please renumber and rename the objects before using this code in a production environment.
 
 ## Disclaimer
-This example extension is provided as-is, so please carefully validate and test the code and any solution built from it. The code is not supported to the same degree as Mobile WMS, but we aim to keep it up to date as Business Central and Mobile WMS evolve.
+
+This example extension is provided as-is. Please carefully validate and test the code and any solution built from it. The code is not supported to the same degree as Mobile WMS, but we aim to keep it up to date as Business Central and Mobile WMS evolve.
 
 Please report bugs directly in GitHub.
