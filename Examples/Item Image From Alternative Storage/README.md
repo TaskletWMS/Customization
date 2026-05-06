@@ -51,15 +51,35 @@ Fires when the app is about to attach an image to a media object. Use this to su
 
 ---
 
+### 🔄 Image Loading Flow
+
+```mermaid
+sequenceDiagram
+    participant App as Mobile App
+    participant BC as Business Central
+
+    App->>BC: GetOrderLines / Lookup
+    Note over BC: Resolves ItemImage ID per line<br/>(OnBeforeGetItemImageID → default lookup → OnAfterGetItemImageID)
+    BC-->>App: Lines with ItemImage values
+
+    loop For each line with an ItemImage value
+        App->>BC: GetMedia (ItemImage ID)
+        Note over BC: OnGetMedia_OnBeforeAddImageToMedia
+        BC-->>App: Base64 image
+    end
+```
+
+Each `GetMedia` call is fired ad-hoc after the lines are received, so images load one by one as responses come back.
+
 ## 💡 Example Logic
 
-The codeunit in this extension provides three simple examples:
+The codeunit in this extension provides three simple examples, all scoped to item **`SPACESHIP`**:
 
-- 🟡 **`YELLOW` variant** — The image ID is set in `OnBeforeGetItemImageID`, which prevents the default lookup from running.
-- 🟠 **`ORANGE` variant** — The image ID is set in `OnAfterGetItemImageID`, which overrides the result after the default lookup.
-- 🌐 **Custom image** — When the resolved image ID is `TestMediaID`, `OnGetMedia_OnBeforeAddImageToMedia` fetches a PNG from a URL and returns it as base64.
+- 🟢 **`GREEN` variant** — The image ID (`GreenSpaceshipMediaID`) is set in `OnBeforeGetItemImageID`, which prevents the default lookup from running.
+- 🟠 **`ORANGE` variant** — The image ID (`OrangeSpaceshipMediaID`) is set in `OnAfterGetItemImageID`, which overrides the result after the default lookup.
+- 🌐 **Custom images** — When the resolved image ID is `GreenSpaceshipMediaID` or `OrangeSpaceshipMediaID`, `OnGetMedia_OnBeforeAddImageToMedia` fetches the corresponding PNG from a GitHub raw URL and returns it as base64.
 
-> These examples apply to **all items** with the matching variant code — no specific item number is accounted for.
+> These examples are scoped to item **`SPACESHIP`** — only that item's variants will trigger the custom image logic.
 
 ---
 
@@ -70,14 +90,6 @@ The codeunit in this extension provides three simple examples:
 | Tasklet Factory | Tasklet Mobile WMS | 5.66.0.0 |
 
 ---
-
-## ✅ Compatibility
-
-| Property | Value |
-|---|---|
-| Platform | 28.0.0.0 |
-| Application | 28.0.0.0 |
-| Runtime | 17.0 |
 
 ## Object numbers and prefix
 
