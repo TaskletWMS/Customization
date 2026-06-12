@@ -1,14 +1,14 @@
 # Customizing [Mobile WMS](https://taskletfactory.com/solutions/mobile-wms-365-bc-nav/) for Business Central
 
 ## Welcome
-This repository accompanies [Tasklet Docs](https://docs.taskletfactory.com/display/TFSK/Customization) and [Tasklet University](https://university.taskletfactory.com/), providing example code and training material for extending Mobile WMS in Business Central.
+This repository accompanies [Tasklet Docs](https://taskletfactory.atlassian.net/wiki/x/b7W0B) and [Tasklet University](https://university.taskletfactory.com/), providing example code and training material for extending Mobile WMS in Business Central.
 
 ## Folders
 
 ### Examples
 Working example projects you can modify and develop further.
 
-### TaskletUniversity
+### Tasklet University
 Source code used in Tasklet University training videos.
 
 ### Templates
