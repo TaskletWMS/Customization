@@ -185,12 +185,12 @@ codeunit 60800 CustomItemImageHandler
 
     local procedure ConvertContentToBase64(var Content: HttpContent): Text
     var
-        MobBase64Convert: Codeunit "MOB Base64 Convert";
+        Base64Convert: Codeunit "Base64 Convert";
         ImageInStream: InStream;
     begin
         if not Content.ReadAs(ImageInStream) then
             exit('');
-        exit(MobBase64Convert.ToBase64(ImageInStream));
+        exit(Base64Convert.ToBase64(ImageInStream));
     end;
 
     local procedure GetVersionTokenFromBase64(Base64Image: Text): Text
