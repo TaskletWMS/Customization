@@ -1,0 +1,61 @@
+<!--
+    This tweak includes four main parts:
+      - A new service with three requests: GetMyOrders, GetMyOrderLines and PostMyOrder.
+      - A new menu item in the MainMenu that opens a new OrderList page.
+      - An OrderList page that shows the orders retrieved by the GetMyOrders request. When an order is selected, it opens an OrderLines page.
+      - An OrderLines page that shows the lines of the selected order retrieved by the GetMyOrderLines request. This page includes a promoted action that opens a page with the ID "PrintLabelTemplate" and passes the selected line to it.
+
+    The Order List page is opened from the main menu, and the Order Lines page is opened when an order is selected in the Order List page.
+
+    Titles use message placeholders (@{SOME_TEXT}) to support multiple languages.
+    These are resolved by Mobile Message records with matching keys.
+    If you are only using one language, you can replace the placeholder with a hardcoded string in this file.
+-->
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+    <services>
+        <!-- New Service: Adds/appends a new service with three requests. -->
+        <service tweak="Append" id="MyPlannedOrders" type="Order" orderType="MyPlannedOrders">
+            <requests>
+                <getOrders>GetMyOrders</getOrders>
+                <getOrderLines>GetMyOrderLines</getOrderLines>
+                <postOrder>PostMyOrder</postOrder>
+            </requests>
+        </service>
+    </services>
+    <pages>
+        <!-- New Menu item: Adds/appends a new menu item in the Main Menu that opens the Order List page. -->
+        <page id="MainMenu" type="Menu">
+            <menuConfiguration>
+                <menuItems>
+                    <menuItem tweak="Append" id="MyPlannedOrders" displayName="@{MY_PLANNED_ORDERS_MENU}" icon="document" />
+                </menuItems>
+            </menuConfiguration>
+        </page>
+        <!-- New Page: Adds/appends an Order List Page. -->
+        <page tweak="Append" id="MyPlannedOrders" type="OrderList" icon="document">
+            <title defaultValue="@{MY_PLANNED_ORDERS_TITLE}" />
+            <orderListConfiguration automaticOrderSelectionAfterFilter="true">
+                <service id="MyPlannedOrders" />
+                <filter configurationKey="MyPlannedOrders" automaticAcceptOnOpen="true" />
+                <list listId="Orders" />
+                <onOrderSelected navigateTo="MyPlannedOrderLines" />
+                <unlockOrder title="@{ReleaseOrderMenuItemWithOrderId}" />
+            </orderListConfiguration>
+        </page>
+        <!-- New Page: Adds/appends an Order Lines Page. -->
+        <page tweak="Append" id="MyPlannedOrderLines" type="OrderLines" icon="document">
+            <title defaultValue="@{MY_PLANNED_ORDER_LINES_TITLE}" />
+            <orderLinesConfiguration suggestQuantity="true" verifySingleScanRegistrations="true" actionOnEmptyList="ClosePage">
+                <service id="MyPlannedOrders" />
+                <list listId="OrderLinesWithImages" />
+                <viewRegistrations title="@{OrderLinesRegistrationMenuItem}" navigateTo="ViewRegistrations" enabled="true" />
+                <deleteOrderRegistrations title="@{OrderLinesDeleteAllOrderRegistrationsMenuItem}" enabled="true" />
+                <scanToSelectBehaviour gs1SearchTerm="Item" behaviour="Auto" />
+            </orderLinesConfiguration>
+            <menu numberOfPromotedItems="4" />
+            <actions>
+                <open icon="mainmenuprint" id="PrintLabelTemplate" title="@{PagePrintLabelTitle}" automaticValueTransfer="true" />
+            </actions>
+        </page>
+    </pages>
+</application>
