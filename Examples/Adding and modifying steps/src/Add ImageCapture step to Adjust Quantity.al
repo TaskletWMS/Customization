@@ -64,12 +64,12 @@ codeunit 75001 AdjustQty_ImageCaptureStep
         // We pass a blank reference above, so no source record is recorded and no target is derived — the images stay only in the Media Queue.
         // The first parameter accepts a Record, RecordId, or RecordRef (or a reference ID as text) to use as the source (Record ID);
         // the target (Target Record ID) is then derived from that source during this registration.
-        // The image data arrives later in separate PostMedia requests and is attached to the derived target — the supported source-to-target
-        // mappings are listed here: https://taskletfactory.atlassian.net/wiki/spaces/TFSK/pages/78949021/Attach+Image
+        // The image data arrives later in separate PostMedia requests and is attached to the derived target.
         //
         // For example, you could pass the Item Ledger Entry created by this posting. Standard code has no attachment support for an Item Ledger Entry,
-        // so you would implement the storage logic yourself (for instance, your own image attachment for the entry) by subscribing to:
-        // - OnRegisterImageCapture_OnBeforeMediaQueueInsert https://taskletfactory.atlassian.net/wiki/x/BwB8hQ
-        // - OnPostMedia_OnBeforeHandleMedia https://taskletfactory.atlassian.net/wiki/x/EgCAhQ
+        // so you would implement the storage logic yourself (for instance, your own image attachment for the entry) by subscribing to
+        // OnRegisterImageCapture_OnBeforeMediaQueueInsert and OnPostMedia_OnBeforeHandleMedia.
+        //
+        // For the supported source-to-target mappings and links to these events, see the full documentation linked at the top of this file.
     end;
 }

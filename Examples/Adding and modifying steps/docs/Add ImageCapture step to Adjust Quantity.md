@@ -10,18 +10,6 @@ A warehouse wants photographic evidence when quantities are manually adjusted on
 
 When the user starts an Adjust Quantity registration, an ImageCapture step appears as part of the registration right after the header is accepted, before the registration is posted. The user takes a picture (with an optional note). A PostMedia request is created in the Mobile Document Queue, and once processed, the image appears in the Mob WMS Media Queue in Business Central.
 
-![ImageCapture step on the device](../media/AdjustQuantity-ImageCaptureStep-DeviceScreen.png)
-
-*The ImageCapture step — prompting the user to take a picture (left) and after the picture has been captured (right).*
-
-![PostMedia entry in the Mobile Document Queue](../media/AdjustQuantity-ImageCaptureStep-DocumentQueue.png)
-
-*The full request sequence in the Mobile Document Queue: `GetRegistrationConfiguration` (adds the step), `PostAdhocRegistration` (posts the adjustment), and `PostMedia` (uploads the captured image).*
-
-![Image in the Mob WMS Media Queue](../media/AdjustQuantity-ImageCaptureStep-MediaQueue.png)
-
-*The captured image stored in the Mob WMS Media Queue.*
-
 ## What this example implements
 
 Source: [Add ImageCapture step to Adjust Quantity.al](../src/Add%20ImageCapture%20step%20to%20Adjust%20Quantity.al)
@@ -55,6 +43,20 @@ For example, you could pass the Item Ledger Entry created by this posting. Stand
 | Codeunit | 75001 | `AdjustQty_ImageCaptureStep` |
 
 Renumber and rename objects before using this in a production environment.
+
+## Screenshots
+
+![ImageCapture step on the device](../media/AdjustQuantity-ImageCaptureStep-DeviceScreen.png)
+
+*The ImageCapture step — prompting the user to take a picture (left) and after the picture has been captured (right).*
+
+![PostMedia entry in the Mobile Document Queue](../media/AdjustQuantity-ImageCaptureStep-DocumentQueue.png)
+
+*The full request sequence in the Mobile Document Queue: `GetRegistrationConfiguration` (adds the step), `PostAdhocRegistration` (posts the adjustment), and `PostMedia` (uploads the captured image).*
+
+![Image in the Mob WMS Media Queue](../media/AdjustQuantity-ImageCaptureStep-MediaQueue.png)
+
+*The captured image stored in the Mob WMS Media Queue.*
 
 ## See also
 
