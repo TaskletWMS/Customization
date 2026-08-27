@@ -84,11 +84,10 @@ codeunit 75000 Pick_ImageCaptureStep
 
         // The reference record passed above is stored as the source (Record ID) on the Media Queue entry, and the target (Target Record ID) is derived from that
         // source during this registration. The first parameter accepts a Record, RecordId, or RecordRef (or a reference ID as text).
-        // The image data arrives later in separate PostMedia requests and is attached to the already-derived target — the supported source-to-target
-        // mappings are listed here: https://taskletfactory.atlassian.net/wiki/spaces/TFSK/pages/78949021/Attach+Image
+        // The image data arrives later in separate PostMedia requests and is attached to the already-derived target.
         // Some record types have no attachment support in BC (for example Transfer Header).
-        // To provide your own attachment logic for those, subscribe to:
-        // - OnRegisterImageCapture_OnBeforeMediaQueueInsert https://taskletfactory.atlassian.net/wiki/x/BwB8hQ
-        // - OnPostMedia_OnBeforeHandleMedia https://taskletfactory.atlassian.net/wiki/x/EgCAhQ
+        // To provide your own attachment logic for those, subscribe to OnRegisterImageCapture_OnBeforeMediaQueueInsert and OnPostMedia_OnBeforeHandleMedia.
+        //
+        // For the supported source-to-target mappings and links to these events, see the full documentation linked at the top of this file.
     end;
 }

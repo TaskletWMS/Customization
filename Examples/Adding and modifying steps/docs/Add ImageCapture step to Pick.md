@@ -10,18 +10,6 @@ A warehouse manager wants photo documentation of items at the point of picking �
 
 When the user posts a pick, an extra step appears asking them to take a picture (with an optional note). Posting resumes after the image is captured. A PostMedia request is created in the Mobile Document Queue, and once processed, the image appears in the Mob WMS Media Queue in Business Central.
 
-![ImageCapture step on the device](../media/Pick-ImageCaptureStep-DeviceScreen.png)
-
-*The ImageCapture step — prompting the user to take a picture (left) and after the picture has been captured (right).*
-
-![Request sequence in the Mobile Document Queue](../media/Pick-ImageCaptureStep-DocumentQueue.png)
-
-*The request sequence in the Mobile Document Queue: the first `PostPickOrder` returns the ImageCapture step, the second `PostPickOrder` posts the pick, and `PostMedia` uploads the captured image.*
-
-![Image in the Mob WMS Media Queue](../media/Pick-ImageCaptureStep-MediaQueue.png)
-
-*The captured image stored in the Mob WMS Media Queue.*
-
 ## What this example implements
 
 Source: [Add ImageCapture step to Pick.al](../src/Add%20ImageCapture%20step%20to%20Pick.al)
@@ -53,6 +41,20 @@ Some record types have no attachment support in BC (for example Transfer Header)
 | Codeunit | 75000 | `Pick_ImageCaptureStep` |
 
 Renumber and rename objects before using this in a production environment.
+
+## Screenshots
+
+![ImageCapture step on the device](../media/Pick-ImageCaptureStep-DeviceScreen.png)
+
+*The ImageCapture step — prompting the user to take a picture (left) and after the picture has been captured (right).*
+
+![Request sequence in the Mobile Document Queue](../media/Pick-ImageCaptureStep-DocumentQueue.png)
+
+*The request sequence in the Mobile Document Queue: the first `PostPickOrder` returns the ImageCapture step, the second `PostPickOrder` posts the pick, and `PostMedia` uploads the captured image.*
+
+![Image in the Mob WMS Media Queue](../media/Pick-ImageCaptureStep-MediaQueue.png)
+
+*The captured image stored in the Mob WMS Media Queue.*
 
 ## See also
 

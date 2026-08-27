@@ -12,14 +12,6 @@ A warehouse wants to populate missing Item Card weight data at the point of rece
 
 When the user registers a Warehouse Receipt line, two extra steps appear — one for Net Weight and one for Gross Weight. Both fields support on-device calculation. After posting, the captured values appear on the Posted Whse. Receipt Line and are written to the Item Card.
 
-![Net Weight and Gross Weight steps on the device](../media/Receive_WeightSteps_DeviceScreen.png)
-
-*The two decimal line steps during registration: Net Weight (left) and Gross Weight (right), entered in grams per base unit of measure.*
-
-![Captured values on the Posted Whse. Receipt Line](../media/Receive_WeightSteps_PostedWarehouseReceipt.png)
-
-*The captured Net Weight and Gross Weight stored on the Posted Whse. Receipt Line (shown via Page Inspection).*
-
 ## What this example implements
 
 Source: [Add line steps to capture weight in Receive.al](../src/Add%20line%20steps%20to%20capture%20weight%20in%20Receive.al)
@@ -57,6 +49,16 @@ The fields are copied explicitly in Step 4 (`OnBeforeCreatePostedRcptLine`).
 | Table extension | 75011 | `EXMPL Posted Whse. Rcpt. Line` |
 
 Renumber and rename objects before using this in a production environment.
+
+## Screenshots
+
+![Net Weight and Gross Weight steps on the device](../media/Receive_WeightSteps_DeviceScreen.png)
+
+*The two decimal line steps during registration: Net Weight (left) and Gross Weight (right), entered in grams per base unit of measure.*
+
+![Captured values on the Posted Whse. Receipt Line](../media/Receive_WeightSteps_PostedWarehouseReceipt.png)
+
+*The captured Net Weight and Gross Weight stored on the Posted Whse. Receipt Line (shown via Page Inspection).*
 
 ## See also
 
