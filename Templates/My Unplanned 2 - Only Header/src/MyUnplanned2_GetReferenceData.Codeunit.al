@@ -1,4 +1,4 @@
-codeunit 60020 "MyUnplanned2_RefData"
+codeunit 60020 MyUnplanned2_RefData
 {
     // -----------------------------------------------------------------------------------------------------------------------
     // DISTRIBUTE TWEAK

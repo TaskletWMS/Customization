@@ -1,4 +1,4 @@
-codeunit 60012 "MyUnplanned1_PostReg"
+codeunit 60012 MyUnplanned1_PostReg
 {
     // -----------------------------------------------------------------------------------------------------------------------
     // HANDLE REGISTRATION

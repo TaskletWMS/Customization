@@ -21,6 +21,8 @@
           - enabled="false"                     : disables navigation when the user selects a lookup result — the lookup is purely for reference
         <list>
           - listId="Lookup"                     : uses the standard Lookup list layout
+                                                  A custom list can also be used by adding a <listConfiguration> under
+                                                  <resources><lists> and referencing its id here, as shown in Lookup 3.
 
     - A new menu item in the Main Menu:
         <page>

@@ -1,4 +1,4 @@
-codeunit 70024 "MyLookup2_Install"
+codeunit 70024 MyLookup2_Install
 {
     Subtype = Install;
 

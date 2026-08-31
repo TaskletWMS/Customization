@@ -1,4 +1,4 @@
-codeunit 60014 "MyUnplanned1_SetupData"
+codeunit 60014 MyUnplanned1_SetupData
 {
     // -----------------------------------------------------------------------------------------------------------------------
     // CREATE SETUP DATA
@@ -45,14 +45,18 @@ codeunit 60014 "MyUnplanned1_SetupData"
     internal procedure CreateMobileMessages()
     var
         MobMessage: Record "MOB Message";
+        TranslationHelper: Codeunit "Translation Helper";
         LanguageCodes: List of [Code[10]];
         LanguageCode: Code[10];
     begin
         LanguageCodes.Add('ENU');
         // Add more languages here
 
-        foreach LanguageCode in LanguageCodes do
+        foreach LanguageCode in LanguageCodes do begin
+            TranslationHelper.SetGlobalLanguageByCode(LanguageCode);
             CreateSampleMessages(LanguageCode, MobMessage);
+            TranslationHelper.RestoreGlobalLanguage();
+        end;
 
         // Alternatively, hardcode values per language without xlf translations:
         // foreach LanguageCode in LanguageCodes do
@@ -81,18 +85,12 @@ codeunit 60014 "MyUnplanned1_SetupData"
     /// <param name="Message">The Mobile Message record to create messages on.</param>
     local procedure CreateSampleMessages(LanguageCode: Code[10]; var Message: Record "MOB Message")
     var
-        TranslationHelper: Codeunit "Translation Helper";
         MyMenuLbl: Label 'My Unplanned One', Comment = 'Menu label';
         MyTitleLbl: Label 'My Unplanned (Header and Steps)', Comment = 'Page title';
     begin
-        TranslationHelper.SetGlobalLanguageToDefault(); // Because if LanguageCode does not match a supported language, we want to fall back to en-US.
-        TranslationHelper.SetGlobalLanguageByCode(LanguageCode);
-
         // The second parameter of Create() is the message code — it must match the @{} placeholder used in the Tweak.xml file.
         Message.Create(LanguageCode, 'MY_UNPLANNED_1_MENU', MyMenuLbl);
         Message.Create(LanguageCode, 'MY_UNPLANNED_1_TITLE', MyTitleLbl);
-
-        TranslationHelper.RestoreGlobalLanguage();
     end;
 
     /// <summary>
@@ -109,7 +107,7 @@ codeunit 60014 "MyUnplanned1_SetupData"
                     Message.Create(LanguageCode, 'MY_UNPLANNED_1_MENU', 'My Unplanned One');
                     Message.Create(LanguageCode, 'MY_UNPLANNED_1_TITLE', 'My Unplanned (Header and Steps)');
                 end;
-            // Add more languages here and hardcode the corresponding translations for each message key.
+        // Add more languages here and hardcode the corresponding translations for each message key.
         end;
     end;
 }

@@ -22,6 +22,8 @@
           - close="true"                        : closes the lookup page and returns to the calling page after the result is selected
         <list>
           - listId="Lookup"                     : uses the standard Lookup list layout
+                                                  A custom list can also be used by adding a <listConfiguration> under
+                                                  <resources><lists> and referencing its id here, as shown in My Lookup 3.
 
     - A new action on an existing page (in this example, ReceiveLines):
         <page>
