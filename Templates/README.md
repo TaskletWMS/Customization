@@ -4,12 +4,13 @@ These templates provide ready-to-use starting points for adding custom functions
 
 ## Lookup Functions
 
-A Lookup function is a page that fetches and displays data from Business Central on the mobile device. The list is driven by a backend call and can return a single result or a list of rows.
+A Lookup function is a page that fetches and displays data from Business Central on the mobile device. The list is driven by a backend call and can return a single result or a list of rows, optionally with registration steps attached to each row.
 
 | Template | When to use | Entry point |
 |---|---|---|
 | [My Lookup 1 — From Input](My%20Lookup%201%20-%20From%20Input/README.md) | User types one or more criteria to retrieve a filtered list of matching records | Main Menu ¹ |
-| [My Lookup 2 — From Context](My%20Lookup%202%20-%20From%20Context/README.md) | User has selected a record and wants to view additional information about it | Action only ² |
+| [My Lookup 2 — From Context](My%20Lookup%202%20-%20From%20Context/README.md) | User opens an action that uses values from the selected row on the page where the action is placed | Action only ² |
+| [My Lookup 3 — Select and Register](My%20Lookup%203%20-%20Select%20and%20Register/README.md) | User enters a header value to retrieve a filtered list, selects a row, fills in registration steps, and submits | Main Menu ¹ |
 
 ## Unplanned Functions
 
@@ -22,7 +23,7 @@ User input is optional and comes in two forms:
 
 When triggered as an action on an existing page, the function also has access to:
 
-- **Context values** — data from the currently selected row (e.g. document number, item, location). Passed automatically from the calling page, no user input required.
+- **Context values** — data from the selected row on the page where the action is placed (e.g. document number, item, location). Passed automatically to the function, with no user input required.
 
 | Template | Registration page | Header input | Step input | Context values | Entry point |
 |---|---|---|---|---|---|
@@ -35,7 +36,7 @@ When triggered as an action on an existing page, the function also has access to
 
 ¹ Can be switched to the opposite entry point. Switching requires changes in both the code and the XML. Use one of the templates with the opposite entry point as a reference. Main Menu patterns include a menu option created as data; action patterns do not.
 
-² Can only be surfaced as an action on an existing page. Context values are passed from the calling page, and a Main Menu item has no calling page to provide them.
+² Can only be surfaced as an action on an existing page. Context values are passed from the selected row on the page where the action is placed. A Main Menu item has no source page to provide them.
 
 ## Disclaimer
 

@@ -21,7 +21,7 @@ codeunit 70011 MyLookup1_RefData
     // DEFINE HEADER FIELDS
     //
     // Defines the fields the user fills in to filter the list. The user sees and accepts these before the list is loaded.
-    // Replace the sample fields with whatever search criteria your lookup requires.
+    // Replace the sample fields with whatever input criteria your lookup requires.
     // -----------------------------------------------------------------------------------------------------------------------
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Reference Data", OnGetReferenceData_OnAddHeaderConfigurations, '', false, false)]
@@ -33,16 +33,16 @@ codeunit 70011 MyLookup1_RefData
     end;
 
     /// <summary>
-    /// This sample creates a search text field for the header configuration.
+    /// This sample creates a header text field for the header configuration.
     /// The field name must match the name read in ReadSampleHeaderValue.
-    /// Replace this with the search fields your lookup requires.
+    /// Replace this with the header fields your lookup requires.
     /// </summary>
     /// <param name="HeaderFields">The header field element record passed by the event subscriber.</param>
     local procedure CreateSampleHeaderFields(var HeaderFields: Record "MOB HeaderField Element")
     var
-        SearchFieldLbl: Label 'Search';
+        HeaderFieldLbl: Label 'Text';
     begin
-        HeaderFields.Create_TextField(10, 'MySearchField', SearchFieldLbl); // e.g. Item No., Bin Code, Location Code
+        HeaderFields.Create_TextField(10, 'MyHeaderField', HeaderFieldLbl); // e.g. Item No., Bin Code, Location Code
         HeaderFields.Set_optional(true); // Set optional if a blank value should return all results
     end;
 }

@@ -1,4 +1,4 @@
-codeunit 70012 "MyLookup1_Lookup"
+codeunit 70012 MyLookup1_Lookup
 {
     // -----------------------------------------------------------------------------------------------------------------------
     // HANDLE LOOKUP
@@ -10,26 +10,26 @@ codeunit 70012 "MyLookup1_Lookup"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"MOB WMS Lookup", OnLookupOnCustomLookupType, '', false, false)]
     local procedure HandleLookup_OnLookupOnCustomLookupType(_MessageId: Guid; _LookupType: Text; var _RequestValues: Record "MOB NS Request Element"; var _LookupResponseElement: Record "MOB NS WhseInquery Element"; var _RegistrationTypeTracking: Text; var _IsHandled: Boolean)
     var
-        MySearchField: Text;
+        MyHeaderField: Text;
     begin
         if _LookupType <> 'MyLookupFromInput' then // IMPORTANT: must match the type attribute in the Tweak.xml
             exit;
 
-        MySearchField := ReadSampleHeaderValue(_RequestValues);
-        AddSampleLookupRows(_LookupResponseElement, MySearchField);
+        MyHeaderField := ReadSampleHeaderValue(_RequestValues);
+        AddSampleLookupRows(_LookupResponseElement, MyHeaderField);
         _IsHandled := true;
     end;
 
     /// <summary>
-    /// This sample reads the search field value from the accepted header.
+    /// This sample reads the header field value from the accepted header.
     /// The field name must match the name defined in CreateSampleHeaderFields.
     /// Replace this with reads for the header fields you defined.
     /// </summary>
     /// <param name="RequestValues">The request values record passed by the event subscriber.</param>
-    /// <returns>The value entered by the user in the search field.</returns>
+    /// <returns>The value entered by the user in the header field.</returns>
     local procedure ReadSampleHeaderValue(var RequestValues: Record "MOB NS Request Element"): Text
     begin
-        exit(RequestValues.GetValue('MySearchField'));
+        exit(RequestValues.GetValue('MyHeaderField'));
     end;
 
     /// <summary>
@@ -37,8 +37,8 @@ codeunit 70012 "MyLookup1_Lookup"
     /// Replace this with your own data query and loop — filter your table and call Create() per record.
     /// </summary>
     /// <param name="LookupResponseElement">The lookup response element record passed by the event subscriber.</param>
-    /// <param name="SearchValue">The search value entered by the user in the header.</param>
-    local procedure AddSampleLookupRows(var LookupResponseElement: Record "MOB NS WhseInquery Element"; SearchValue: Text)
+    /// <param name="HeaderFieldValue">The header field value entered by the user in the header.</param>
+    local procedure AddSampleLookupRows(var LookupResponseElement: Record "MOB NS WhseInquery Element"; HeaderFieldValue: Text)
     var
         i: Integer;
         RowLbl: Label 'Row %1', Comment = '%1 = row number';
@@ -55,7 +55,7 @@ codeunit 70012 "MyLookup1_Lookup"
         //   var
         //       MyRecord: Record "My Table";
         //   begin
-        //       MyRecord.SetFilter("My Field", '@*%1*', SearchValue);
+        //       MyRecord.SetFilter("My Field", '@*%1*', HeaderFieldValue);
         //       if MyRecord.FindSet() then
         //           repeat
         //               LookupResponseElement.Create();

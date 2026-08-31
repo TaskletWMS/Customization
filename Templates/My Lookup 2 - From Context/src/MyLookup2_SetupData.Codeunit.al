@@ -1,4 +1,4 @@
-codeunit 70023 "MyLookup2_SetupData"
+codeunit 70023 MyLookup2_SetupData
 {
     // -----------------------------------------------------------------------------------------------------------------------
     // CREATE SETUP DATA
@@ -34,14 +34,18 @@ codeunit 70023 "MyLookup2_SetupData"
     internal procedure CreateMobileMessages()
     var
         MobMessage: Record "MOB Message";
+        TranslationHelper: Codeunit "Translation Helper";
         LanguageCodes: List of [Code[10]];
         LanguageCode: Code[10];
     begin
         LanguageCodes.Add('ENU');
         // Add more languages here
 
-        foreach LanguageCode in LanguageCodes do
+        foreach LanguageCode in LanguageCodes do begin
+            TranslationHelper.SetGlobalLanguageByCode(LanguageCode);
             CreateSampleMessages(LanguageCode, MobMessage);
+            TranslationHelper.RestoreGlobalLanguage();
+        end;
 
         // Alternatively, hardcode values per language without xlf translations:
         // foreach LanguageCode in LanguageCodes do
@@ -55,18 +59,12 @@ codeunit 70023 "MyLookup2_SetupData"
     /// <param name="Message">The Mobile Message record to create messages on.</param>
     local procedure CreateSampleMessages(LanguageCode: Code[10]; var Message: Record "MOB Message")
     var
-        TranslationHelper: Codeunit "Translation Helper";
         MyActionLbl: Label 'My Lookup Two', Comment = 'Action label on the source page';
         MyTitleLbl: Label 'My Lookup (From Context)', Comment = 'Lookup page title';
     begin
-        TranslationHelper.SetGlobalLanguageToDefault(); // Because if LanguageCode does not match a supported language, we want to fall back to en-US.
-        TranslationHelper.SetGlobalLanguageByCode(LanguageCode);
-
         // The second parameter of Create() is the message code — it must match the @{} placeholder used in the Tweak.xml file.
         Message.Create(LanguageCode, 'MY_LOOKUP_2_ACTION', MyActionLbl);
         Message.Create(LanguageCode, 'MY_LOOKUP_2_TITLE', MyTitleLbl);
-
-        TranslationHelper.RestoreGlobalLanguage();
     end;
 
     /// <summary>
@@ -83,7 +81,7 @@ codeunit 70023 "MyLookup2_SetupData"
                     Message.Create(LanguageCode, 'MY_LOOKUP_2_ACTION', 'My Lookup Two');
                     Message.Create(LanguageCode, 'MY_LOOKUP_2_TITLE', 'My Lookup (From Context)');
                 end;
-            // Add more languages here and hardcode the corresponding translations for each message key.
+        // Add more languages here and hardcode the corresponding translations for each message key.
         end;
     end;
 }

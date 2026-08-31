@@ -1,4 +1,4 @@
-codeunit 60035 "MyUnplanned3_Install"
+codeunit 60035 MyUnplanned3_Install
 {
     Subtype = Install;
 
