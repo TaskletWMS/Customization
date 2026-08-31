@@ -1,0 +1,94 @@
+<!--
+    Template: Lookup function with user-input header and list-driven registration — the user fills in the
+    header value(s), a filtered list is returned, and the selected row is registered. See README.md for the full flow.
+
+    This tweak includes three main parts:
+    - A custom list layout (optional):
+        <resources><lists><listConfiguration>
+          - id="MyLookupList"                   : the list layout id — referenced by <list listId="..."> below
+          - rows/columns/elements               : bind response fields with {FieldName}, e.g. {DisplayLine1}, {DisplayLine2}, {Quantity}
+                                                  Remove this whole <resources> block and use a standard listId (e.g. "Lookup") if you don't need a custom layout.
+
+    - A new Lookup page:
+        <page>
+          - tweak="Append"                      : registers as a new page without replacing existing ones
+          - id                                  : unique identifier for this page
+          - type="Lookup"                       : lookup page type
+        <title>
+          - defaultValue                        : page title — resolved via Mobile Messages
+        <lookupConfiguration>
+          - type                                : lookup type key — must match _LookupType in AL
+          - useRegistrationCollector="true"     : after row selection, steps are collected and submitted via PostAdhocRegistration.
+        <header>
+          - configurationKey                    : identifies which header fields to load — must match InitConfigurationKey in AL
+          - automaticAccept="Never"             : the header is not auto-accepted; the user enters values and accepts to load the list
+          - hideAfterAccept="true"              : hides the header area after it is accepted
+        <onSuccessfulPost>
+          - refreshOnSuccess="true"             : after a successful registration, re-run the lookup so the list reflects the change.
+                                                  Leave it out (or set "false") and the registered row is instead removed from the device list after posting.
+        <list>
+          - listId="MyLookupList"               : the list layout to use — references the custom <listConfiguration> above
+
+    - A Main Menu item:
+        <menuItem tweak="Append">
+          - id                                  : must match the id of the lookup page above
+          - displayName                         : label shown in the menu — resolved via Mobile Messages
+          - icon                                : icon id shown in the menu
+
+    Replace all placeholders to match your customization:
+    - "MyLookupSelectAndRegister" (function id - used in page id, type and configuration key)
+    - "MyLookupList" (custom list layout id)
+    - "MY_LOOKUP_3_TITLE" (page title)
+    - "MY_LOOKUP_3_MENU" (Main Menu item label)
+    - "myicon" (icon id)
+-->
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+    <resources>
+        <lists>
+            <listConfiguration tweak="Append" id="MyLookupList">
+                <rows>
+                    <row>
+                        <columns>
+                            <column width="70" xAlign="left" yAlign="top">
+                                <elements>
+                                    <textElement fontId="headlineFont" text="{DisplayLine1}" />
+                                </elements>
+                            </column>
+                            <column width="30" xAlign="right" yAlign="top">
+                                <elements>
+                                    <textElement fontId="headlineFont" text="{Quantity}" horizontalAlignment="right" dataMember="Positive"/>
+                                </elements>
+                            </column>
+                        </columns>
+                    </row>
+                    <row>
+                        <columns>
+                            <column width="100" xAlign="left" yAlign="top">
+                                <elements>
+                                    <textElement fontId="contentFont" text="{DisplayLine2}" />
+                                </elements>
+                            </column>
+                        </columns>
+                    </row>
+                </rows>
+            </listConfiguration>
+        </lists>
+    </resources>
+    <pages>
+        <page tweak="Append" id="MyLookupSelectAndRegister" type="Lookup" icon="myicon">
+            <title defaultValue="@{MY_LOOKUP_3_TITLE}" />
+            <lookupConfiguration type="MyLookupSelectAndRegister" useRegistrationCollector="true">
+                <header configurationKey="MyLookupSelectAndRegister" automaticAccept="Never" hideAfterAccept="true" />
+                <onSuccessfulPost refreshOnSuccess="true" />
+                <list listId="MyLookupList" />
+            </lookupConfiguration>
+        </page>
+        <page id="MainMenu">
+            <menuConfiguration>
+                <menuItems>
+                    <menuItem tweak="Append" id="MyLookupSelectAndRegister" displayName="@{MY_LOOKUP_3_MENU}" icon="myicon" />
+                </menuItems>
+            </menuConfiguration>
+        </page>
+    </pages>
+</application>
