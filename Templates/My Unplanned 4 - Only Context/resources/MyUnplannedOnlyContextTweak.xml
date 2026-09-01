@@ -32,7 +32,7 @@
                                the parent page when returning, if the unplanned page performed a successful post
 
     Replace all placeholders to match your customization:
-    - "MyUnplannedOnlySteps" (function id - used in page id, type and configurationKey)
+    - "MyUnplannedOnlyContext" (function id - used in page id, type and configurationKey)
     - "MY_UNPLANNED_4_TITLE" (page title)
     - "MY_UNPLANNED_4_ACTION" (menu label)
     - "myicon" (icon id)

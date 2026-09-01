@@ -3,7 +3,7 @@ codeunit 70010 MyLookup1_SetupData
     // -----------------------------------------------------------------------------------------------------------------------
     // CREATE SETUP DATA
     //
-    // To make this customization work, you need provide setup data such as menu options and messages.
+    // To make this customization work, you need to provide setup data such as menu options and messages.
     // This codeunit includes event subscribers that create the necessary setup data when manually triggering actions in the BC client or during a Mobile WMS upgrade.
     // The procedures are also called during the installation of the extension, so the setup data is created automatically when the extension is installed.
     // If you want to run this code when the extension is upgraded to a new version, you can implement it in an Upgrade codeunit as well.
