@@ -1,4 +1,4 @@
-# Template: Unplanned — Context Only
+# Template: My Unplanned 4 - Only Context
 
 An unplanned registration function with no user-fillable header fields and no steps, added as an action on an existing page.
 The header shows a locked context field (BackendID from the calling page) and auto-accepts immediately — no user input is collected.
@@ -41,9 +41,9 @@ The codeunits contain `CreateSample*` and `ReadSample*` procedures as starting p
 
 4. In **Define Header Fields**, replace `MyUnplannedOnlyContext` in the configurationKey, and define the context field(s) to display in the auto-accepted header.
 
-5. In **Handle Registration**, replace `MyUnplannedOnlyContext` in the type check, and implement your business logic. All input comes from context values passed from the calling page — no header or step values are collected from the user.
+5. In **Handle Registration**, replace `MyUnplannedOnlyContext` in the type check. Update `ReadSampleContextValues` to read the context fields available on your target page, and implement your business logic.
 
-6. In **Handle Icon**, replace `myicon` with your icon id and provide your own Base64 image.
+6. In **Handle Icon**, replace `myicon` with your icon id and replace `resources/myicon.png` with your own icon image (named to match your icon id).
 
 7. In **Create Setup Data**, replace `MY_UNPLANNED_4_TITLE` and `MY_UNPLANNED_4_ACTION` with your own message keys, and set their actual values (and translation).
 

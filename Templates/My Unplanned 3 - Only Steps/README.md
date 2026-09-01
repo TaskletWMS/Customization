@@ -1,4 +1,4 @@
-# Template: Unplanned — Steps Only
+# Template: My Unplanned 3 - Only Steps
 
 An unplanned registration function with steps but no user-fillable header, added as an action on an existing page.
 The header auto-accepts on open, passing context from the parent page directly into the steps.
@@ -43,11 +43,11 @@ The codeunits contain `CreateSample*` and `ReadSample*` procedures as starting p
 
 4. In **Define Header Fields**, replace `MyUnplannedOnlySteps` in the configurationKey, and define the context field displayed in the (auto-accepted) header.
 
-5. In **Define Steps**, replace `MyUnplannedOnlySteps` in the type check, and define the steps to collect after the header auto-accepts.
+5. In **Define Steps**, replace `MyUnplannedOnlySteps` in the type check. Update `ReadSampleContextValues` to read the context fields available on your target page, and define the steps to collect in `CreateSampleSteps`.
 
-6. In **Handle Registration**, replace `MyUnplannedOnlySteps` in the type check, and implement your business logic.
+6. In **Handle Registration**, replace `MyUnplannedOnlySteps` in the type check. Update `ReadSampleStepValues` to read the step names you defined in step 5, and implement your business logic.
 
-7. In **Handle Icon**, replace `myicon` with your icon id and provide your own Base64 image.
+7. In **Handle Icon**, replace `myicon` with your icon id and replace `resources/myicon.png` with your own icon image (named to match your icon id).
 
 8. In **Create Setup Data**, replace `MY_UNPLANNED_3_TITLE` and `MY_UNPLANNED_3_ACTION` with your own message keys, and set their actual values (and translation).
 

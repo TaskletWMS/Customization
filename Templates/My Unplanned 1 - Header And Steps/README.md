@@ -1,4 +1,4 @@
-# Template: Unplanned — Header And Steps
+# Template: My Unplanned 1 - Header And Steps
 
 An unplanned registration function with a header and steps, added to the Main Menu.
 
@@ -42,11 +42,11 @@ The codeunits contain `CreateSample*` and `ReadSample*` procedures as starting p
 
 4. In **Define Header Fields**, replace `MyUnplannedHeaderAndSteps` in the configurationKey, and define the header fields your registration requires.
 
-5. In **Define Steps**, replace `MyUnplannedHeaderAndSteps` in the type check, and define the steps to collect after the header is accepted.
+5. In **Define Steps**, replace `MyUnplannedHeaderAndSteps` in the type check. Update `ReadSampleHeaderValues` to read the field names you defined in step 4, and define the steps to collect in `CreateSampleSteps`.
 
-6. In **Handle Registration**, replace `MyUnplannedHeaderAndSteps` in the type check, and implement your business logic.
+6. In **Handle Registration**, replace `MyUnplannedHeaderAndSteps` in the type check. Update `ReadSampleStepValues` to read the step names you defined in step 5, and implement your business logic.
 
-7. In **Handle Icon**, replace `myicon` with your icon id and provide your own Base64 image.
+7. In **Handle Icon**, replace `myicon` with your icon id and replace `resources/myicon.png` with your own icon image (named to match your icon id).
 
 8. In **Create Setup Data**, replace `MyUnplannedHeaderAndSteps` in the menu option, `MY_UNPLANNED_1_TITLE` and `MY_UNPLANNED_1_MENU` with your own message keys, and set their actual values (and translation).
 

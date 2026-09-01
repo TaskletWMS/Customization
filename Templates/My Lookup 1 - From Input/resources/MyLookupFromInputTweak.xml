@@ -1,5 +1,5 @@
 <!--
-    Template: Lookup function with user-input header — the user fills in search criteria and a filtered list is returned.
+    Template: Lookup function with user-input header — the user fills in input values and a list of results is returned.
 
     This tweak includes two main parts:
     - A new Lookup page:
@@ -12,7 +12,7 @@
           - defaultValue                        : page title shown on the device (placeholder or hardcoded string)
         <lookupConfiguration>
           - type                                : lookup type key — must match _LookupType in AL
-          - useRegistrationCollector="false"    : no step collector; this is a read-only filtered list
+          - useRegistrationCollector="false"    : no step collector; this is a read-only result list
         <header>
           - configurationKey                    : identifies which header fields to load — must match the key in AL
           - automaticAccept="Never"             : the user must manually accept the header before the list is fetched
@@ -22,7 +22,7 @@
         <list>
           - listId="Lookup"                     : uses the standard Lookup list layout
                                                   A custom list can also be used by adding a <listConfiguration> under
-                                                  <resources><lists> and referencing its id here, as shown in Lookup 3.
+                                                  <resources><lists> and referencing its id here, as shown in My Lookup 3.
 
     - A new menu item in the Main Menu:
         <page>

@@ -42,7 +42,7 @@ codeunit 70021 MyLookup2_Lookup
     /// <param name="LineNumber">The context value read from the calling page (e.g. LineNumber from ReceiveLines).</param>
     local procedure CreateSampleLookupResponse(var _LookupResponseElement: Record "MOB NS WhseInquery Element"; LineNumber: Text)
     var
-        LineNumberLbl: Label 'Line number is %1';
+        LineNumberLbl: Label 'Line number is %1', Comment = '%1 = line number';
     begin
         _LookupResponseElement.Create();
         _LookupResponseElement.SetValue('LineNumber', LineNumber);

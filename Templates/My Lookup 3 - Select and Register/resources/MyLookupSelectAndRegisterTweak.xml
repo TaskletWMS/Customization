@@ -1,6 +1,6 @@
 <!--
     Template: Lookup function with user-input header and list-driven registration — the user fills in the
-    header value(s), a filtered list is returned, and the selected row is registered. See README.md for the full flow.
+    header value(s), a list of results is returned, and the selected row is registered.
 
     This tweak includes three main parts:
     - A custom list layout (optional):

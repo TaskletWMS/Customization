@@ -1,4 +1,4 @@
-# Template: Unplanned — Header Only
+# Template: My Unplanned 2 - Only Header
 
 An unplanned registration function with a header but no steps, added to the Main Menu.
 Business logic runs immediately when the header is accepted.
@@ -40,9 +40,9 @@ The codeunits contain `CreateSample*` and `ReadSample*` procedures as starting p
 
 4. In **Define Header Fields**, replace `MyUnplannedOnlyHeader` in the configurationKey, and define the header fields your registration requires.
 
-5. In **Handle Registration**, replace `MyUnplannedOnlyHeader` in the type check, and implement your business logic.
+5. In **Handle Registration**, replace `MyUnplannedOnlyHeader` in the type check. Update `ReadSampleHeaderValues` to read the field names you defined in step 4, and implement your business logic.
 
-6. In **Handle Icon**, replace `myicon` with your icon id and provide your own Base64 image.
+6. In **Handle Icon**, replace `myicon` with your icon id and replace `resources/myicon.png` with your own icon image (named to match your icon id).
 
 7. In **Create Setup Data**, replace `MyUnplannedOnlyHeader` in the menu option, `MY_UNPLANNED_2_TITLE` and `MY_UNPLANNED_2_MENU` with your own message keys, and set their actual values (and translation).
 

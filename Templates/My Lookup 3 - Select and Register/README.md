@@ -46,11 +46,11 @@ Select menu item → enter header value → accept → list loads → select a r
 
 5. In **Define Header Fields**, replace `MyLookupSelectAndRegister` in `InitConfigurationKey` if you changed the key, and define the header fields the user fills in (the sample defines a single `MyHeaderField` text field).
 
-6. In **Handle Lookup**, replace `MyLookupSelectAndRegister` in the type check, implement `AddSampleLookupRows` to query BC and return the selectable rows, and set `Set_ReferenceID` on each row. Define the steps to collect in `CreateSampleSteps` (or remove them and set `useRegistrationCollector="false"` if none are needed).
+6. In **Handle Lookup**, replace `MyLookupSelectAndRegister` in the type check. Update `ReadSampleHeaderValue` to read the field name(s) you defined in step 5, implement `AddSampleLookupRows` to query BC and return the selectable rows, and set `Set_ReferenceID` on each row. Define the steps to collect in `CreateSampleSteps` (or remove them and set `useRegistrationCollector="false"` if none are needed).
 
 7. In **Handle Registration**, replace `MyLookupSelectAndRegister` in the type check, read `Get_ReferenceID()` to identify the selected row, read the step values, and implement your business logic.
 
-8. In **Handle Icon**, replace `myicon` with your icon id and provide your own image (`myicon.png` in `resources/`).
+8. In **Handle Icon**, replace `myicon` with your icon id and replace `resources/myicon.png` with your own icon image (named to match your icon id).
 
 9. Remove the **simulated data store** — delete `MyLookup3_SimulatedStorage.Codeunit.al` and the calls to it — once your lookup reads real data.
 
@@ -67,6 +67,7 @@ Select menu item → enter header value → accept → list loads → select a r
 The following are delivered as Reference Data on login. Any changes require the mobile user to re-login:
 - **Distribute Tweak** — tweak XML
 - **Define Header Fields** — header field definitions
+- **Create Setup Data** — menu configuration and Mobile Messages (returned in the language of the mobile user)
 
 ## Disclaimer
 

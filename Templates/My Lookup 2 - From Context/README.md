@@ -1,4 +1,4 @@
-# Template: Lookup - From Context
+# Template: My Lookup 2 - From Context
 
 A lookup function that displays read-only information for the currently selected record, added as an action on an existing page (e.g., Receive Lines list).
 This template can only be surfaced as an action. Context values are passed from the calling page, and a Main Menu item has no calling page to provide them.
@@ -42,9 +42,9 @@ The codeunits contain `CreateSample*` procedures as starting points — use them
 
 4. In **Define Header Fields**, replace `MyLookupFromContext` in `InitConfigurationKey` if you changed the key.
 
-5. In **Handle Lookup**, replace `MyLookupFromContext` in the type check, and implement your own logic to read context values and populate the lookup response with the information you want to show.
+5. In **Handle Lookup**, replace `MyLookupFromContext` in the type check. Update `ReadSampleContextValues` to read the context fields available on your target page, and implement `CreateSampleLookupResponse` to populate the lookup response with the information you want to show.
 
-6. In **Handle Icon**, replace `myicon` with your icon id and provide your own image (`myicon.png` in `resources/`).
+6. In **Handle Icon**, replace `myicon` with your icon id and replace `resources/myicon.png` with your own icon image (named to match your icon id).
 
 7. In **Create Setup Data**, replace `MY_LOOKUP_2_TITLE` and `MY_LOOKUP_2_ACTION` with your message keys and update the label texts (and provide translations as needed via xlf).
 
