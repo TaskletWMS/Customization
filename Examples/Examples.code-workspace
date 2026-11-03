@@ -31,6 +31,10 @@
 		{
 			"name": "Project Item Posting - Lookup + unplanned",
 			"path": "Project Item Posting - Lookup + unplanned"
+		},
+		{
+			"name": "Toogle RegisterQtyByScan on Pick Lines",
+			"path": "Toogle RegisterQtyByScan on Pick Lines"
 		}
 	],
 	"settings": {

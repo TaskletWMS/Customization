@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://schemas.taskletfactory.com/MobileWMS/Application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.taskletfactory.com/MobileWMS/Application http://schemas.taskletfactory.com/MobileWMS/Application.xsd">
+    <pages>
+        <page id="PickLines" tweak="Append">
+            <menu numberOfPromotedItems="1" />
+            <actions>
+                <adhocRegistration tweak="Append" id="TogglePickRegisterQtyByScan" title="Enter Qty." icon="keyboard" menuPlacement="1" registrationType="TogglePickRegisterQtyByScan">
+                    <onSuccessfulPost refreshOnSuccess="true"/>
+                </adhocRegistration>
+            </actions>
+        </page>
+    </pages>
+</application>

@@ -1,0 +1,38 @@
+{
+  "id": "7a7930de-9a8a-4cfc-851d-a20c88e1744c",
+  "name": "Customization Example : Toggle RegisterQtyByScan on Pick Lines",
+  "publisher": "Your Publisher Name",
+  "version": "1.0.0.0",
+  "brief": "Toggle RegisterQtyByScan on Mobile WMS pick lines",
+  "description": "Toggle quantity registration by barcode scan for individual Mobile WMS pick lines.",
+  "platform": "27.0.0.0",
+  "application": "27.0.0.0",
+  "runtime": "16.0",
+  "logo": "ExampleLogo.png",
+  "target": "Cloud",
+  "dependencies": [
+    {
+      "publisher": "Tasklet Factory",
+      "name": "Tasklet Mobile WMS",
+      "version": "5.57.0.0",
+      "id": "a5727ce6-368c-49e2-84cb-1a6052f0551c"
+    }
+  ],
+  "resourceFolders": [
+    "resources"
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "features": [
+    "NoImplicitWith"
+  ],
+  "idRanges": [
+    {
+      "from": 60100,
+      "to": 60149
+    }
+  ]
+}
